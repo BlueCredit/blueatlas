@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NXY7BHERXJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NXY7BHERXJ');
+</script>
+
+<meta charset="UTF-8">
+<title>Data Center Water Leaks - Usage</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body { font-family: Arial, sans-serif; margin: 25px; background: #f5f7fb; line-height: 1.5; position: relative; }
+    
+    /* Header & Logo Styles */
+    header { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 30px; }
+    .logo-container {
+        width: 150px;
+        height: 150px;
+        background: white;
+        border-radius: 50%;
+        border: 2px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .logo-container img { width: 85%; height: auto; display: block; }
+
+    /* Top-Right Counter Styles */
+    .counter-container {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        background: white;
+        padding: 15px 25px;
+        border-radius: 12px;
+        text-align: right;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid #e0e6ed;
+        z-index: 10;
+    }
+    .counter-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .counter-value { font-size: 32px; font-weight: 800; color: #1e293b; font-family: 'Courier New', monospace; line-height: 1; margin: 5px 0; }
+    .counter-unit { font-size: 14px; color: #1976d2; font-weight: 700; }
+
+    /* Dashboard Layout Styles */
+    .section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .container { display: flex; gap: 20px; }
+    .sidebar { width: 280px; background: white; padding: 15px; border-radius: 8px; height: 650px; overflow: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .main { flex: 1; background: white; padding: 20px; border-radius: 8px; max-width: calc(100% - 320px); overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .locationBtn { display: block; width: 100%; margin-bottom: 8px; padding: 10px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; text-align: left; }
+    .locationBtn:hover { background: #0f5aa6; }
+    
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 13px; }
+    th, td { border: 1px solid #eee; padding: 10px; text-align: left; }
+    th { background: #f8f9fa; font-weight: 600; }
+
+    .filters { margin-bottom: 20px; display: flex; gap: 20px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; }
+    .filters select { padding: 8px; border-radius: 4px; border: 1px solid #ddd; }
+    
+    .toolbar { margin-bottom: 20px; }
+    .toolbar button { margin-right: 10px; padding: 10px 16px; cursor: pointer; background: #fff; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; }
+    .toolbar button:hover { background: #f0f0f0; }
+    
+    .chart-container { position: relative; height: 450px; width: 100%; }
+
+
+        /* FOOTER & FIXED SUPPORT BOX */
+        footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: auto; }
+        .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
+        .footer-section { width: 100%; text-align: center; }
+        .footer-section h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 15px; }
+        .footer-section p.disclaimer { font-size: 0.9rem; color: #94a3b8; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
+        
+        .support-box { 
+            background: #ffffff; 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #6366f1; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.04);
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+        .support-box h3 { color: #1e293b; margin-top: 0; }
+        .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
+        
+        .gfm-embed { margin: 0 auto; display: inline-block; }
+</style>
+</head>
+<body>
+
+<div class="counter-container">
+    <div class="counter-label">Total Usage Recorded</div>
+    <div class="counter-value" id="totalCounter">0</div>
+    <div class="counter-unit">Gallons</div>
+</div>
+
+<header>
+    <a href="index.html" style="text-decoration: none;">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo">
+        </div>
+    </a>
+</header>
+<div class="filters">
+    <div>
+        <label><b>Company:</b></label>
+        <select id="companyFilter" onchange="applyFilters()">
+            <option value="All">All Companies</option>
+        </select>
+    </div>
+    <div>
+        <label><b>Utility:</b></label>
+        <select id="utilityFilter" onchange="applyFilters()">
+            <option value="All">All Utilities</option>
+        </select>
+    </div>
+</div>
+
+<div class="toolbar">
+    <button onclick="downloadCSV()">Download Raw Data (CSV)</button>
+    <button onclick="viewMap()" style="background:#2e7d32; color:white; border:none;">Explore Data Center Locations</button>
+
+</div>
+
+<div class="section">
+    <h3>Annual Water Use by Utility</h3>
+    <table id="utilityTable">
+        <thead>
+            <tr><th>Utility</th><th>Year</th><th>Total Gallons</th></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h4 style="margin-top:0;">Facilities</h4>
+        <div id="locations"></div>
+    </div>
+    <div class="main">
+        <h3 id="chartTitle">Select a facility to view usage trends</h3>
+        <div class="chart-container">
+            <canvas id="siteChart"></canvas>
+        </div>
+    </div>
+</div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Data Disclaimer and Support</h3>
+                <p class="disclaimer">The information presented in this application is compiled from verified FOIA requests and corporate sustainability reports. All information is provided "as is" for transparency purposes.</p>
+                
+                <div class="support-box">
+                    <h3>Support This Project</h3>
+                    <p>Your contribution helps us cover FOIA fees, technology costs, and the research required to keep this data public and accessible.</p>
+                    <div class="gfm-embed" data-url="https://www.gofundme.com/f/transparency-for-data-center-water-use/widget/small"></div>
+                    <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script>
+let allRecords=[];
+let records=[];
+let siteChart;
+
+async function loadCSV(){
+    try {
+        const response = await fetch("wateruse.csv");
+        const text = await response.text();
+        const lines = text.trim().split(/\r?\n/);
+        
+        allRecords = lines.slice(1).map(line => {
+            const row = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') inQuotes = !inQuotes;
+                else if (char === ',' && !inQuotes) {
+                    row.push(current.trim());
+                    current = '';
+                } else current += char;
+            }
+            row.push(current.trim());
+
+            if(row.length < 5) return null;
+            
+            const company = row[0].replace(/^"|"$/g, '').trim();
+            const utility = row[1].replace(/^"|"$/g, '').trim();
+            const location = row[2].replace(/^"|"$/g, '').trim();
+            const dateStr = row[3].replace(/^"|"$/g, '').trim();
+            const gallons = parseFloat(row[4]) || 0;
+
+            const dateObj = new Date(dateStr);
+            return {
+                company, utility, location,
+                date: !isNaN(dateObj) ? dateObj.toLocaleDateString() : dateStr,
+                year: !isNaN(dateObj) ? dateObj.getFullYear() : null,
+                gallons
+            };
+        }).filter(item => item !== null);
+
+        records = [...allRecords];
+
+        const totalSum = records.reduce((sum, r) => sum + r.gallons, 0);
+        animateCounter('totalCounter', totalSum);
+
+        buildFilters();
+        loadLocations();
+        buildUtilityTable();
+    } catch (e) {
+        console.error("Error loading CSV:", e);
+    }
+}
+
+function animateCounter(id, target) {
+    const element = document.getElementById(id);
+    let start = 0;
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const current = Math.floor(progress * target);
+        element.innerText = current.toLocaleString();
+        if (progress < 1) requestAnimationFrame(update);
+        else element.innerText = Math.floor(target).toLocaleString();
+    }
+    requestAnimationFrame(update);
+}
+
+function buildFilters(){
+    const companies = [...new Set(allRecords.map(r=>r.company))].sort();
+    const utilities = [...new Set(allRecords.map(r=>r.utility))].sort();
+    const companySel = document.getElementById("companyFilter");
+    const utilitySel = document.getElementById("utilityFilter");
+    companies.forEach(c => {
+        let opt=document.createElement("option"); opt.value=c; opt.text=c;
+        companySel.appendChild(opt);
+    });
+    utilities.forEach(u => {
+        let opt=document.createElement("option"); opt.value=u; opt.text=u;
+        utilitySel.appendChild(opt);
+    });
+}
+
+function applyFilters(){
+    const cVal = document.getElementById("companyFilter").value;
+    const uVal = document.getElementById("utilityFilter").value;
+    records = allRecords.filter(r => (cVal === "All" || r.company === cVal) && (uVal === "All" || r.utility === uVal));
+    document.getElementById("locations").innerHTML="";
+    loadLocations();
+    buildUtilityTable();
+    if(siteChart) siteChart.destroy();
+    document.getElementById("chartTitle").innerText = "Select a facility to view usage trends";
+}
+
+function buildUtilityTable(){
+    const totals={};
+    records.forEach(r=>{
+        if(!r.year) return;
+        if(!totals[r.utility]) totals[r.utility]={};
+        if(!totals[r.utility][r.year]) totals[r.utility][r.year]=0;
+        totals[r.utility][r.year] += r.gallons;
+    });
+    const tbody = document.querySelector("#utilityTable tbody");
+    tbody.innerHTML="";
+    Object.keys(totals).sort().forEach(util => {
+        Object.keys(totals[util]).sort().forEach(yr => {
+            let tr = document.createElement("tr");
+            tr.innerHTML=`<td>${util}</td><td>${yr}</td><td>${totals[util][yr].toLocaleString()}</td>`;
+            tbody.appendChild(tr);
+        });
+    });
+}
+
+function loadLocations(){
+    const sidebar = document.getElementById("locations");
+    [...new Set(records.map(r=>r.location))].sort().forEach(loc=>{
+        let btn = document.createElement("button");
+        btn.className = "locationBtn";
+        btn.innerText = loc;
+        btn.onclick = () => drawChart(loc);
+        sidebar.appendChild(btn);
+    });
+}
+
+function drawChart(locationName){
+    document.getElementById("chartTitle").innerText = "Usage: " + locationName;
+    let data = allRecords.filter(r => r.location === locationName).sort((a,b) => new Date(a.date) - new Date(b.date));
+    let labels = data.map(d => d.date);
+    let values = data.map(d => d.gallons);
+    if(siteChart) siteChart.destroy();
+    const ctx = document.getElementById("siteChart").getContext('2d');
+    siteChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Gallons Used",
+                data: values,
+                borderColor: '#1976d2',
+                backgroundColor: 'rgba(25, 118, 210, 0.1)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+    });
+}
+
+function downloadCSV(){ window.location="wateruse.csv"; }
+function viewMap(){ window.open("map.html","_blank"); }
+function openwindow(){ window.open("https://public.flourish.studio/visualisation/27352160/", "_blank"); }
+
+loadCSV();
+</script>
+</body>
+</html>

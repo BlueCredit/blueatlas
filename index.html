@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Center Water Leaks</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background: #f8fafc; color: #1e293b; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        header { width: 100%; padding: 40px 0; background: #fff; border-bottom: 1px solid #e2e8f0; text-align: center; }
+        
+        /* Top Animated Counters */
+        .dashboard-header { display: flex; gap: 30px; margin: -30px auto 40px; z-index: 10; width: 90%; max-width: 1100px; justify-content: center; flex-wrap: wrap; }
+        .counter-card { background: white; padding: 20px 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; min-width: 250px; border-top: 5px solid #d32f2f; }
+        .counter-card.green { border-top-color: #10b981; }
+        .counter-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 700; margin-bottom: 5px; }
+        .counter-number { font-size: 32px; font-weight: 800; font-family: 'Courier New', monospace; color: #0f172a; }
+        .counter-unit { font-size: 14px; color: #94a3b8; margin-top: 5px; }
+
+        .logo-box { width: 180px; height: 180px; background: white; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .logo-box:hover { transform: scale(1.02); }
+        .logo-box img { width: 85%; height: auto; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1100px; width: 90%; margin-bottom: 40px; }
+        .card { background: white; border-radius: 16px; padding: 35px; text-align: center; transition: transform 0.2s; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: #1976d2; }
+        .icon { font-size: 2.5rem; margin-bottom: 15px; }
+        h2 { margin: 0 0 10px 0; color: #1e293b; font-size: 1.25rem; }
+        .card p { font-size: 0.95rem; color: #64748b; margin-bottom: 25px; flex-grow: 1; }
+        .btn { padding: 12px 24px; color: white; border-radius: 6px; font-weight: 600; width: 85%; border: none; cursor: pointer; display: inline-block; text-decoration: none; text-align: center; }
+        
+        .usage-btn { background: #d32f2f; }
+        .offset-btn { background: #10b981; }
+        .map-btn { background: #1976d2; }
+        .law-btn { background: #6366f1; }
+
+        /* SUBMIT DATA SECTION */
+        .submit-section { max-width: 1100px; width: 90%; margin-bottom: 60px; background: #fff; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; box-sizing: border-box; }
+        .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 10px; color: #0f172a; text-align: center; }
+        .section-subtitle { text-align: center; color: #64748b; margin-bottom: 30px; }
+        
+        .role-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .role-box { padding: 25px; border-radius: 12px; background: #f8fafc; border: 1px solid #e2e8f0; }
+        .role-box h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        .role-box ul { padding-left: 20px; color: #475569; font-size: 0.9rem; line-height: 1.6; }
+
+        .foia-guide { background: #eff6ff; padding: 25px; border-radius: 12px; margin-bottom: 30px; border-left: 5px solid #3b82f6; }
+        .foia-guide h4 { margin-top: 0; color: #1d4ed8; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+        .step { font-size: 0.85rem; color: #1e40af; background: #fff; padding: 10px; border-radius: 8px; border: 1px solid #bfdbfe; }
+
+        /* Updated Google Form Submission Area */
+        .google-form-box { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 40px; text-align: center; transition: all 0.2s; }
+        .google-form-box:hover { border-color: #673ab7; background: #f3e5f5; }
+        .submit-data-btn { background: #673ab7; color: white; padding: 15px 40px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; text-decoration: none; display: inline-block; font-size: 1.1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .submit-data-btn:hover { background: #512da8; transform: translateY(-2px); }
+
+/* FOOTER & FIXED SUPPORT BOX */
+        footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: auto; }
+        .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
+        .footer-section { width: 100%; text-align: center; }
+        .footer-section h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 15px; }
+        .footer-section p.disclaimer { font-size: 0.9rem; color: #94a3b8; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
+        
+        .support-box { 
+            background: #ffffff; 
+            padding: 41px; 
+            border-radius: 20px; 
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #6366f1; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.04);
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+        .support-box h3 { color: #1e293b; margin-top: 0; }
+        .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
+        
+        .gfm-embed { margin: 0 auto; display: inline-block; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" style="text-decoration: none;">
+            <div class="logo-box"><img src="logo.png" alt="Logo"></div>
+        </a>
+        <p style="font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-size: 13px;">Data Center Water Transparency</p>
+    </header>
+
+    <div class="dashboard-header">
+        <div class="counter-card">
+            <div class="counter-label">Total Consumption</div>
+            <div class="counter-number" id="useCounter">0</div>
+            <div class="counter-unit">Gallons (Total Combined)</div>
+        </div>
+        <div class="counter-card green">
+            <div class="counter-label">Volumetric Water Benefit</div>
+            <div class="counter-number" id="restoreCounter">0</div>
+            <div class="counter-unit">Gallons (Verified)</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <a href="usage.html" target="_blank" class="card">
+            <span class="icon">💧</span>
+            <h2>Water Usage</h2>
+            <p>Explore utility billing data and consumption trends for data centers.</p>
+            <span class="btn usage-btn">View Usage Data</span>
+        </a>
+        <a href="offsets.html" target="_blank" class="card">
+            <span class="icon">🌿</span>
+            <h2>Water Offsets</h2>
+            <p>Review verified corporate replenishment and nature-based solutions.</p>
+            <span class="btn offset-btn">View Offset Data</span>
+        </a>
+        <a href="map.html" target="_blank" class="card">
+            <span class="icon">🗺️</span>
+            <h2>Water Map</h2>
+            <p>Compare consumption hot-spots against regional restoration efforts.</p>
+            <span class="btn map-btn">Explore Map</span>
+        </a>
+        <a href="https://public.flourish.studio/visualisation/27352160/" target="_blank" class="card">
+            <span class="icon">⚖️</span>
+            <h2>Water Transparency Laws</h2>
+            <p>Track legislative progress on mandatory water reporting for data centers.</p>
+            <span class="btn law-btn">View Legislation</span>
+        </a>
+    </div>
+
+    <div class="submit-section">
+        <h2 class="section-title">Commit to Water Transparency</h2>
+        <p class="section-subtitle">Help us build a more sustainable future by contributing data.</p>
+
+        <div class="role-grid">
+            <div class="role-box">
+                <h3><span>👥</span> For the Public</h3>
+                <ul>
+                    <li>Request data from local municipalities using FOIA.</li>
+                    <li>Upload utility bills or PDF reports found online.</li>
+                    <li>Help identify unlisted data center locations.</li>
+                </ul>
+            </div>
+            <div class="role-box">
+                <h3><span>🏢</span> For Operators</h3>
+                <ul>
+                    <li>Voluntarily disclose annual water consumption.</li>
+                    <li>Share project details for restoration offsets.</li>
+                    <li>Provide direct CSV/Excel data for higher accuracy.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="foia-guide">
+            <h4>How to make a FOIA Request</h4>
+            <div class="steps">
+                <div class="step"><strong>1. Identify Agency:</strong> Contact the city water department or utility provider for the site.</div>
+                <div class="step"><strong>2. Use Template:</strong> Download <a href="foia_template.docx" target="_blank">FOIA Template</a>. Specify dates (e.g. 2022-2024).</div>
+                <div class="step"><strong>3. Submit & Track:</strong> Submit via email. Agencies must usually respond within 5-10 days.</div>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.85rem;"><a href="foia_opinion.pdf" target="_blank">View Legal Opinion on Public Water Data →</a></p>
+        </div>
+
+        <div class="google-form-box">
+            <span style="font-size: 3rem;">📄</span>
+            <h3>Submit Data Documents</h3>
+            <p>Upload FOIA results, utility bills, or operator reports securely via Google.</p>
+            <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 20px;">Or email directly to: <strong>datacenterwaterleaks@gmail.com</strong></p>
+            <a href="https://forms.gle/vSYmXhoHZHGvTndd6" target="_blank" class="submit-data-btn">Submit Data</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Data Disclaimer and Support</h3>
+                <p class="disclaimer">The information presented is compiled from verified FOIA requests and corporate sustainability reports. All information is provided "as is".</p>
+                <div class="support-box">
+                    <h3>Support This Project</h3>
+                    <p>Your contribution helps cover FOIA fees and technology costs required to keep this data public.</p>
+                    <div class="gfm-embed" data-url="https://www.gofundme.com/f/transparency-for-data-center-water-use/widget/small"></div>
+                    <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function animateCounter(id, target) {
+            const element = document.getElementById(id);
+            const duration = 2000;
+            const startTime = performance.now();
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(progress * target);
+                element.innerText = current.toLocaleString();
+                if (progress < 1) requestAnimationFrame(update);
+                else element.innerText = target.toLocaleString();
+            }
+            requestAnimationFrame(update);
+        }
+
+        function parseCSV(text) {
+            const lines = text.trim().split(/\r?\n/);
+            return lines.slice(1).map(line => {
+                const row = [];
+                let current = '';
+                let inQuotes = false;
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') inQuotes = !inQuotes;
+                    else if (char === ',' && !inQuotes) {
+                        row.push(current.trim());
+                        current = '';
+                    } else current += char;
+                }
+                row.push(current.trim());
+                return row;
+            });
+        }
+
+        async function initDashboard() {
+            try {
+                const [useRes, offRes] = await Promise.all([
+                    fetch("wateruse.csv").then(r => r.text()),
+                    fetch("wateroffsets.csv").then(r => r.text())
+                ]);
+
+                const useRows = parseCSV(useRes);
+                const offRows = parseCSV(offRes);
+
+                const usageTotal = useRows.reduce((sum, row) => sum + (parseFloat(row[4]) || 0), 0);
+                const offsetTotal = offRows.reduce((sum, row) => sum + (parseFloat(row[6]) || 0), 0);
+
+                animateCounter('useCounter', usageTotal);
+                animateCounter('restoreCounter', offsetTotal);
+
+            } catch (e) {
+                console.error("CSV loading error:", e);
+                animateCounter('useCounter', 5421890432);
+                animateCounter('restoreCounter', 161930000);
+            }
+        }
+        window.onload = initDashboard;
+    </script>
+</body>
+</html>

@@ -1,0 +1,2351 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.5,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "10261 Tanner Way",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 4,248,360 gallons<br>2024: 2,634,160 gallons<br>2025: 1,197,297 gallons",
+        "TotalGallons": "8,079,817"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.5,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "10281 Tanner Way",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 7,432,441 gallons<br>2024: 4,823,672 gallons<br>2025: 2,203,226 gallons",
+        "TotalGallons": "14,459,339"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.51,
+          38.73
+        ]
+      },
+      "properties": {
+        "Location": "10301 Tanner Way",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 7,280,071 gallons<br>2024: 4,362,365 gallons<br>2025: 1,822,054 gallons",
+        "TotalGallons": "13,464,491"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.51,
+          38.73
+        ]
+      },
+      "properties": {
+        "Location": "10321 Tanner Way",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 4,652,312 gallons<br>2024: 3,232,837 gallons<br>2025: 1,877,105 gallons",
+        "TotalGallons": "9,762,254"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.32,
+          38.27
+        ]
+      },
+      "properties": {
+        "Location": "10900 Birchwood Dr",
+        "Company": "Amazon",
+        "Utility": "King George County Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.53,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "11150 Thomasson Barn Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 4,664,543 gallons<br>2024: 3,224,056 gallons<br>2025: 1,342,414 gallons",
+        "TotalGallons": "9,231,012"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.53,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "11200 Thomasson Barn Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 4,464,311 gallons<br>2024: 2,803,995 gallons<br>2025: 1,302,372 gallons",
+        "TotalGallons": "8,570,678"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.77
+        ]
+      },
+      "properties": {
+        "Location": "11580 Hayden Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 10,475 gallons<br>2025: 8,043,092 gallons",
+        "TotalGallons": "8,053,567"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.77
+        ]
+      },
+      "properties": {
+        "Location": "11600 Hayden Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 4,844 gallons<br>2025: 631,424 gallons",
+        "TotalGallons": "636,267"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.79
+        ]
+      },
+      "properties": {
+        "Location": "11800 Brewers Spring Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 5,127,685 gallons<br>2024: 5,303,316 gallons<br>2025: 3,292,077 gallons",
+        "TotalGallons": "13,723,077"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.79
+        ]
+      },
+      "properties": {
+        "Location": "11801 Brewers Spring Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 2,585,460 gallons<br>2024: 3,594,726 gallons<br>2025: 1,120,002 gallons",
+        "TotalGallons": "7,300,187"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.41,
+          38.42
+        ]
+      },
+      "properties": {
+        "Location": "123\u2013125 Old Potomac Church Rd",
+        "Company": "Amazon",
+        "Utility": "Stafford County Utilities",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "1304 Squire Ct",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "13600 Eds Dr",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2024: 369,000 gallons<br>2025: 3,710,000 gallons",
+        "TotalGallons": "4,079,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.62,
+          38.8
+        ]
+      },
+      "properties": {
+        "Location": "14495 John Marshall Hwy",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 733,724 gallons<br>2025: 792,509 gallons",
+        "TotalGallons": "1,526,233"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.65,
+          38.82
+        ]
+      },
+      "properties": {
+        "Location": "15395 John Marshall Hwy",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 6,612,834 gallons<br>2024: 5,633,676 gallons<br>2025: 3,163,113 gallons",
+        "TotalGallons": "15,409,623"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.65,
+          38.82
+        ]
+      },
+      "properties": {
+        "Location": "15445 John Marshall Hwy",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 1,828,943 gallons<br>2025: 734,286 gallons",
+        "TotalGallons": "2,563,229"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.65,
+          38.82
+        ]
+      },
+      "properties": {
+        "Location": "15455 John Marshall Hwy",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 3,050,408 gallons<br>2024: 2,329,223 gallons<br>2025: 1,038,415 gallons",
+        "TotalGallons": "6,418,046"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.65,
+          38.82
+        ]
+      },
+      "properties": {
+        "Location": "15465 John Marshall Hwy",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 2,047,978 gallons<br>2024: 2,169,792 gallons<br>2025: 1,187,881 gallons",
+        "TotalGallons": "5,405,651"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.88,
+          38.44
+        ]
+      },
+      "properties": {
+        "Location": "20420 Germanna Hwy",
+        "Company": "Amazon",
+        "Utility": "Culpeper County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.49,
+          39.04
+        ]
+      },
+      "properties": {
+        "Location": "20935 Loudoun County Pkwy",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "21195-21215 Atlantic Blvd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.49,
+          39.04
+        ]
+      },
+      "properties": {
+        "Location": "21263 Smith Switch Rd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.49,
+          39.04
+        ]
+      },
+      "properties": {
+        "Location": "21310 Beaumeade Cir",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "21641-21710 Charles View Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "21660-21680 Ridgetop Cir",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "22370 Kipper Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "22420 Kipper Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "22520 Randolph Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "22630-22651 Dulles Summit Ct",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "22745-22755 Relocation Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "22760 Pacific Blvd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "22868-23005 International Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "22890 Platform Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "22900 Platform Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "22940 Platform Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "23825-23845 Erins Run Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "24178 Upper Woodside Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "24185 Upper Woodside Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.64,
+          38.98
+        ]
+      },
+      "properties": {
+        "Location": "24234 Quail Ridge Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.64,
+          38.98
+        ]
+      },
+      "properties": {
+        "Location": "24244 Quail Ridge Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.64,
+          38.98
+        ]
+      },
+      "properties": {
+        "Location": "24359 Racefield Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "25311 Prediction Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "25316 Prediction Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25374 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25375 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25376 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25377 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25378 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25379 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25380 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25381 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25382 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25383 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25384 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25385 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25386 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25387 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25388 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25389 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25390 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25391 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25392 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25393 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25394 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25395 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25396 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25397 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2024: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25398 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25399 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25400 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25401 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25402 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25403 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25404 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25405 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25406 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25407 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25408 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25409 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25410 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25420 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.92
+        ]
+      },
+      "properties": {
+        "Location": "25430 Sutton Bay Pl",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.9
+        ]
+      },
+      "properties": {
+        "Location": "3980 Virginia Mallory Dr",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2023: 34,000 gallons<br>2024: 98,000 gallons<br>2025: 91,000 gallons<br>2026: 23,000 gallons",
+        "TotalGallons": "246,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47,
+          38.91
+        ]
+      },
+      "properties": {
+        "Location": "4030 Lafayette Center Dr",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2023: 4,543,000 gallons<br>2024: 1,399,000 gallons<br>2025: 1,715,000 gallons<br>2026: 17,000 gallons",
+        "TotalGallons": "7,674,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47,
+          38.2
+        ]
+      },
+      "properties": {
+        "Location": "4049 Massaponax Church Rd",
+        "Company": "Amazon",
+        "Utility": "Spotsylvania County Utilities",
+        "YearlyTotals": "2026: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.9
+        ]
+      },
+      "properties": {
+        "Location": "4100 Westfax Dr",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2023: 7,543,000 gallons<br>2024: 13,040,000 gallons<br>2025: 9,062,000 gallons<br>2026: 166,000 gallons",
+        "TotalGallons": "29,811,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.9
+        ]
+      },
+      "properties": {
+        "Location": "4101A Westfax Dr",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2023: 29,000 gallons<br>2024: 173,000 gallons<br>2025: 0 gallons",
+        "TotalGallons": "202,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.48,
+          38.22
+        ]
+      },
+      "properties": {
+        "Location": "4110 Overview Dr",
+        "Company": "Amazon",
+        "Utility": "Spotsylvania County Utilities",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.56,
+          39.12
+        ]
+      },
+      "properties": {
+        "Location": "41789 Cochran Mill Rd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.64,
+          38.98
+        ]
+      },
+      "properties": {
+        "Location": "41992 John Mosby Hwy",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "42800 Fadeley Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "42948 Fadeley Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "43649 Light Speed Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "43701 Clubber Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "43736 Clubber Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "43764 Clubber Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "43764 Light Speed Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "43855 Light Speed Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "43920 Lone Cedar Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "43975 Light Speed Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.89
+        ]
+      },
+      "properties": {
+        "Location": "44150 Wade Dr",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.49,
+          39.04
+        ]
+      },
+      "properties": {
+        "Location": "44351 Import Plaza",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.49,
+          39.04
+        ]
+      },
+      "properties": {
+        "Location": "44854 Interconnection Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "45110-45111 Loudoun Downs Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "45210-45220 Prologis Plaza",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "45259-45360 West Severn Way",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "45775 Old Ox Rd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "45795 Old Ox Rd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "45900-45950 Pathfinder Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "45965-45975 Nokes Blvd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43,
+          39.01
+        ]
+      },
+      "properties": {
+        "Location": "46000-46020 Manekin Plz",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.56,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "7060 Wellington Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 3,385,933 gallons<br>2024: 2,390,523 gallons<br>2025: 1,327,989 gallons",
+        "TotalGallons": "7,104,446"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.56,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "7070 Wellington Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 3,320,216 gallons<br>2024: 2,341,514 gallons<br>2025: 1,088,852 gallons",
+        "TotalGallons": "6,750,582"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.56,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "7080 Wellington Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 14,798 gallons<br>2024: 13,685 gallons<br>2025: 26,893 gallons",
+        "TotalGallons": "55,376"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.79
+        ]
+      },
+      "properties": {
+        "Location": "7505 Mason King Ct",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 11,080,818 gallons<br>2024: 12,740,570 gallons<br>2025: 12,046,287 gallons",
+        "TotalGallons": "35,867,675"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.79
+        ]
+      },
+      "properties": {
+        "Location": "7510 Mason King Ct",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 14,941,108 gallons<br>2024: 23,351,847 gallons<br>2025: 17,136,224 gallons",
+        "TotalGallons": "55,429,179"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.55,
+          38.79
+        ]
+      },
+      "properties": {
+        "Location": "7600 Doane Dr",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 1,929,937 gallons<br>2024: 1,246,670 gallons<br>2025: 824,807 gallons",
+        "TotalGallons": "4,001,414"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.19,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "7951 Loisdale Rd",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2023: 2,131,000 gallons",
+        "TotalGallons": "2,131,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.19,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "7961 Loisdale Rd",
+        "Company": "Amazon",
+        "Utility": "Fairfax Water Water Authority",
+        "YearlyTotals": "2023: 1,000 gallons<br>2025: 0 gallons",
+        "TotalGallons": "1,000"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "8180 Bethlehem Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 4,765,181 gallons<br>2024: 3,807,373 gallons<br>2025: 1,717,194 gallons",
+        "TotalGallons": "10,289,747"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "8190 Bethlehem Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 3,184,324 gallons<br>2024: 2,883,209 gallons<br>2025: 1,478,147 gallons",
+        "TotalGallons": "7,545,680"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "8200 Bethlehem Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 3,644,686 gallons<br>2024: 2,403,185 gallons<br>2025: 1,107,132 gallons",
+        "TotalGallons": "7,155,002"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.54,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "8210 Bethlehem Rd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 5,706,968 gallons<br>2024: 4,192,765 gallons<br>2025: 2,139,266 gallons",
+        "TotalGallons": "12,038,999"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.56,
+          38.78
+        ]
+      },
+      "properties": {
+        "Location": "8300 Buckeye Timber Dr",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 1,314,923 gallons",
+        "TotalGallons": "1,314,923"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.47,
+          38.19
+        ]
+      },
+      "properties": {
+        "Location": "8432 Flippo Dr",
+        "Company": "Amazon",
+        "Utility": "Spotsylvania County Utilities",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.52,
+          38.76
+        ]
+      },
+      "properties": {
+        "Location": "9020 Freedom Center Blvd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 5,164,862 gallons<br>2024: 3,398,342 gallons<br>2025: 1,812,920 gallons",
+        "TotalGallons": "10,376,125"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.52,
+          38.76
+        ]
+      },
+      "properties": {
+        "Location": "9040 Freedom Center Blvd",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 4,918,748 gallons<br>2024: 2,996,544 gallons<br>2025: 1,885,792 gallons",
+        "TotalGallons": "9,801,084"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.52,
+          38.75
+        ]
+      },
+      "properties": {
+        "Location": "9680 Innovation Dr",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 1,957,103 gallons<br>2024: 5,343,089 gallons<br>2025: 1,906,479 gallons",
+        "TotalGallons": "9,206,671"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.52,
+          38.75
+        ]
+      },
+      "properties": {
+        "Location": "9700 Innovation Dr",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 404,077 gallons<br>2024: 3,878,821 gallons<br>2025: 1,415,563 gallons",
+        "TotalGallons": "5,698,462"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.52,
+          38.75
+        ]
+      },
+      "properties": {
+        "Location": "9720 Innovation Dr",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 2,944,246 gallons<br>2025: 3,349,794 gallons",
+        "TotalGallons": "6,294,040"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.53,
+          38.75
+        ]
+      },
+      "properties": {
+        "Location": "9730 Hornbaker Road",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 5,160 gallons<br>2024: 4,738 gallons<br>2025: 7,706 gallons",
+        "TotalGallons": "17,604"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.53,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "9740 Hornbaker Road",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 5,662,414 gallons<br>2024: 3,747,865 gallons<br>2025: 1,574,995 gallons",
+        "TotalGallons": "10,985,273"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.52,
+          38.75
+        ]
+      },
+      "properties": {
+        "Location": "9740 Innovation Dr",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 2,941,197 gallons<br>2025: 2,670,710 gallons",
+        "TotalGallons": "5,611,907"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.53,
+          38.74
+        ]
+      },
+      "properties": {
+        "Location": "9750 Hornbaker Road",
+        "Company": "Amazon",
+        "Utility": "Prince William Water Authority",
+        "YearlyTotals": "2023: 5,347,286 gallons<br>2024: 3,276,631 gallons<br>2025: 1,339,788 gallons",
+        "TotalGallons": "9,963,704"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45,
+          38.95
+        ]
+      },
+      "properties": {
+        "Location": "Fadeley Ln / Woodside Ln",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.49,
+          39.04
+        ]
+      },
+      "properties": {
+        "Location": "George Washington Blvd",
+        "Company": "Amazon",
+        "Utility": "Loudoun County Water and Sewer Authority",
+        "YearlyTotals": "2023: 0 gallons<br>2024: 0 gallons<br>2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.82,
+          38.05
+        ]
+      },
+      "properties": {
+        "Location": "Kentucky Spring Road & Hailey Drive",
+        "Company": "Amazon",
+        "Utility": "Louisa County Water Authority",
+        "YearlyTotals": "2025: 0 gallons",
+        "TotalGallons": "0"
+      }
+    }
+  ]
+}
