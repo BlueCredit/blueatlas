@@ -15,85 +15,85 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     body { font-family: Arial, sans-serif; margin: 25px; background: #f5f7fb; line-height: 1.5; position: relative; }
-    
-    /* Header & Logo Styles */
+
+    /* Header & Logo */
     header { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 30px; }
-    .logo-container {
-        width: 150px;
-        height: 150px;
-        background: white;
-        border-radius: 50%;
-        border: 2px solid #ddd;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
+    .logo-container { width: 150px; height: 150px; background: white; border-radius: 50%; border: 2px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .logo-container img { width: 85%; height: auto; display: block; }
 
-    /* Top-Right Counter Styles */
-    .counter-container {
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        background: white;
-        padding: 15px 25px;
-        border-radius: 12px;
-        text-align: right;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        border: 1px solid #e0e6ed;
-        z-index: 10;
-    }
+    /* Top-Right Counter */
+    .counter-container { position: absolute; top: 25px; right: 25px; background: white; padding: 15px 25px; border-radius: 12px; text-align: right; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e0e6ed; z-index: 10; }
     .counter-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
     .counter-value { font-size: 32px; font-weight: 800; color: #1e293b; font-family: 'Courier New', monospace; line-height: 1; margin: 5px 0; }
     .counter-unit { font-size: 14px; color: #1976d2; font-weight: 700; }
 
-    /* Dashboard Layout Styles */
+    /* Summary metric cards */
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+    .metric-card { background: white; border-radius: 8px; padding: 16px 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 4px solid #1976d2; }
+    .metric-card.green { border-left-color: #2e7d32; }
+    .metric-card.amber { border-left-color: #f57c00; }
+    .metric-card.red   { border-left-color: #c62828; }
+    .metric-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px; }
+    .metric-value { font-size: 24px; font-weight: 800; color: #1e293b; line-height: 1.1; }
+    .metric-sub { font-size: 11px; color: #94a3b8; margin-top: 3px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 4px; margin-bottom: 0; border-bottom: 2px solid #e2e8f0; }
+    .tab { padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: 600; color: #64748b; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+    .tab.active { color: #1976d2; border-bottom-color: #1976d2; }
+    .tab:hover { color: #1976d2; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Sections */
     .section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .container { display: flex; gap: 20px; }
-    .sidebar { width: 280px; background: white; padding: 15px; border-radius: 8px; height: 650px; overflow: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .main { flex: 1; background: white; padding: 20px; border-radius: 8px; max-width: calc(100% - 320px); overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .locationBtn { display: block; width: 100%; margin-bottom: 8px; padding: 10px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; text-align: left; }
-    .locationBtn:hover { background: #0f5aa6; }
-    
-    table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 13px; }
-    th, td { border: 1px solid #eee; padding: 10px; text-align: left; }
-    th { background: #f8f9fa; font-weight: 600; }
+    .section h3 { margin-top: 0; margin-bottom: 14px; font-size: 15px; color: #1e293b; }
 
-    .filters { margin-bottom: 20px; display: flex; gap: 20px; align-items: center; background: #fff; padding: 15px; border-radius: 8px; }
-    .filters select { padding: 8px; border-radius: 4px; border: 1px solid #ddd; }
-    
+    /* Charts */
+    .chart-container { position: relative; width: 100%; }
+    .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+    /* Legend */
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 12px; color: #555; }
+    .legend-item { display: flex; align-items: center; gap: 5px; }
+    .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
+
+    /* Filters */
+    .filters { margin-bottom: 20px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .filters select { padding: 8px; border-radius: 4px; border: 1px solid #ddd; font-size: 13px; }
+    .filters label { font-size: 13px; font-weight: 600; }
+
+    /* Toolbar */
     .toolbar { margin-bottom: 20px; }
-    .toolbar button { margin-right: 10px; padding: 10px 16px; cursor: pointer; background: #fff; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; }
+    .toolbar button { margin-right: 10px; padding: 10px 16px; cursor: pointer; background: #fff; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; font-size: 13px; }
     .toolbar button:hover { background: #f0f0f0; }
-    
-    .chart-container { position: relative; height: 450px; width: 100%; }
 
+    /* Facility explorer */
+    .container { display: flex; gap: 20px; }
+    .sidebar { width: 280px; background: white; padding: 15px; border-radius: 8px; height: 650px; overflow: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
+    .main { flex: 1; background: white; padding: 20px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .locationBtn { display: block; width: 100%; margin-bottom: 6px; padding: 9px 10px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; text-align: left; }
+    .locationBtn:hover { background: #0f5aa6; }
 
-        /* FOOTER & FIXED SUPPORT BOX */
-        footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: auto; }
-        .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
-        .footer-section { width: 100%; text-align: center; }
-        .footer-section h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 15px; }
-        .footer-section p.disclaimer { font-size: 0.9rem; color: #94a3b8; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
-        
-        .support-box { 
-            background: #ffffff; 
-            padding: 40px; 
-            border-radius: 20px; 
-            border: 1px solid #e2e8f0;
-            border-top: 4px solid #6366f1; 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.04);
-            width: 100%;
-            box-sizing: border-box;
-            max-width: 700px;
-            margin: 20px auto 0;
-        }
-        .support-box h3 { color: #1e293b; margin-top: 0; }
-        .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
-        
-        .gfm-embed { margin: 0 auto; display: inline-block; }
+    /* Table */
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 13px; }
+    th, td { border: 1px solid #eee; padding: 9px 10px; text-align: left; }
+    th { background: #f8f9fa; font-weight: 600; }
+    tr:hover td { background: #f8fbff; }
+
+    /* Note */
+    .note { font-size: 11px; color: #94a3b8; font-style: italic; margin-top: 8px; }
+
+    /* Footer */
+    footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: 30px; }
+    .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
+    .footer-section { width: 100%; text-align: center; }
+    .footer-section h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 15px; }
+    .footer-section p.disclaimer { font-size: 0.9rem; color: #94a3b8; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
+    .support-box { background: #ffffff; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; border-top: 4px solid #6366f1; box-shadow: 0 15px 30px rgba(0,0,0,0.04); width: 100%; box-sizing: border-box; max-width: 700px; margin: 20px auto 0; }
+    .support-box h3 { color: #1e293b; margin-top: 0; }
+    .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
+    .gfm-embed { margin: 0 auto; display: inline-block; }
 </style>
 </head>
 <body>
@@ -111,187 +111,416 @@
         </div>
     </a>
 </header>
+
+<!-- Summary metric cards -->
+<div class="summary-grid">
+    <div class="metric-card">
+        <div class="metric-label">Total Consumption</div>
+        <div class="metric-value">1.84B gal</div>
+        <div class="metric-sub">Jan 2023 – Apr 2026</div>
+    </div>
+    <div class="metric-card green">
+        <div class="metric-label">Companies Tracked</div>
+        <div class="metric-value">15</div>
+        <div class="metric-sub">across 280 locations</div>
+    </div>
+    <div class="metric-card amber">
+        <div class="metric-label">Utilities</div>
+        <div class="metric-value">11</div>
+        <div class="metric-sub">Virginia</div>
+    </div>
+    <div class="metric-card red">
+        <div class="metric-label">Water Benefit Verified</div>
+        <div class="metric-value">&lt;8%</div>
+        <div class="metric-sub">~120M gal of 1.84B</div>
+    </div>
+</div>
+
+<!-- Filters -->
 <div class="filters">
     <div>
-        <label><b>Company:</b></label>
+        <label>Company:</label>
         <select id="companyFilter" onchange="applyFilters()">
             <option value="All">All Companies</option>
         </select>
     </div>
     <div>
-        <label><b>Utility:</b></label>
+        <label>Utility:</label>
         <select id="utilityFilter" onchange="applyFilters()">
             <option value="All">All Utilities</option>
         </select>
     </div>
 </div>
 
+<!-- Toolbar -->
 <div class="toolbar">
-   <button onclick="window.location.href='../usdatacentermap.kmz'" 
-        style="background:#1565c0; color:white; border:none;">
-    Download Data Center Map (KMZ)
-</button>
+    <button onclick="window.location.href='../usdatacentermap.kmz'" style="background:#1565c0; color:white; border:none;">
+        Download Data Center Map (KMZ)
+    </button>
+    <button onclick="window.location.href='wateruse.csv'" style="background:#2e7d32; color:white; border:none;">
+        Download Data (CSV)
+    </button>
 </div>
 
-<div class="section">
-    <h3>Annual Water Use by Utility</h3>
-    <table id="utilityTable">
-        <thead>
-            <tr><th>Utility</th><th>Year</th><th>Total Gallons</th></tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+<!-- TABS -->
+<div class="tabs">
+    <button class="tab active" onclick="switchTab('tab-summary')">Summary Charts</button>
+    <button class="tab" onclick="switchTab('tab-utility')">By Utility</button>
+    <button class="tab" onclick="switchTab('tab-company')">By Company</button>
+    <button class="tab" onclick="switchTab('tab-facility')">Facility Explorer</button>
+    <button class="tab" onclick="switchTab('tab-table')">Data Table</button>
 </div>
 
-<div class="container">
-    <div class="sidebar">
-        <h4 style="margin-top:0;">Facilities</h4>
-        <div id="locations"></div>
-    </div>
-    <div class="main">
-        <h3 id="chartTitle">Select a facility to view usage trends</h3>
-        <div class="chart-container">
-            <canvas id="siteChart"></canvas>
-        </div>
-    </div>
-</div>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Data Disclaimer and Support</h3>
-                <p class="disclaimer">The information presented in this application is compiled from verified FOIA requests and corporate sustainability reports. All information is provided "as is" for transparency purposes.</p>
-                
-                <div class="support-box">
-                    <h3>Support This Project</h3>
-                    <p>Your contribution helps us cover FOIA fees, technology costs, and the research required to keep this data public and accessible.</p>
-                    <div class="gfm-embed" data-url="https://www.gofundme.com/f/transparency-for-data-center-water-use/widget/small"></div>
-                    <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+<!-- TAB: Summary Charts -->
+<div id="tab-summary" class="tab-content active">
+    <div style="background:white; padding:20px; border-radius:0 8px 8px 8px; box-shadow:0 2px 4px rgba(0,0,0,0.05); margin-bottom:20px;">
+        <div class="chart-row">
+            <div class="section" style="margin-bottom:0;">
+                <h3>Monthly consumption — all utilities</h3>
+                <div class="chart-container" style="height:300px;">
+                    <canvas id="monthlyChart"></canvas>
                 </div>
             </div>
+            <div class="section" style="margin-bottom:0;">
+                <h3>Annual totals</h3>
+                <div class="chart-container" style="height:300px;">
+                    <canvas id="annualChart"></canvas>
+                </div>
+                <p class="note">* 2026 is Jan–Apr only. Annualised run rate ≈ 783M gal/yr.</p>
+            </div>
         </div>
-    </footer>
+    </div>
+</div>
+
+<!-- TAB: By Utility -->
+<div id="tab-utility" class="tab-content">
+    <div class="section">
+        <h3>Consumption by utility, by year</h3>
+        <div class="legend" id="utilLegend"></div>
+        <div class="chart-container" style="height:340px;">
+            <canvas id="utilBarChart"></canvas>
+        </div>
+        <p class="note">* Loudoun Water shows $0 for 2026 — data withheld pending FOIA deposit dispute.</p>
+    </div>
+    <div class="section">
+        <h3>Annual water use by utility — detail table</h3>
+        <table id="utilityTable">
+            <thead><tr><th>Utility</th><th>Year</th><th>Total Gallons</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- TAB: By Company -->
+<div id="tab-company" class="tab-content">
+    <div class="section">
+        <h3>Consumption by company, by year</h3>
+        <div class="legend" id="coLegend"></div>
+        <div class="chart-container" style="height:520px;">
+            <canvas id="coBarChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- TAB: Facility Explorer -->
+<div id="tab-facility" class="tab-content">
+    <div class="container" style="padding-top:20px;">
+        <div class="sidebar">
+            <h4 style="margin-top:0;">Facilities</h4>
+            <div id="locations"></div>
+        </div>
+        <div class="main">
+            <h3 id="chartTitle">Select a facility to view usage trends</h3>
+            <div class="chart-container" style="height:450px;">
+                <canvas id="siteChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TAB: Data Table -->
+<div id="tab-table" class="tab-content">
+    <div class="section">
+        <h3>All records</h3>
+        <table id="dataTable">
+            <thead><tr><th>Company</th><th>Utility</th><th>Location</th><th>Date</th><th>Gallons</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Data Disclaimer and Support</h3>
+            <p class="disclaimer">The information presented in this application is compiled from verified FOIA requests and corporate sustainability reports. All information is provided "as is" for transparency purposes.</p>
+            <div class="support-box">
+                <h3>Support This Project</h3>
+                <p>Your contribution helps us cover FOIA fees, technology costs, and the research required to keep this data public and accessible.</p>
+                <div class="gfm-embed" data-url="https://www.gofundme.com/f/transparency-for-data-center-water-use/widget/small"></div>
+                <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
-let allRecords=[];
-let records=[];
-let siteChart;
+let allRecords = [];
+let records = [];
+let siteChart, monthlyChart, annualChart, utilBarChart, coBarChart;
 
-async function loadCSV(){
+const YEAR_COLORS = { '2023':'#185FA5', '2024':'#1D9E75', '2025':'#BA7517', '2026':'#993C1D' };
+
+function switchTab(id) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+}
+
+async function loadCSV() {
     try {
         const response = await fetch("wateruse.csv");
         const text = await response.text();
         const lines = text.trim().split(/\r?\n/);
-        
         allRecords = lines.slice(1).map(line => {
             const row = [];
-            let current = '';
-            let inQuotes = false;
+            let current = '', inQuotes = false;
             for (let i = 0; i < line.length; i++) {
                 const char = line[i];
                 if (char === '"') inQuotes = !inQuotes;
-                else if (char === ',' && !inQuotes) {
-                    row.push(current.trim());
-                    current = '';
-                } else current += char;
+                else if (char === ',' && !inQuotes) { row.push(current.trim()); current = ''; }
+                else current += char;
             }
             row.push(current.trim());
-
-            if(row.length < 5) return null;
-            
-            const company = row[0].replace(/^"|"$/g, '').trim();
-            const utility = row[1].replace(/^"|"$/g, '').trim();
+            if (row.length < 5) return null;
+            const company  = row[0].replace(/^"|"$/g, '').trim();
+            const utility  = row[1].replace(/^"|"$/g, '').trim();
             const location = row[2].replace(/^"|"$/g, '').trim();
-            const dateStr = row[3].replace(/^"|"$/g, '').trim();
-            const gallons = parseFloat(row[4]) || 0;
-
-            const dateObj = new Date(dateStr);
+            const dateStr  = row[3].replace(/^"|"$/g, '').trim();
+            const gallons  = parseFloat(row[4]) || 0;
+            const dateObj  = new Date(dateStr);
             return {
                 company, utility, location,
                 date: !isNaN(dateObj) ? dateObj.toLocaleDateString() : dateStr,
                 year: !isNaN(dateObj) ? dateObj.getFullYear() : null,
+                monthKey: !isNaN(dateObj) ? `${dateObj.getFullYear()}-${String(dateObj.getMonth()+1).padStart(2,'0')}` : null,
                 gallons
             };
-        }).filter(item => item !== null);
-
+        }).filter(Boolean);
         records = [...allRecords];
-
-        const totalSum = records.reduce((sum, r) => sum + r.gallons, 0);
-        animateCounter('totalCounter', totalSum);
-
+        animateCounter('totalCounter', records.reduce((s,r) => s + r.gallons, 0));
         buildFilters();
         loadLocations();
         buildUtilityTable();
-    } catch (e) {
-        console.error("Error loading CSV:", e);
-    }
+        buildDataTable();
+        buildSummaryCharts();
+        buildUtilityChart();
+        buildCompanyChart();
+        buildLegend('utilLegend');
+        buildLegend('coLegend');
+    } catch(e) { console.error("Error loading CSV:", e); }
 }
 
 function animateCounter(id, target) {
-    const element = document.getElementById(id);
-    let start = 0;
-    const duration = 1500;
-    const startTime = performance.now();
-
-    function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const current = Math.floor(progress * target);
-        element.innerText = current.toLocaleString();
-        if (progress < 1) requestAnimationFrame(update);
-        else element.innerText = Math.floor(target).toLocaleString();
+    const el = document.getElementById(id);
+    const duration = 1500, startTime = performance.now();
+    function update(now) {
+        const p = Math.min((now - startTime) / duration, 1);
+        el.innerText = Math.floor(p * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(update);
+        else el.innerText = Math.floor(target).toLocaleString();
     }
     requestAnimationFrame(update);
 }
 
-function buildFilters(){
-    const companies = [...new Set(allRecords.map(r=>r.company))].sort();
-    const utilities = [...new Set(allRecords.map(r=>r.utility))].sort();
-    const companySel = document.getElementById("companyFilter");
-    const utilitySel = document.getElementById("utilityFilter");
-    companies.forEach(c => {
-        let opt=document.createElement("option"); opt.value=c; opt.text=c;
-        companySel.appendChild(opt);
-    });
-    utilities.forEach(u => {
-        let opt=document.createElement("option"); opt.value=u; opt.text=u;
-        utilitySel.appendChild(opt);
-    });
+function buildFilters() {
+    const companies = [...new Set(allRecords.map(r => r.company))].sort();
+    const utilities = [...new Set(allRecords.map(r => r.utility))].sort();
+    const cSel = document.getElementById("companyFilter");
+    const uSel = document.getElementById("utilityFilter");
+    companies.forEach(c => { let o = document.createElement("option"); o.value = o.text = c; cSel.appendChild(o); });
+    utilities.forEach(u => { let o = document.createElement("option"); o.value = o.text = u; uSel.appendChild(o); });
 }
 
-function applyFilters(){
+function applyFilters() {
     const cVal = document.getElementById("companyFilter").value;
     const uVal = document.getElementById("utilityFilter").value;
     records = allRecords.filter(r => (cVal === "All" || r.company === cVal) && (uVal === "All" || r.utility === uVal));
-    document.getElementById("locations").innerHTML="";
+    document.getElementById("locations").innerHTML = "";
     loadLocations();
     buildUtilityTable();
-    if(siteChart) siteChart.destroy();
+    buildDataTable();
+    buildSummaryCharts();
+    buildUtilityChart();
+    buildCompanyChart();
+    if (siteChart) { siteChart.destroy(); siteChart = null; }
     document.getElementById("chartTitle").innerText = "Select a facility to view usage trends";
 }
 
-function buildUtilityTable(){
-    const totals={};
-    records.forEach(r=>{
-        if(!r.year) return;
-        if(!totals[r.utility]) totals[r.utility]={};
-        if(!totals[r.utility][r.year]) totals[r.utility][r.year]=0;
-        totals[r.utility][r.year] += r.gallons;
+/* ── Summary Charts ── */
+function buildSummaryCharts() {
+    // Monthly totals
+    const monthly = {};
+    records.forEach(r => { if (r.monthKey) { monthly[r.monthKey] = (monthly[r.monthKey] || 0) + r.gallons; } });
+    const mKeys = Object.keys(monthly).sort();
+    const mVals = mKeys.map(k => monthly[k]);
+    const mLabels = mKeys.map(k => { const [y,m] = k.split('-'); return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1]} '${y.slice(2)}`; });
+
+    if (monthlyChart) monthlyChart.destroy();
+    monthlyChart = new Chart(document.getElementById('monthlyChart'), {
+        type: 'bar',
+        data: {
+            labels: mLabels,
+            datasets: [{ label: 'Gallons', data: mVals, backgroundColor: '#1976d2', borderRadius: 2 }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => (ctx.raw/1e6).toFixed(1)+'M gal' } } },
+            scales: { x: { ticks: { maxRotation: 45, autoSkip: true, maxTicksLimit: 18, font: { size: 10 } } }, y: { ticks: { callback: v => (v/1e6).toFixed(0)+'M' }, beginAtZero: true } }
+        }
+    });
+
+    // Annual totals
+    const annual = {};
+    records.forEach(r => { if (r.year) annual[r.year] = (annual[r.year] || 0) + r.gallons; });
+    const aKeys = Object.keys(annual).sort();
+    const aColors = aKeys.map(k => YEAR_COLORS[k] || '#888');
+
+    if (annualChart) annualChart.destroy();
+    annualChart = new Chart(document.getElementById('annualChart'), {
+        type: 'bar',
+        data: {
+            labels: aKeys.map(k => k == 2026 ? '2026*' : k),
+            datasets: [{ label: 'Gallons', data: aKeys.map(k => annual[k]), backgroundColor: aColors, borderRadius: 4 }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => (ctx.raw/1e6).toFixed(0)+'M gal' } } },
+            scales: { y: { ticks: { callback: v => (v/1e6).toFixed(0)+'M' }, beginAtZero: true } }
+        }
+    });
+}
+
+/* ── Utility Grouped Bar ── */
+function buildUtilityChart() {
+    const utilYearTotals = {};
+    records.forEach(r => {
+        if (!r.year) return;
+        if (!utilYearTotals[r.utility]) utilYearTotals[r.utility] = {};
+        utilYearTotals[r.utility][r.year] = (utilYearTotals[r.utility][r.year] || 0) + r.gallons;
+    });
+    const utils = Object.keys(utilYearTotals).filter(u => Object.values(utilYearTotals[u]).some(v => v > 0));
+    const years = ['2023','2024','2025','2026'];
+    const shortNames = {
+        'Prince William Water Authority ': 'Prince William WA',
+        'Loudoun Water -Central System ': 'Loudoun Water',
+        'LEESBURG, TOWN OF': 'Leesburg',
+        'Fairfax Water Water Authority': 'Fairfax Water',
+        'CHESTERFIELD CO CENTRAL WATER SYSTEM': 'Chesterfield Co',
+        'CULPEPER, TOWN OF': 'Culpeper'
+    };
+    const labels = utils.map(u => shortNames[u] || u.trim());
+    const datasets = years.map(yr => ({
+        label: yr === '2026' ? '2026 (Jan–Apr)' : yr,
+        data: utils.map(u => utilYearTotals[u][yr] || 0),
+        backgroundColor: YEAR_COLORS[yr]
+    }));
+    if (utilBarChart) utilBarChart.destroy();
+    utilBarChart = new Chart(document.getElementById('utilBarChart'), {
+        type: 'bar',
+        data: { labels, datasets },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.raw/1e6).toFixed(0)+'M gal' } } },
+            scales: {
+                x: { ticks: { callback: v => (v/1e6).toFixed(0)+'M' }, grid: { color: 'rgba(0,0,0,0.04)' } },
+                y: { ticks: { font: { size: 12 } }, grid: { display: false } }
+            }
+        }
+    });
+}
+
+/* ── Company Grouped Bar ── */
+function buildCompanyChart() {
+    const coYearTotals = {};
+    records.forEach(r => {
+        if (!r.year) return;
+        if (!coYearTotals[r.company]) coYearTotals[r.company] = {};
+        coYearTotals[r.company][r.year] = (coYearTotals[r.company][r.year] || 0) + r.gallons;
+    });
+    const totals = Object.keys(coYearTotals).map(c => ({ c, t: Object.values(coYearTotals[c]).reduce((a,b)=>a+b,0) }));
+    totals.sort((a,b) => b.t - a.t);
+    const cos = totals.map(x => x.c);
+    const years = ['2023','2024','2025','2026'];
+    const datasets = years.map(yr => ({
+        label: yr === '2026' ? '2026 (Jan–Apr)' : yr,
+        data: cos.map(c => coYearTotals[c][yr] || 0),
+        backgroundColor: YEAR_COLORS[yr]
+    }));
+    if (coBarChart) coBarChart.destroy();
+    coBarChart = new Chart(document.getElementById('coBarChart'), {
+        type: 'bar',
+        data: { labels: cos, datasets },
+        options: {
+            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + (ctx.raw/1e6).toFixed(0)+'M gal' } } },
+            scales: {
+                x: { ticks: { callback: v => (v/1e6).toFixed(0)+'M' }, grid: { color: 'rgba(0,0,0,0.04)' } },
+                y: { ticks: { font: { size: 12 } }, grid: { display: false } }
+            }
+        }
+    });
+}
+
+function buildLegend(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.innerHTML = Object.entries(YEAR_COLORS).map(([yr,col]) =>
+        `<div class="legend-item"><span class="swatch" style="background:${col}"></span>${yr === '2026' ? '2026 (Jan–Apr)' : yr}</div>`
+    ).join('');
+}
+
+/* ── Utility Table ── */
+function buildUtilityTable() {
+    const totals = {};
+    records.forEach(r => {
+        if (!r.year) return;
+        if (!totals[r.utility]) totals[r.utility] = {};
+        totals[r.utility][r.year] = (totals[r.utility][r.year] || 0) + r.gallons;
     });
     const tbody = document.querySelector("#utilityTable tbody");
-    tbody.innerHTML="";
+    tbody.innerHTML = "";
     Object.keys(totals).sort().forEach(util => {
         Object.keys(totals[util]).sort().forEach(yr => {
-            let tr = document.createElement("tr");
-            tr.innerHTML=`<td>${util}</td><td>${yr}</td><td>${totals[util][yr].toLocaleString()}</td>`;
+            const tr = document.createElement("tr");
+            tr.innerHTML = `<td>${util.trim()}</td><td>${yr}</td><td>${Math.round(totals[util][yr]).toLocaleString()}</td>`;
             tbody.appendChild(tr);
         });
     });
 }
 
-function loadLocations(){
+/* ── Data Table (first 500 rows to avoid browser lag) ── */
+function buildDataTable() {
+    const tbody = document.querySelector("#dataTable tbody");
+    tbody.innerHTML = "";
+    const slice = records.slice(0, 500);
+    slice.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${r.company}</td><td>${r.utility.trim()}</td><td>${r.location}</td><td>${r.date}</td><td>${Math.round(r.gallons).toLocaleString()}</td>`;
+        tbody.appendChild(tr);
+    });
+    if (records.length > 500) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="5" style="text-align:center;color:#94a3b8;font-style:italic;">Showing 500 of ${records.length.toLocaleString()} records. Download CSV for full dataset.</td>`;
+        tbody.appendChild(tr);
+    }
+}
+
+/* ── Facility Explorer ── */
+function loadLocations() {
     const sidebar = document.getElementById("locations");
-    [...new Set(records.map(r=>r.location))].sort().forEach(loc=>{
+    [...new Set(records.map(r => r.location))].sort().forEach(loc => {
         let btn = document.createElement("button");
         btn.className = "locationBtn";
         btn.innerText = loc;
@@ -300,33 +529,29 @@ function loadLocations(){
     });
 }
 
-function drawChart(locationName){
+function drawChart(locationName) {
     document.getElementById("chartTitle").innerText = "Usage: " + locationName;
-    let data = allRecords.filter(r => r.location === locationName).sort((a,b) => new Date(a.date) - new Date(b.date));
-    let labels = data.map(d => d.date);
-    let values = data.map(d => d.gallons);
-    if(siteChart) siteChart.destroy();
-    const ctx = document.getElementById("siteChart").getContext('2d');
-    siteChart = new Chart(ctx, {
+    const data = allRecords.filter(r => r.location === locationName).sort((a,b) => new Date(a.date) - new Date(b.date));
+    if (siteChart) siteChart.destroy();
+    siteChart = new Chart(document.getElementById("siteChart").getContext('2d'), {
         type: "line",
         data: {
-            labels: labels,
+            labels: data.map(d => d.date),
             datasets: [{
                 label: "Gallons Used",
-                data: values,
+                data: data.map(d => d.gallons),
                 borderColor: '#1976d2',
-                backgroundColor: 'rgba(25, 118, 210, 0.1)',
-                fill: true,
-                tension: 0.3
+                backgroundColor: 'rgba(25,118,210,0.1)',
+                fill: true, tension: 0.3, pointRadius: 3
             }]
         },
-        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { tooltip: { callbacks: { label: ctx => Math.round(ctx.raw).toLocaleString() + ' gal' } } },
+            scales: { y: { beginAtZero: true, ticks: { callback: v => v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'K' : v } } }
+        }
     });
 }
-
-function downloadCSV(){ window.location="wateruse.csv"; }
-function viewMap(){ window.open("map.html","_blank"); }
-function openwindow(){ window.open("https://public.flourish.studio/visualisation/27352160/", "_blank"); }
 
 loadCSV();
 </script>
