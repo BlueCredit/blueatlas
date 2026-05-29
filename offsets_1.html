@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NXY7BHERXJ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NXY7BHERXJ');
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Data Center Water Offsets</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 25px; background: #f5f7fb; line-height: 1.5; position: relative; }
+        
+        header { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 30px; }
+        .logo-container { width: 150px; height: 150px; background: white; border-radius: 50%; border: 2px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 0.2s; }
+        .logo-container:hover { transform: scale(1.02); }
+        .logo-container img { width: 85%; height: auto; display: block; }
+
+        .counter-container { position: absolute; top: 25px; right: 25px; background: white; padding: 15px 25px; border-radius: 12px; text-align: right; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e0e6ed; z-index: 10; }
+        .counter-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+        .counter-value { font-size: 32px; font-weight: 800; color: #2e7d32; font-family: 'Courier New', monospace; line-height: 1; margin: 5px 0; }
+        .counter-unit { font-size: 14px; color: #2e7d32; font-weight: 700; }
+
+        .section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        /* Portfolio Spotlight Styles */
+        .portfolio-selector-area { display: flex; flex-direction: column; align-items: center; padding: 40px; background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%); border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 25px; text-align: center;}
+        .large-select { padding: 12px; font-size: 16px; border-radius: 8px; border: 2px solid #2e7d32; width: 100%; max-width: 400px; outline: none; margin-bottom: 10px; cursor: pointer; }
+        
+        .portfolio-card { width: 100%; max-width: 500px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 30px; margin-top: 20px; text-align: center; border-top: 5px solid #2e7d32; display: none; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .portfolio-card h2 { margin: 0 0 10px 0; color: #1e293b; }
+        .portfolio-card .stat { font-size: 24px; font-weight: bold; color: #2e7d32; margin: 15px 0; }
+        .portfolio-card .btn-link { display: inline-block; padding: 12px 24px; color: white; text-decoration: none; border-radius: 6px; font-weight: bold; transition: all 0.2s; margin-top: 10px; }
+        
+        .container { display: flex; gap: 20px; }
+        .sidebar { width: 320px; background: white; padding: 15px; border-radius: 8px; height: 650px; overflow: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .main { flex: 1; background: white; padding: 20px; border-radius: 8px; max-width: calc(100% - 340px); overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        
+        .projectBtn { display: block; width: 100%; margin-bottom: 8px; padding: 12px; background: #2e7d32; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px; text-align: left; transition: background 0.2s; }
+        .projectBtn:hover { background: #1b5e20; }
+        
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 13px; }
+        th, td { border: 1px solid #eee; padding: 10px; text-align: left; }
+        th { background: #f8f9fa; font-weight: 600; }
+
+        .filters { margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center; background: #fff; padding: 15px; border-radius: 8px; }
+        .filters select { padding: 8px; border-radius: 4px; border: 1px solid #ddd; min-width: 140px; }
+        
+        .toolbar { margin-bottom: 20px; }
+        .toolbar button { margin-right: 10px; padding: 10px 16px; cursor: pointer; background: #fff; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; }
+        
+        .chart-container { position: relative; height: 450px; width: 100%; }
+
+        footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 40px 0; margin-top: 40px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="counter-container">
+    <div class="counter-label">Volumetric Water Benefit</div>
+    <div class="counter-value" id="totalCounter">0</div>
+    <div class="counter-unit">Gallons</div>
+</div>
+
+<header>
+    <a href="index.html" style="text-decoration: none;">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo">
+        </div>
+    </a>
+</header>
+
+<div class="portfolio-selector-area">
+    <h3 style="margin-top:0;">Corporate Water Replenishment Portfolios</h3>
+    <p style="margin-bottom: 20px; color: #64748b; max-width: 600px;">Explore verified replenishment documents and recorded impacts for companies in our database.</p>
+    
+    <select id="portfolioSelector" class="large-select" onchange="updatePortfolioCard()">
+        <option value="">-- Search / Select a Company --</option>
+    </select>
+
+    <div id="companyCard" class="portfolio-card">
+        <h2 id="cardCompanyName">Company Name</h2>
+        <p style="color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; margin-bottom: 5px;">Recorded Offset Impact</p>
+        <div class="stat" id="cardStat">0 Gallons</div>
+        <p id="cardDescription" style="font-size: 14px; color: #475569; line-height: 1.6; margin: 0 0 20px 0;"></p>
+        <a id="cardLink" href="#" target="_blank" class="btn-link">View Portfolio</a>
+    </div>
+</div>
+
+<div class="filters">
+    <div>
+        <label><b>Company Filter:</b></label>
+        <select id="companyFilter" onchange="applyFilters()">
+            <option value="All">All Companies</option>
+        </select>
+    </div>
+    <div>
+        <label><b>Watershed:</b></label>
+        <select id="watershedFilter" onchange="applyFilters()">
+            <option value="All">All Watersheds</option>
+        </select>
+    </div>
+    <div>
+        <label><b>Partner:</b></label>
+        <select id="partnerFilter" onchange="applyFilters()">
+            <option value="All">All Partners</option>
+        </select>
+    </div>
+</div>
+
+<div class="toolbar">
+    <button onclick="window.location.href='../usdatacentermap.kmz'" 
+        style="background:#1565c0; color:white; border:none;">
+    Download Data Center Map (KMZ)
+</button>
+</div>
+
+<div class="section">
+    <h3>Data Summary by Watershed</h3>
+    <table id="summaryTable">
+        <thead>
+            <tr>
+                <th>Watershed</th>
+                <th>Year</th>
+                <th>Total Benefit (Gallons)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div class="container">
+    <div class="sidebar">
+        <h4 style="margin-top:0;">Project List</h4>
+        <div id="projectsList"></div>
+    </div>
+    <div class="main">
+        <h3 id="chartTitle">Select a project to view details</h3>
+        <div class="chart-container">
+            <canvas id="offsetChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p style="color: #94a3b8; font-size: 0.9rem;">Data compiled from verified FOIA requests and corporate sustainability reports. All information is provided "as is".</p>
+</footer>
+
+<script>
+let allRecords = [];
+let filteredRecords = [];
+let portfolioLinks = {}; 
+let offsetChart;
+
+async function loadData() {
+    try {
+        const reportResp = await fetch("waterreports.csv");
+        const reportText = await reportResp.text();
+        const reportLines = reportText.trim().split(/\r?\n/);
+        const pSel = document.getElementById("portfolioSelector");
+        
+        reportLines.slice(1).forEach(line => {
+            const row = parseLine(line);
+            if (row.length >= 1 && row[0]) {
+                const company = row[0].trim();
+                portfolioLinks[company] = (row[1] && row[1].trim() !== "") ? row[1].trim() : null;
+                pSel.add(new Option(company, company));
+            }
+        });
+
+        const response = await fetch("wateroffsets.csv");
+        const text = await response.text();
+        const lines = text.trim().split(/\r?\n/);
+        const headers = parseLine(lines[0]);
+
+        allRecords = lines.slice(1).map(line => {
+            const row = parseLine(line);
+            if(row.length < 5) return null;
+            const dateStr = row[headers.indexOf('Date')] || "";
+            return {
+                company: row[headers.indexOf('Company')] || "Unknown",
+                project: row[headers.indexOf('Project')] || "N/A",
+                partner: row[headers.indexOf('Partner ')] || "N/A", 
+                watershed: row[headers.indexOf('Watershed')] || "N/A",
+                category: row[headers.indexOf('Category')] || "General",
+                date: dateStr,
+                year: dateStr.split('-')[0] || "N/A",
+                benefit: parseFloat(row[headers.indexOf('Gallons')].replace(/,/g, '')) || 0
+            };
+        }).filter(r => r !== null);
+
+        filteredRecords = [...allRecords];
+        animateCounter('totalCounter', allRecords.reduce((s, r) => s + r.benefit, 0));
+        
+        buildFilters();
+        loadSidebar();
+        buildSummaryTable();
+    } catch (e) { console.error("Error initializing data:", e); }
+}
+
+function parseLine(line) {
+    const row = []; let current = '', inQuotes = false;
+    for (let char of line) {
+        if (char === '"') inQuotes = !inQuotes;
+        else if (char === ',' && !inQuotes) { row.push(current.trim()); current = ''; }
+        else current += char;
+    }
+    row.push(current.trim()); return row;
+}
+
+function updatePortfolioCard() {
+    const company = document.getElementById("portfolioSelector").value;
+    const card = document.getElementById("companyCard");
+    const linkBtn = document.getElementById("cardLink");
+    const desc = document.getElementById("cardDescription");
+    const stat = document.getElementById("cardStat");
+    
+    if (!company) {
+        card.style.display = "none";
+        return;
+    }
+
+    const companyTotal = allRecords
+        .filter(r => r.company === company)
+        .reduce((sum, r) => sum + r.benefit, 0);
+
+    document.getElementById("cardCompanyName").innerText = company;
+    stat.innerText = companyTotal > 0 
+        ? Math.round(companyTotal).toLocaleString() + " Gallons" 
+        : "No Offset Data Recorded";
+
+    if (portfolioLinks[company]) {
+        linkBtn.href = portfolioLinks[company];
+        linkBtn.innerText = "View Verified Portfolio (PDF) ↗";
+        linkBtn.style.background = "#2e7d32";
+        linkBtn.style.pointerEvents = "auto";
+        linkBtn.style.opacity = "1";
+        desc.innerText = `Detailed documentation is available for ${company}. Click the button below to view their official replenishment project portfolio.`;
+    } else {
+        linkBtn.href = "#";
+        linkBtn.innerText = "Portfolio Data Requested";
+        linkBtn.style.background = "#94a3b8";
+        linkBtn.style.pointerEvents = "none";
+        linkBtn.style.opacity = "0.7";
+        desc.innerText = `We are currently tracking ${company}, but they have not yet released a public water replenishment portfolio for our records.`;
+    }
+    
+    card.style.display = "block";
+}
+
+function buildFilters() {
+    const comps = [...new Set(allRecords.map(r => r.company))].sort();
+    const water = [...new Set(allRecords.map(r => r.watershed))].sort();
+    const partners = [...new Set(allRecords.map(r => r.partner))].sort();
+    
+    const cSel = document.getElementById("companyFilter");
+    const wSel = document.getElementById("watershedFilter");
+    const pSel = document.getElementById("partnerFilter");
+
+    comps.forEach(c => cSel.add(new Option(c, c)));
+    water.forEach(w => wSel.add(new Option(w, w)));
+    partners.forEach(p => pSel.add(new Option(p, p)));
+}
+
+function applyFilters() {
+    const cVal = document.getElementById("companyFilter").value;
+    const wVal = document.getElementById("watershedFilter").value;
+    const pVal = document.getElementById("partnerFilter").value;
+
+    filteredRecords = allRecords.filter(r => 
+        (cVal === "All" || r.company === cVal) && 
+        (wVal === "All" || r.watershed === wVal) &&
+        (pVal === "All" || r.partner === pVal)
+    );
+
+    loadSidebar();
+    buildSummaryTable();
+}
+
+function buildSummaryTable() {
+    const summary = {};
+    filteredRecords.forEach(r => {
+        const key = `${r.watershed}|${r.year}`;
+        if (!summary[key]) summary[key] = { w: r.watershed, y: r.year, total: 0 };
+        summary[key].total += r.benefit;
+    });
+    
+    const tbody = document.querySelector("#summaryTable tbody");
+    tbody.innerHTML = "";
+    Object.values(summary).sort((a,b) => b.y - a.y || a.w.localeCompare(b.w)).forEach(s => {
+        tbody.innerHTML += `<tr><td>${s.w}</td><td>${s.y}</td><td>${Math.round(s.total).toLocaleString()}</td></tr>`;
+    });
+}
+
+function loadSidebar() {
+    const list = document.getElementById("projectsList");
+    list.innerHTML = "";
+    const projects = [...new Set(filteredRecords.map(r => r.project))].sort();
+    projects.forEach(projName => {
+        let btn = document.createElement("button");
+        btn.className = "projectBtn";
+        btn.innerText = projName; 
+        btn.onclick = () => drawChart(projName);
+        list.appendChild(btn);
+    });
+}
+
+function drawChart(projectName) {
+    const projectData = allRecords.filter(r => r.project === projectName).sort((a,b) => a.date.localeCompare(b.date));
+    document.getElementById("chartTitle").innerText = `${projectName} (${projectData[0]?.partner || "N/A"})`;
+    if(offsetChart) offsetChart.destroy();
+    const ctx = document.getElementById("offsetChart").getContext('2d');
+    offsetChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: projectData.map(d => d.date),
+            datasets: [{
+                label: "Monthly Gallons",
+                data: projectData.map(d => d.benefit),
+                borderColor: '#2e7d32',
+                backgroundColor: 'rgba(46, 125, 50, 0.1)',
+                fill: true,
+                tension: 0.3
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+}
+
+function animateCounter(id, target) {
+    const el = document.getElementById(id);
+    const duration = 1500; const start = performance.now();
+    function update(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        el.innerText = Math.floor(progress * target).toLocaleString();
+        if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+}
+
+function downloadCSV() { window.location = "wateroffsets.csv"; }
+
+loadData();
+</script>
+</body>
+</html>
