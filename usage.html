@@ -487,22 +487,7 @@ function buildUtilityTable() {
     });
 }
 
-/* ── Data Table (first 500 rows to avoid browser lag) ── */
-function buildDataTable() {
-    const tbody = document.querySelector("#dataTable tbody");
-    tbody.innerHTML = "";
-    const slice = records.slice(0, 500);
-    slice.forEach(r => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${r.company}</td><td>${r.utility.trim()}</td><td>${r.location}</td><td>${r.date}</td><td>${Math.round(r.gallons).toLocaleString()}</td>`;
-        tbody.appendChild(tr);
-    });
-    if (records.length > 500) {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td colspan="5" style="text-align:center;color:#94a3b8;font-style:italic;">Showing 500 of ${records.length.toLocaleString()} records. Download CSV for full dataset.</td>`;
-        tbody.appendChild(tr);
-    }
-}
+
 
 /* ── Facility Explorer ── */
 function loadLocations() {
