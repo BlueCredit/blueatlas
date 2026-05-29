@@ -13,19 +13,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     body { font-family: Arial, sans-serif; margin: 25px; background: #f5f7fb; line-height: 1.5; position: relative; }
-
     header { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 30px; }
     .logo-container { width: 150px; height: 150px; background: white; border-radius: 50%; border: 2px solid #ddd; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; overflow: hidden; transition: transform 0.2s; }
     .logo-container:hover { transform: scale(1.02); }
     .logo-container img { width: 85%; height: auto; display: block; }
 
-    /* Counter */
     .counter-container { position: absolute; top: 25px; right: 25px; background: white; padding: 15px 25px; border-radius: 12px; text-align: right; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e0e6ed; z-index: 10; }
     .counter-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
     .counter-value { font-size: 32px; font-weight: 800; color: #2e7d32; font-family: 'Courier New', monospace; line-height: 1; margin: 5px 0; }
     .counter-unit { font-size: 14px; color: #2e7d32; font-weight: 700; }
 
-    /* Metric cards */
     .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
     .metric-card { background: white; border-radius: 8px; padding: 16px 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 4px solid #2e7d32; }
     .metric-card.red   { border-left-color: #c62828; }
@@ -35,9 +32,6 @@
     .metric-value { font-size: 24px; font-weight: 800; color: #1e293b; line-height: 1.1; }
     .metric-sub { font-size: 11px; color: #94a3b8; margin-top: 3px; }
 
-    
-
-    /* Tabs */
     .tabs { display: flex; gap: 4px; margin-bottom: 0; border-bottom: 2px solid #e2e8f0; }
     .tab { padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: 600; color: #64748b; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
     .tab.active { color: #2e7d32; border-bottom-color: #2e7d32; }
@@ -45,84 +39,68 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Sections */
     .section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
     .section h3 { margin-top: 0; margin-bottom: 14px; font-size: 15px; color: #1e293b; }
 
-    /* Charts */
     .chart-container { position: relative; width: 100%; }
     .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
 
-    /* Legend */
     .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 12px; color: #555; }
     .legend-item { display: flex; align-items: center; gap: 5px; }
     .swatch { width: 10px; height: 10px; border-radius: 2px; display: inline-block; flex-shrink: 0; }
 
-    /* Portfolio selector */
     .portfolio-selector-area { display: flex; flex-direction: column; align-items: center; padding: 36px 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 0; text-align: center; }
     .portfolio-selector-area p { color: #64748b; font-size: 14px; max-width: 520px; margin: 0 0 18px; }
     .large-select { padding: 12px 16px; font-size: 15px; border-radius: 8px; border: 2px solid #2e7d32; width: 100%; max-width: 420px; outline: none; cursor: pointer; background: white; }
     .large-select:focus { border-color: #1b5e20; box-shadow: 0 0 0 3px rgba(46,125,50,0.15); }
 
-    /* Modal overlay */
     .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1000; align-items: center; justify-content: center; }
     .modal-overlay.open { display: flex; }
-    .modal-box { background: white; border-radius: 16px; padding: 0; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: popIn 0.2s ease; overflow: hidden; }
-    @keyframes popIn { from { opacity:0; transform:scale(0.94) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
+    .modal-box { background: white; border-radius: 16px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); animation: popIn 0.2s ease; overflow: hidden; }
+    @keyframes popIn { from{opacity:0;transform:scale(0.94) translateY(8px)} to{opacity:1;transform:scale(1) translateY(0)} }
+    .modal-top { height: 4px; background: #2e7d32; }
+    .modal-top.amber { background: #f57c00; }
     .modal-header { padding: 22px 24px 16px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: flex-start; }
     .modal-header h2 { margin: 0; font-size: 20px; color: #1e293b; }
     .modal-close { background: none; border: none; font-size: 22px; color: #94a3b8; cursor: pointer; padding: 0; line-height: 1; }
     .modal-close:hover { color: #475569; }
     .modal-body { padding: 20px 24px 24px; }
     .modal-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 12px; margin-bottom: 14px; }
-    .modal-badge.green  { background: #dcfce7; color: #166534; }
-    .modal-badge.amber  { background: #fef3c7; color: #92400e; }
-    .modal-badge.gray   { background: #f1f5f9; color: #475569; }
+    .modal-badge.green { background: #dcfce7; color: #166534; }
+    .modal-badge.amber { background: #fef3c7; color: #92400e; }
     .modal-stat { font-size: 28px; font-weight: 800; margin: 4px 0 10px; }
     .modal-stat.green { color: #2e7d32; }
     .modal-stat.amber { color: #f57c00; }
-    .modal-stat.gray  { color: #94a3b8; }
     .modal-desc { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 20px; }
-    .modal-top { border-top: 4px solid #2e7d32; }
-    .modal-top.amber { border-top-color: #f57c00; }
-    .modal-top.gray  { border-top-color: #94a3b8; }
     .modal-btn { display: inline-block; padding: 11px 22px; color: white; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: 700; }
     .modal-btn.green { background: #2e7d32; }
     .modal-btn.gray  { background: #94a3b8; pointer-events: none; }
 
-    /* Filters */
     .filters { margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; align-items: center; background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
     .filters select { padding: 8px; border-radius: 4px; border: 1px solid #ddd; min-width: 160px; font-size: 13px; }
     .filters label { font-size: 13px; font-weight: 600; }
-    .filter-reset { padding: 8px 14px; font-size: 13px; cursor: pointer; background: #f1f5f9; border: 1px solid #ddd; border-radius: 4px; color: #475569; font-weight: 600; }
-    .filter-reset:hover { background: #e2e8f0; }
 
-    /* Toolbar */
     .toolbar { margin-bottom: 20px; }
     .toolbar button { margin-right: 10px; padding: 10px 16px; cursor: pointer; background: #fff; border: 1px solid #ddd; border-radius: 4px; font-weight: bold; font-size: 13px; }
 
-    /* Project explorer */
     .container { display: flex; gap: 20px; }
     .sidebar { width: 300px; background: white; padding: 15px; border-radius: 8px; height: 650px; overflow: auto; box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0; }
     .main { flex: 1; background: white; padding: 20px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
     .projectBtn { display: block; width: 100%; margin-bottom: 6px; padding: 9px 10px; background: #2e7d32; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; text-align: left; transition: background 0.2s; }
     .projectBtn:hover { background: #1b5e20; }
 
-    /* Table */
     table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 13px; }
     th, td { border: 1px solid #eee; padding: 9px 10px; text-align: left; }
     th { background: #f8f9fa; font-weight: 600; }
     tr:hover td { background: #f8fbff; }
-
     .note { font-size: 11px; color: #94a3b8; font-style: italic; margin-top: 8px; }
 
-     /* Footer */
     footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: 30px; }
     .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
     .footer-section { width: 100%; text-align: center; }
     .footer-section h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 15px; }
     .footer-section p.disclaimer { font-size: 0.9rem; color: #94a3b8; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
-    .support-box { background: #ffffff; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; border-top: 4px solid #6366f1; box-shadow: 0 15px 30px rgba(0,0,0,0.04); width: 100%; box-sizing: border-box; max-width: 700px; margin: 20px auto 0; }
+    .support-box { background: #fff; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; border-top: 4px solid #6366f1; box-shadow: 0 15px 30px rgba(0,0,0,0.04); width: 100%; box-sizing: border-box; max-width: 700px; margin: 20px auto 0; }
     .support-box h3 { color: #1e293b; margin-top: 0; }
     .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
     .gfm-embed { margin: 0 auto; display: inline-block; }
@@ -142,12 +120,12 @@
     </a>
 </header>
 
-<!-- Metric cards -->
+<!-- Metric cards — all populated by JS -->
 <div class="summary-grid">
     <div class="metric-card">
         <div class="metric-label">Verified Water Benefit</div>
         <div class="metric-value" id="m-benefit">—</div>
-        <div class="metric-sub" id="m-benefit-sub">All recorded projects</div>
+        <div class="metric-sub" id="m-benefit-sub">Loading…</div>
     </div>
     <div class="metric-card red">
         <div class="metric-label">Total Consumption</div>
@@ -157,23 +135,21 @@
     <div class="metric-card amber">
         <div class="metric-label">Replenishment Rate</div>
         <div class="metric-value" id="m-rate">—</div>
-        <div class="metric-sub" id="m-rate-sub">vs. verified consumption</div>
+        <div class="metric-sub" id="m-rate-sub">Loading…</div>
     </div>
     <div class="metric-card blue">
         <div class="metric-label">Companies with Programs</div>
         <div class="metric-value" id="m-cos">—</div>
-        <div class="metric-sub" id="m-cos-sub">of tracked companies</div>
+        <div class="metric-sub" id="m-cos-sub">Loading…</div>
     </div>
 </div>
 
-
-
-<!-- Modal overlay -->
+<!-- Modal -->
 <div class="modal-overlay" id="portfolioModal" onclick="closeModal(event)">
-    <div class="modal-box" id="modalBox">
+    <div class="modal-box">
         <div class="modal-top" id="modalTop"></div>
         <div class="modal-header">
-            <h2 id="modalCompany">Company</h2>
+            <h2 id="modalCompany"></h2>
             <button class="modal-close" onclick="document.getElementById('portfolioModal').classList.remove('open')">✕</button>
         </div>
         <div class="modal-body">
@@ -193,7 +169,6 @@
     <div><label>Partner:</label>
         <select id="partnerFilter" onchange="applyFilters()"><option value="All">All Partners</option></select>
     </div>
-    <button class="filter-reset" onclick="resetFilters()">Reset</button>
 </div>
 
 <!-- Toolbar -->
@@ -213,7 +188,7 @@
     <div style="background:white;padding:20px;border-radius:0 8px 8px 8px;box-shadow:0 2px 4px rgba(0,0,0,0.05);margin-bottom:20px;">
         <div class="portfolio-selector-area">
             <p>Select a company to view their verified replenishment portfolio and recorded water benefit impact.</p>
-            <select class="large-select" id="portfolioSelector" onchange="updatePortfolioCard()">
+            <select class="large-select" id="portfolioSelector" onchange="openPortfolioModal()">
                 <option value="">— Select a Company —</option>
             </select>
         </div>
@@ -282,13 +257,14 @@
         </div>
     </div>
 </footer>
+
 <script>
 let allRecords = [];
 let filteredRecords = [];
 let portfolioLinks = {};
 let offsetChart, annualCoChart, categoryChart, monthlyChart;
 
-const CO_COLORS = { 'Amazon':'#185FA5', 'Microsoft':'#0F6E56', 'Google':'#BA7517' };
+const CO_COLORS  = { 'Amazon':'#185FA5', 'Microsoft':'#0F6E56', 'Google':'#BA7517' };
 const CAT_COLORS = { 'Recycled Water':'#1D9E75', 'Water Quality':'#185FA5', 'Watershed Replenishment':'#BA7517' };
 
 function switchTab(id, btn) {
@@ -298,193 +274,165 @@ function switchTab(id, btn) {
     btn.classList.add('active');
 }
 
+function fmtM(v) {
+    if (v >= 1e9) return (v/1e9).toFixed(2)+'B gal';
+    if (v >= 1e6) return (v/1e6).toFixed(1)+'M gal';
+    if (v >= 1e3) return Math.round(v/1e3)+'K gal';
+    return Math.round(v).toLocaleString()+' gal';
+}
+
+function animateCounter(id, target) {
+    const el = document.getElementById(id); const dur=1500, t0=performance.now();
+    function u(now){ const p=Math.min((now-t0)/dur,1); el.innerText=Math.floor(p*target).toLocaleString(); if(p<1) requestAnimationFrame(u); }
+    requestAnimationFrame(u);
+}
+
 function parseLine(line) {
-    const row = []; let current = '', inQuotes = false;
-    for (let char of line) {
-        if (char === '"') inQuotes = !inQuotes;
-        else if (char === ',' && !inQuotes) { row.push(current.trim()); current = ''; }
-        else current += char;
+    const row=[]; let cur='', inQ=false;
+    for(const ch of line){
+        if(ch==='"') inQ=!inQ;
+        else if(ch===','&&!inQ){ row.push(cur.trim()); cur=''; }
+        else cur+=ch;
     }
-    row.push(current.trim()); return row;
+    row.push(cur.trim()); return row;
 }
 
 async function loadData() {
     try {
-        // Load portfolio links
+        // 1. Portfolio links (optional)
         try {
-            const rr = await fetch("waterreports.csv");
-            const rt = await rr.text();
+            const rt = await (await fetch("waterreports.csv")).text();
             rt.trim().split(/\r?\n/).slice(1).forEach(line => {
                 const row = parseLine(line);
-                if (row.length >= 1 && row[0]) {
-                    portfolioLinks[row[0].trim()] = (row[1] && row[1].trim()) ? row[1].trim() : null;
-                }
+                if (row[0]) portfolioLinks[row[0].trim()] = row[1]?.trim() || null;
             });
-        } catch(e) { /* waterreports.csv optional */ }
+        } catch(e) {}
 
-        // Load offsets
-        const resp = await fetch("wateroffsets.csv");
-        const text = await resp.text();
-        const lines = text.trim().split(/\r?\n/);
+        // 2. Offsets data
+        const text    = await (await fetch("wateroffsets.csv")).text();
+        const lines   = text.trim().split(/\r?\n/);
         const headers = parseLine(lines[0]);
+
+        const idx = {
+            company:   headers.indexOf('Company'),
+            project:   headers.indexOf('Project'),
+            partner:   headers.indexOf('Partner ') >= 0 ? headers.indexOf('Partner ') : headers.indexOf('Partner'),
+            watershed: headers.indexOf('Watershed'),
+            category:  headers.indexOf('Category'),
+            date:      headers.indexOf('Date'),
+            gallons:   headers.indexOf('Gallons')
+        };
 
         allRecords = lines.slice(1).map(line => {
             const row = parseLine(line);
             if (row.length < 5) return null;
-            const g = parseFloat((row[headers.indexOf('Gallons')] || '0').replace(/,/g,'')) || 0;
-            const dateStr = (row[headers.indexOf('Date')] || '').trim();
+            const dateStr = (row[idx.date]||'').trim();
             return {
-                company:   (row[headers.indexOf('Company')] || '').trim(),
-                project:   (row[headers.indexOf('Project')] || '').trim(),
-                partner:   (row[headers.indexOf('Partner ')] || row[headers.indexOf('Partner')] || '').trim(),
-                watershed: (row[headers.indexOf('Watershed')] || '').trim(),
-                category:  (row[headers.indexOf('Category')] || 'General').trim(),
-                date: dateStr,
-                year: dateStr.slice(0,4),
-                benefit: g
+                company:   (row[idx.company]  ||'').trim(),
+                project:   (row[idx.project]  ||'').trim(),
+                partner:   (row[idx.partner]  ||'').trim(),
+                watershed: (row[idx.watershed]||'').trim(),
+                category:  (row[idx.category] ||'General').trim(),
+                date:      dateStr,
+                year:      dateStr.slice(0,4),
+                benefit:   parseFloat((row[idx.gallons]||'0').replace(/,/g,''))||0
             };
         }).filter(r => r && r.company);
 
         filteredRecords = [...allRecords];
 
-        const total = allRecords.reduce((s,r) => s + r.benefit, 0);
+        // 3. Consumption totals from wateruse.csv (optional)
+        let totalConsumption=0, totalLocations=0, totalTrackedCos=0;
+        try {
+            const ut    = await (await fetch("wateruse.csv")).text();
+            const ul    = ut.trim().split(/\r?\n/);
+            const uh    = parseLine(ul[0]);
+            const gi    = uh.indexOf('Gallons'), li=uh.indexOf('Location'), ci=uh.indexOf('Company');
+            const uRows = ul.slice(1).map(l=>parseLine(l)).filter(r=>r.length>gi);
+            totalConsumption = uRows.reduce((s,r)=>s+(parseFloat((r[gi]||'0').replace(/,/g,''))||0),0);
+            totalLocations   = new Set(uRows.map(r=>(r[li]||'').trim()).filter(Boolean)).size;
+            totalTrackedCos  = new Set(uRows.map(r=>(r[ci]||'').trim()).filter(Boolean)).size;
+        } catch(e) {}
+
+        // 4. Populate metric cards
+        const total = allRecords.reduce((s,r)=>s+r.benefit,0);
         animateCounter('totalCounter', total);
 
-        // Load consumption totals live from wateruse.csv
-        let totalConsumption = 0, totalLocations = 0, totalTrackedCos = 0;
-        try {
-            const ur = await fetch("wateruse.csv");
-            const ut = await ur.text();
-            const ulines = ut.trim().split(/\r?\n/);
-            const uh = parseLine(ulines[0]);
-            const giIdx = uh.indexOf('Gallons'), loIdx = uh.indexOf('Location'), coIdx = uh.indexOf('Company');
-            const uRows = ulines.slice(1).map(l => parseLine(l)).filter(r => r.length > giIdx);
-            totalConsumption = uRows.reduce((s,r) => s + (parseFloat((r[giIdx]||'0').replace(/,/g,''))||0), 0);
-            totalLocations   = new Set(uRows.map(r => (r[loIdx]||'').trim()).filter(Boolean)).size;
-            totalTrackedCos  = new Set(uRows.map(r => (r[coIdx]||'').trim()).filter(Boolean)).size;
-        } catch(e) { /* wateruse.csv not found — degrade gracefully */ }
+        document.getElementById('m-benefit').innerText     = fmtM(total);
+        document.getElementById('m-benefit-sub').innerText = allRecords.length.toLocaleString()+' project records';
 
-        // Card 1: benefit
-        document.getElementById('m-benefit').innerText = fmtM(total);
-        document.getElementById('m-benefit-sub').innerText = allRecords.length.toLocaleString() + ' project records';
-
-        // Card 2: consumption (from wateruse.csv)
-        document.getElementById('m-consumption').innerText = totalConsumption > 0 ? fmtM(totalConsumption) : '—';
-        document.getElementById('m-consumption-sub').innerText = totalConsumption > 0
-            ? totalLocations.toLocaleString() + ' locations, ' + totalTrackedCos + ' companies'
-            : 'wateruse.csv not loaded';
-
-        // Card 3: replenishment rate
-        const pctNum = totalConsumption > 0 ? total / totalConsumption * 100 : 0;
-        document.getElementById('m-rate').innerText = totalConsumption > 0 ? pctNum.toFixed(1) + '%' : '—';
-        document.getElementById('m-rate-sub').innerText = totalConsumption > 0
-            ? fmtM(total) + ' of ' + fmtM(totalConsumption)
-            : 'vs. verified consumption';
-
-        // Card 4: companies with programs
-        const cosWithData = [...new Set(allRecords.filter(r => r.benefit > 0).map(r => r.company))].length;
-        document.getElementById('m-cos').innerText = cosWithData;
-        document.getElementById('m-cos-sub').innerText = 'of ' + (totalTrackedCos > 0 ? totalTrackedCos : allRecords.length > 0 ? [...new Set(allRecords.map(r=>r.company))].length : '—') + ' tracked companies';
-
-        // Debt bar
         if (totalConsumption > 0) {
-            document.getElementById('debtPct').innerText  = pctNum.toFixed(1) + '%';
-            document.getElementById('debtPct2').innerText = pctNum.toFixed(1) + '%';
-            document.getElementById('debtAmt').innerText  = fmtM(total);
-            const debtText = document.querySelector('.debt-text');
-            if (debtText) debtText.innerHTML = `Of <strong>${fmtM(totalConsumption)}</strong> consumed by Virginia data centers, only <strong id="debtAmt">${fmtM(total)}</strong> has been verified as returned to local watersheds — a replenishment rate of <strong id="debtPct2">${pctNum.toFixed(1)}%</strong>. Most operators claim to be 50%+ water-positive.`;
-            setTimeout(() => {
-                document.getElementById('debtBar').style.width = Math.max(pctNum, 1) + '%';
-                document.getElementById('debtBarLabel').innerText = pctNum.toFixed(1) + '%';
-            }, 300);
+            document.getElementById('m-consumption').innerText     = fmtM(totalConsumption);
+            document.getElementById('m-consumption-sub').innerText = totalLocations.toLocaleString()+' locations, '+totalTrackedCos+' companies';
+            const pct = total/totalConsumption*100;
+            document.getElementById('m-rate').innerText     = pct.toFixed(1)+'%';
+            document.getElementById('m-rate-sub').innerText = fmtM(total)+' of '+fmtM(totalConsumption);
+        } else {
+            document.getElementById('m-consumption').innerText     = '—';
+            document.getElementById('m-consumption-sub').innerText = 'wateruse.csv not loaded';
+            document.getElementById('m-rate').innerText     = '—';
+            document.getElementById('m-rate-sub').innerText = 'wateruse.csv not loaded';
         }
 
+        const cosWithData = [...new Set(allRecords.filter(r=>r.benefit>0).map(r=>r.company))].length;
+        const totalCos    = totalTrackedCos || [...new Set(allRecords.map(r=>r.company))].length;
+        document.getElementById('m-cos').innerText     = cosWithData;
+        document.getElementById('m-cos-sub').innerText = 'of '+totalCos+' tracked companies';
+
+        // 5. Build filters, portfolio dropdown, charts, sidebar
         buildFilters();
         buildCharts();
         loadSidebar();
-        buildSummaryTable();
-        buildDataTable();
+
     } catch(e) { console.error("Error loading data:", e); }
 }
 
-function fmtM(v) {
-    if (v >= 1e9) return (v/1e9).toFixed(2) + 'B gal';
-    if (v >= 1e6) return (v/1e6).toFixed(1) + 'M gal';
-    if (v >= 1e3) return (v/1e3).toFixed(0) + 'K gal';
-    return Math.round(v).toLocaleString() + ' gal';
-}
-
-function animateCounter(id, target) {
-    const el = document.getElementById(id); const dur = 1500; const t0 = performance.now();
-    function u(now) { const p = Math.min((now-t0)/dur,1); el.innerText = Math.floor(p*target).toLocaleString(); if(p<1) requestAnimationFrame(u); }
-    requestAnimationFrame(u);
-}
-
 function buildFilters() {
-    const add = (selId, vals) => {
+    const addOpts = (selId, vals) => {
         const sel = document.getElementById(selId);
         vals.forEach(v => { if(v) sel.add(new Option(v,v)); });
     };
-    add('companyFilter',  [...new Set(allRecords.map(r=>r.company))].sort());
-    add('partnerFilter',  [...new Set(allRecords.map(r=>r.partner))].sort());
+    addOpts('companyFilter', [...new Set(allRecords.map(r=>r.company))].sort());
+    addOpts('partnerFilter', [...new Set(allRecords.map(r=>r.partner))].sort());
 
-    // Portfolio dropdown
+    // Portfolio dropdown — companies from records + any in portfolioLinks
     const pSel = document.getElementById('portfolioSelector');
-    [...new Set(allRecords.map(r=>r.company))].sort().forEach(c => pSel.add(new Option(c,c)));
-    // Also add companies from portfolioLinks that may not have offset records
-    Object.keys(portfolioLinks).forEach(c => {
-        if (![...pSel.options].map(o=>o.value).includes(c)) pSel.add(new Option(c,c));
-    });
-}
-
-function resetFilters() {
-    document.getElementById('companyFilter').value = 'All';
-    document.getElementById('partnerFilter').value = 'All';
-    applyFilters();
+    const seen = new Set();
+    [...new Set(allRecords.map(r=>r.company))].sort().forEach(c => { pSel.add(new Option(c,c)); seen.add(c); });
+    Object.keys(portfolioLinks).sort().forEach(c => { if(!seen.has(c)){ pSel.add(new Option(c,c)); } });
 }
 
 function applyFilters() {
     const c = document.getElementById('companyFilter').value;
     const p = document.getElementById('partnerFilter').value;
-    filteredRecords = allRecords.filter(r =>
-        (c==='All'||r.company===c) &&
-        (p==='All'||r.partner===p)
-    );
+    filteredRecords = allRecords.filter(r => (c==='All'||r.company===c) && (p==='All'||r.partner===p));
     buildCharts();
     loadSidebar();
-    buildSummaryTable();
-    buildDataTable();
 }
 
 /* ── Portfolio Modal ── */
-function updatePortfolioCard() {
+function openPortfolioModal() {
     const company = document.getElementById('portfolioSelector').value;
     if (!company) return;
 
-    const total = allRecords.filter(r=>r.company===company).reduce((s,r)=>s+r.benefit,0);
+    const total   = allRecords.filter(r=>r.company===company).reduce((s,r)=>s+r.benefit,0);
     const hasLink = !!portfolioLinks[company];
     const hasData = total > 0;
 
-    const cls   = hasData ? 'green' : 'amber';
-    const badge = hasData ? 'Replenishment Recorded' : 'No Verified Benefit Recorded';
-    const desc  = hasData
-        ? `${fmtM(total)} of verified water benefit recorded across all projects. Detailed documentation is available — click below to view the official replenishment portfolio.`
-        : `${company} claims to be water-positive, but no verified volumetric water benefit has been recorded in our database for Virginia operations.`;
-    const linkTxt = hasLink ? 'View Verified Portfolio (PDF) ↗' : 'Portfolio Not Released';
-
-    document.getElementById('modalCompany').innerText = company;
-    document.getElementById('modalTop').className = `modal-top ${hasData ? '' : 'amber'}`;
-    document.getElementById('modalBadge').className = `modal-badge ${hasData ? 'green' : 'amber'}`;
-    document.getElementById('modalBadge').innerText = badge;
-    document.getElementById('modalStat').className = `modal-stat ${hasData ? 'green' : 'amber'}`;
-    document.getElementById('modalStat').innerText = hasData ? fmtM(total) : '0 gallons recorded';
-    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('modalTop').className      = 'modal-top'+(hasData?'':' amber');
+    document.getElementById('modalCompany').innerText  = company;
+    document.getElementById('modalBadge').className    = 'modal-badge '+(hasData?'green':'amber');
+    document.getElementById('modalBadge').innerText    = hasData?'Replenishment Recorded':'No Verified Benefit Recorded';
+    document.getElementById('modalStat').className     = 'modal-stat '+(hasData?'green':'amber');
+    document.getElementById('modalStat').innerText     = hasData ? fmtM(total) : '0 gallons recorded';
+    document.getElementById('modalDesc').innerText     = hasData
+        ? `${fmtM(total)} of verified water benefit recorded across all projects. Click below to view the official replenishment portfolio.`
+        : `${company} claims to be water-positive, but no verified volumetric benefit has been recorded in our database for Virginia operations.`;
     const lnk = document.getElementById('modalLink');
-    lnk.className = `modal-btn ${hasLink && hasData ? 'green' : 'gray'}`;
-    lnk.innerText = linkTxt;
-    lnk.href = hasLink ? portfolioLinks[company] : '#';
-    if (!hasLink) lnk.style.pointerEvents = 'none';
-    else lnk.style.pointerEvents = 'auto';
+    lnk.className       = 'modal-btn '+(hasLink&&hasData?'green':'gray');
+    lnk.innerText       = hasLink ? 'View Verified Portfolio (PDF) ↗' : 'Portfolio Not Released';
+    lnk.href            = hasLink ? portfolioLinks[company] : '#';
+    lnk.style.pointerEvents = hasLink ? 'auto' : 'none';
 
     document.getElementById('portfolioModal').classList.add('open');
 }
@@ -492,61 +440,53 @@ function updatePortfolioCard() {
 function closeModal(e) {
     if (e.target === document.getElementById('portfolioModal')) {
         document.getElementById('portfolioModal').classList.remove('open');
+        document.getElementById('portfolioSelector').value = '';
     }
 }
 
 /* ── Charts ── */
 function buildCharts() {
-    // Annual by company
     const years = [...new Set(filteredRecords.map(r=>r.year))].sort();
     const cos   = [...new Set(filteredRecords.map(r=>r.company))].sort();
-    const annualData = cos.map(co => ({
-        label: co,
-        data: years.map(yr => filteredRecords.filter(r=>r.company===co&&r.year===yr).reduce((s,r)=>s+r.benefit,0)),
-        backgroundColor: CO_COLORS[co] || '#888'
-    }));
+
     if (annualCoChart) annualCoChart.destroy();
     annualCoChart = new Chart(document.getElementById('annualCoChart'), {
-        type:'bar', data:{ labels:years, datasets:annualData },
+        type:'bar',
+        data:{ labels:years, datasets:cos.map(co=>({
+            label:co,
+            data:years.map(yr=>filteredRecords.filter(r=>r.company===co&&r.year===yr).reduce((s,r)=>s+r.benefit,0)),
+            backgroundColor:CO_COLORS[co]||'#888'
+        }))},
         options:{
             responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{ display:false }, tooltip:{ callbacks:{ label:ctx=>ctx.dataset.label+': '+fmtM(ctx.raw) }}},
-            scales:{
-                x:{ stacked:false },
-                y:{ ticks:{ callback:v=>fmtM(v) }, beginAtZero:true }
-            }
+            plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtM(ctx.raw)}}},
+            scales:{y:{ticks:{callback:v=>fmtM(v)},beginAtZero:true}}
         }
     });
-    // Legend
-    document.getElementById('legendCo').innerHTML = cos.map(co =>
+    document.getElementById('legendCo').innerHTML = cos.map(co=>
         `<div class="legend-item"><span class="swatch" style="background:${CO_COLORS[co]||'#888'}"></span>${co}</div>`
     ).join('');
 
-    // Category donut
-    const cats = [...new Set(filteredRecords.map(r=>r.category))].sort();
-    const catTotals = cats.map(c => filteredRecords.filter(r=>r.category===c).reduce((s,r)=>s+r.benefit,0));
+    const cats      = [...new Set(filteredRecords.map(r=>r.category))].sort();
+    const catTotals = cats.map(c=>filteredRecords.filter(r=>r.category===c).reduce((s,r)=>s+r.benefit,0));
     if (categoryChart) categoryChart.destroy();
     categoryChart = new Chart(document.getElementById('categoryChart'), {
         type:'doughnut',
-        data:{ labels:cats, datasets:[{ data:catTotals, backgroundColor:cats.map(c=>CAT_COLORS[c]||'#888'), borderWidth:2, borderColor:'#fff' }]},
-        options:{
-            responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{ position:'bottom', labels:{ font:{size:12} }}, tooltip:{ callbacks:{ label:ctx=>ctx.label+': '+fmtM(ctx.raw) }}}
-        }
+        data:{labels:cats, datasets:[{data:catTotals, backgroundColor:cats.map(c=>CAT_COLORS[c]||'#888'), borderWidth:2, borderColor:'#fff'}]},
+        options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:ctx=>ctx.label+': '+fmtM(ctx.raw)}}}}
     });
 
-    // Monthly totals
     const monthly = {};
-    filteredRecords.forEach(r => { if(r.date) monthly[r.date] = (monthly[r.date]||0) + r.benefit; });
+    filteredRecords.forEach(r=>{ if(r.date) monthly[r.date]=(monthly[r.date]||0)+r.benefit; });
     const mKeys = Object.keys(monthly).sort();
     if (monthlyChart) monthlyChart.destroy();
     monthlyChart = new Chart(document.getElementById('monthlyChart'), {
         type:'bar',
-        data:{ labels:mKeys, datasets:[{ label:'Gallons', data:mKeys.map(k=>monthly[k]), backgroundColor:'#1D9E75', borderRadius:2 }]},
+        data:{labels:mKeys, datasets:[{label:'Gallons', data:mKeys.map(k=>monthly[k]), backgroundColor:'#1D9E75', borderRadius:2}]},
         options:{
             responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label:ctx=>fmtM(ctx.raw) }}},
-            scales:{ x:{ ticks:{ maxRotation:45, autoSkip:true, maxTicksLimit:20, font:{size:10} }}, y:{ ticks:{ callback:v=>fmtM(v) }, beginAtZero:true }}
+            plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fmtM(ctx.raw)}}},
+            scales:{x:{ticks:{maxRotation:45,autoSkip:true,maxTicksLimit:20,font:{size:10}}},y:{ticks:{callback:v=>fmtM(v)},beginAtZero:true}}
         }
     });
 }
@@ -557,10 +497,10 @@ function loadSidebar() {
     list.innerHTML = '';
     [...new Set(filteredRecords.map(r=>r.project))].sort().forEach(proj => {
         const total = filteredRecords.filter(r=>r.project===proj).reduce((s,r)=>s+r.benefit,0);
-        const btn = document.createElement('button');
+        const btn   = document.createElement('button');
         btn.className = 'projectBtn';
         btn.innerHTML = `<span style="display:block;font-size:11px;font-weight:700;opacity:0.8;margin-bottom:2px;">${fmtM(total)}</span>${proj}`;
-        btn.onclick = () => drawChart(proj);
+        btn.onclick   = () => drawChart(proj);
         list.appendChild(btn);
     });
 }
@@ -568,17 +508,16 @@ function loadSidebar() {
 function drawChart(projectName) {
     const data = allRecords.filter(r=>r.project===projectName).sort((a,b)=>a.date.localeCompare(b.date));
     document.getElementById('chartTitle').innerText = projectName;
-    const meta = document.getElementById('projectMeta');
     if (data.length > 0) {
-        document.getElementById('metaPartner').innerText = data[0].partner || 'N/A';
+        document.getElementById('metaPartner').innerText   = data[0].partner   || 'N/A';
         document.getElementById('metaWatershed').innerText = data[0].watershed || 'N/A';
-        document.getElementById('metaCategory').innerText = data[0].category || 'N/A';
-        meta.style.display = 'block';
+        document.getElementById('metaCategory').innerText  = data[0].category  || 'N/A';
+        document.getElementById('projectMeta').style.display = 'block';
     }
     const total = data.reduce((s,r)=>s+r.benefit,0);
-    const peak = data.reduce((m,r)=>r.benefit>m.benefit?r:m, data[0]||{benefit:0});
+    const peak  = data.reduce((m,r)=>r.benefit>m.benefit?r:m, data[0]||{benefit:0});
     document.getElementById('ptTotal').innerText = fmtM(total);
-    document.getElementById('ptPeak').innerText = peak.date || '—';
+    document.getElementById('ptPeak').innerText  = peak.date || '—';
     document.getElementById('ptCount').innerText = data.length;
     document.getElementById('projectTotals').style.display = 'block';
 
@@ -586,47 +525,15 @@ function drawChart(projectName) {
     offsetChart = new Chart(document.getElementById('offsetChart').getContext('2d'), {
         type:'line',
         data:{
-            labels: data.map(d=>d.date),
-            datasets:[{
-                label:'Monthly Gallons',
-                data: data.map(d=>d.benefit),
-                borderColor:'#2e7d32',
-                backgroundColor:'rgba(46,125,50,0.1)',
-                fill:true, tension:0.3, pointRadius:3
-            }]
+            labels:data.map(d=>d.date),
+            datasets:[{label:'Monthly Gallons', data:data.map(d=>d.benefit), borderColor:'#2e7d32', backgroundColor:'rgba(46,125,50,0.1)', fill:true, tension:0.3, pointRadius:3}]
         },
         options:{
             responsive:true, maintainAspectRatio:false,
-            plugins:{ tooltip:{ callbacks:{ label:ctx=>fmtM(ctx.raw) }}},
-            scales:{ y:{ beginAtZero:true, ticks:{ callback:v=>fmtM(v) }}}
+            plugins:{tooltip:{callbacks:{label:ctx=>fmtM(ctx.raw)}}},
+            scales:{y:{beginAtZero:true,ticks:{callback:v=>fmtM(v)}}}
         }
     });
-}
-
-/* ── Tables ── */
-function buildSummaryTable() {
-    const summary = {};
-    filteredRecords.forEach(r => {
-        const key = `${r.watershed}|${r.year}`;
-        if(!summary[key]) summary[key]={w:r.watershed,y:r.year,total:0};
-        summary[key].total += r.benefit;
-    });
-    const tbody = document.querySelector('#summaryTable tbody');
-    tbody.innerHTML = '';
-    Object.values(summary).sort((a,b)=>b.y-a.y||a.w.localeCompare(b.w)).forEach(s => {
-        tbody.innerHTML += `<tr><td>${s.w}</td><td>${s.y}</td><td>${Math.round(s.total).toLocaleString()}</td></tr>`;
-    });
-}
-
-function buildDataTable() {
-    const tbody = document.querySelector('#dataTable tbody');
-    tbody.innerHTML = '';
-    filteredRecords.slice(0,500).forEach(r => {
-        tbody.innerHTML += `<tr><td>${r.company}</td><td>${r.project}</td><td>${r.partner}</td><td>${r.category}</td><td>${r.watershed}</td><td>${r.date}</td><td>${Math.round(r.benefit).toLocaleString()}</td></tr>`;
-    });
-    if(filteredRecords.length>500){
-        tbody.innerHTML += `<tr><td colspan="7" style="text-align:center;color:#94a3b8;font-style:italic;">Showing 500 of ${filteredRecords.length.toLocaleString()} records. Download CSV for full dataset.</td></tr>`;
-    }
 }
 
 loadData();
