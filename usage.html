@@ -371,7 +371,9 @@ function fmtG(v) {
 async function loadCSV() {
     try {
         const response = await fetch("wateruse.csv");
+        if (!response.ok) throw new Error('wateruse.csv returned ' + response.status);
         const text = await response.text();
+        if (!text.includes(',')) throw new Error('wateruse.csv appears to be empty or not a CSV');
         const lines = text.trim().split(/\r?\n/);
 
         allRecords = lines.slice(1).map(line => {
@@ -434,13 +436,13 @@ async function loadCSV() {
             document.getElementById('card-total').innerText     = fmtG(grand);
             document.getElementById('card-total-sub').innerText = dateRange + ' · incl. Loudoun Water aggregate';
         };
-        // If aggregate already loaded, update now; otherwise site-specific total shown first
+        // Show site-specific total immediately, update when Loudoun aggregate loads
+        animateCounter('totalCounter', totalGal);
+        document.getElementById('card-total').innerText     = fmtG(totalGal);
+        document.getElementById('card-total-sub').innerText = dateRange + ' (site-specific only)';
+        // If aggregate already loaded, update now
         if (window._loudounAggTotal) {
             window._updateUsageCounter(window._loudounAggTotal);
-        } else {
-            animateCounter('totalCounter', totalGal);
-            document.getElementById('card-total').innerText     = fmtG(totalGal);
-            document.getElementById('card-total-sub').innerText = dateRange;
         }
         document.getElementById('card-companies').innerText = numCompanies;
         document.getElementById('card-locations').innerText = 'across ' + numLocations.toLocaleString() + ' locations';
@@ -468,13 +470,23 @@ async function loadCSV() {
         buildLegend('utilLegend');
         buildLegend('coLegend');
 
-    } catch(e) { console.error("Error loading CSV:", e); }
+    } catch(e) {
+        console.error("Error loading CSV:", e);
+        // Show error in metric cards so it's visible on screen
+        ['card-total','card-companies','card-locations','card-utilities'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerText = 'Load error';
+        });
+        const sub = document.getElementById('card-total-sub');
+        if (sub) sub.innerText = 'Check console — CSV fetch failed: ' + e.message;
+    }
 }
 
 /* ── Aggregate loader ── */
 async function loadAggregates() {
     try {
         const res = await fetch("wateruse_loudoun.csv");
+        if (!res.ok) throw new Error('wateruse_loudoun.csv not found (' + res.status + ') — upload this file to your server');
         const text = await res.text();
         const lines = text.trim().split(/\r?\n/);
         const headers = lines[0].split(',');
@@ -510,7 +522,11 @@ async function loadAggregates() {
         buildCoverageCards();
         buildAggAnnualChart();
         buildAggYearButtons();
-    } catch(e) { console.error("Aggregate load error:", e); }
+    } catch(e) {
+        console.error("Aggregate load error:", e);
+        const banner = document.querySelector('.agg-banner');
+        if (banner) banner.innerHTML += '<br><strong style="color:red">Aggregate CSV load failed: ' + e.message + '</strong>';
+    }
 
     // Also load reclaimed
     try {

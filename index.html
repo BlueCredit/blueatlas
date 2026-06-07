@@ -222,9 +222,9 @@
         async function initDashboard() {
             try {
                 const [useRes, loudounRes, offRes] = await Promise.all([
-                    fetch("wateruse.csv").then(r => r.text()),
-                    fetch("wateruse_loudoun.csv").then(r => r.text()),
-                    fetch("wateroffsets.csv").then(r => r.text())
+                    fetch("wateruse.csv").then(r => { if(!r.ok) throw new Error("wateruse.csv not found"); return r.text(); }),
+                    fetch("wateruse_loudoun.csv").then(r => { if(!r.ok) throw new Error("wateruse_loudoun.csv not found"); return r.text(); }),
+                    fetch("wateroffsets.csv").then(r => { if(!r.ok) throw new Error("wateroffsets.csv not found"); return r.text(); })
                 ]);
 
                 const useRows     = parseCSV(useRes);
