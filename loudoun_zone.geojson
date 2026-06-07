@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Loudoun Water — Data Center Zone",
+        "utility": "Loudoun Water",
+        "description": "Approximate service area containing data center customers",
+        "potable_2024_gal": 898475261,
+        "potable_2023_gal": 810039617,
+        "potable_2025_gal": 906159201,
+        "reclaimed_2024_gal": 704861798,
+        "reclaimed_2023_gal": 723991806,
+        "reclaimed_2025_gal": 697166574,
+        "attributed_pct_2024": 23.2,
+        "attributed_pct_2023": 26.3,
+        "note": "Site-specific data withheld — billing records for Meta, Google, EdgeConneX, GDC pending FOIA. Amazon data available separately.",
+        "source": "Loudoun Water utility-reported aggregate billing data, 2025"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-77.55, 38.88],
+          [-77.38, 38.88],
+          [-77.38, 39.06],
+          [-77.55, 39.06],
+          [-77.55, 38.88]
+        ]]
+      }
+    }
+  ]
+}

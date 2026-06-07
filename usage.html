@@ -66,6 +66,49 @@
     .support-box h3 { color: #1e293b; margin-top: 0; }
     .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
     .gfm-embed { margin: 0 auto; display: inline-block; }
+
+    /* ── Utility Aggregates tab extras ── */
+    .agg-banner {
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+        border-left: 4px solid #f59e0b;
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 13px;
+        color: #78350f;
+        margin-bottom: 20px;
+        line-height: 1.5;
+    }
+    .coverage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+    .coverage-card {
+        background: white;
+        border-radius: 8px;
+        padding: 16px 18px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        border-left: 4px solid #f59e0b;
+        position: relative;
+    }
+    .coverage-year { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; margin-bottom: 4px; }
+    .coverage-total { font-size: 22px; font-weight: 800; color: #1e293b; line-height: 1.1; margin-bottom: 4px; }
+    .coverage-bar-wrap { background: #f1f5f9; border-radius: 4px; height: 8px; margin: 8px 0 6px; overflow: hidden; }
+    .coverage-bar-attr { background: #1976d2; height: 8px; border-radius: 4px 0 0 4px; }
+    .coverage-bar-unknown { background: #e2e8f0; height: 8px; }
+    .coverage-legend { font-size: 11px; color: #64748b; display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+    .coverage-legend span { display: flex; align-items: center; gap: 4px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .agg-type-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .agg-type-btn {
+        padding: 6px 16px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        background: white;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        color: #64748b;
+        transition: all 0.15s;
+    }
+    .agg-type-btn.active { background: #1976d2; color: white; border-color: #1976d2; }
 </style>
 </head>
 <body>
@@ -135,6 +178,7 @@
     <button class="tab" onclick="switchTab('tab-utility', this)">By Utility</button>
     <button class="tab" onclick="switchTab('tab-company', this)">By Company</button>
     <button class="tab" onclick="switchTab('tab-facility', this)">Facility Explorer</button>
+    <button class="tab" onclick="switchTab('tab-aggregate', this)">Utility Aggregates</button>
 </div>
 
 <!-- TAB: Summary Charts -->
@@ -166,7 +210,7 @@
         <div class="chart-container" style="height:340px;">
             <canvas id="utilBarChart"></canvas>
         </div>
-        <p class="note">* Loudoun Water shows $0 for 2026 — data withheld pending FOIA deposit dispute.</p>
+        <p class="note">* Loudoun Water removed from site-specific records — see Utility Aggregates tab for full Loudoun Water data.</p>
     </div>
     <div class="section">
         <h3>Annual water use by utility — detail table</h3>
@@ -204,6 +248,87 @@
     </div>
 </div>
 
+<!-- TAB: Utility Aggregates -->
+<div id="tab-aggregate" class="tab-content">
+    <div style="background:white; padding:20px; border-radius:0 8px 8px 8px; box-shadow:0 2px 4px rgba(0,0,0,0.05); margin-bottom:20px;">
+
+        <div class="agg-banner">
+            <strong>About this data:</strong> Utility-reported aggregate consumption for all data center customers.
+            Individual site billing records are withheld pending FOIA requests for Meta, Google, EdgeConneX, and GDC.
+            Amazon site-specific data is available on the Facility Explorer tab (other utilities only).
+            Source: Loudoun Water billing data, 2025 report.
+        </div>
+
+        <!-- Coverage gap cards -->
+        <h3 style="margin-top:0; margin-bottom:14px; font-size:15px; color:#1e293b;">Loudoun Water — Data Attribution Coverage</h3>
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <div class="coverage-year">2023</div>
+                <div class="coverage-total">810.0M gal</div>
+                <div style="font-size:12px; color:#64748b; margin-bottom:6px;">All data centers (potable)</div>
+                <div class="coverage-bar-wrap">
+                    <div class="coverage-bar-attr" style="width:26.3%; float:left;"></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="coverage-legend">
+                    <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: 26.3%</span>
+                    <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: 73.7%</span>
+                </div>
+            </div>
+            <div class="coverage-card">
+                <div class="coverage-year">2024</div>
+                <div class="coverage-total">898.5M gal</div>
+                <div style="font-size:12px; color:#64748b; margin-bottom:6px;">All data centers (potable)</div>
+                <div class="coverage-bar-wrap">
+                    <div class="coverage-bar-attr" style="width:23.2%; float:left;"></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="coverage-legend">
+                    <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: 23.2%</span>
+                    <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: 76.8%</span>
+                </div>
+            </div>
+            <div class="coverage-card">
+                <div class="coverage-year">2025 (full year)</div>
+                <div class="coverage-total">906.2M gal</div>
+                <div style="font-size:12px; color:#64748b; margin-bottom:6px;">All data centers (potable)</div>
+                <div class="coverage-bar-wrap">
+                    <div class="coverage-bar-attr" style="width:13.8%; float:left;"></div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="coverage-legend">
+                    <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: 13.8%</span>
+                    <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: 86.2%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toggle potable / reclaimed -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <h3 style="margin:0; font-size:15px; color:#1e293b;">Annual trend — Loudoun Water data centers</h3>
+            <div class="agg-type-tabs">
+                <button class="agg-type-btn active" id="btnPotable" onclick="showAggType('potable')">Potable</button>
+                <button class="agg-type-btn" id="btnReclaimed" onclick="showAggType('reclaimed')">Reclaimed</button>
+            </div>
+        </div>
+        <div class="chart-container" style="height:300px; margin-bottom:20px;">
+            <canvas id="aggAnnualChart"></canvas>
+        </div>
+
+        <!-- Monthly detail chart -->
+        <h3 style="margin-bottom:8px; font-size:15px; color:#1e293b;">Monthly detail — select year</h3>
+        <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;" id="aggYearBtns"></div>
+        <div class="chart-container" style="height:260px; margin-bottom:20px;">
+            <canvas id="aggMonthlyChart"></canvas>
+        </div>
+
+        <p class="note">
+            * Data from Loudoun Water utility billing system. Reclaimed water includes all uses at premise (cooling and irrigation).
+            December 2022 included invoicing for prior usage. 2025 is full-year estimate.
+        </p>
+    </div>
+</div>
+
 <footer>
     <div class="footer-container">
         <div class="footer-section">
@@ -223,8 +348,16 @@
 let allRecords = [];
 let records    = [];
 let siteChart, monthlyChart, annualChart, utilBarChart, coBarChart;
+let aggAnnualChart, aggMonthlyChart;
+let aggData = { potable: {}, reclaimed: {} };
+let currentAggType = 'potable';
+let currentAggYear = null;
 
 const YEAR_COLORS = { '2023':'#185FA5', '2024':'#1D9E75', '2025':'#BA7517', '2026':'#993C1D' };
+const AGG_YEAR_COLORS = {
+    '2019':'#94a3b8','2020':'#64748b','2021':'#475569',
+    '2022':'#c2410c','2023':'#185FA5','2024':'#1D9E75','2025':'#BA7517'
+};
 
 function switchTab(id, btn) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -240,6 +373,7 @@ function fmtG(v) {
     return Math.round(v).toLocaleString() + ' gal';
 }
 
+/* ── Main wateruse.csv loader (unchanged logic) ── */
 async function loadCSV() {
     try {
         const response = await fetch("wateruse.csv");
@@ -275,7 +409,6 @@ async function loadCSV() {
 
         records = [...allRecords];
 
-        // ── Derive all metric card values from data ──
         const totalGal      = allRecords.reduce((s,r) => s + r.gallons, 0);
         const numCompanies  = new Set(allRecords.map(r => r.company)).size;
         const numLocations  = new Set(allRecords.map(r => r.location)).size;
@@ -283,7 +416,6 @@ async function loadCSV() {
         const years         = [...new Set(allRecords.map(r => r.year).filter(Boolean))].sort();
         const dateRange     = years.length ? years[0] + ' – ' + years[years.length-1] : '';
 
-        // Try loading water benefit from wateroffsets.csv
         let benefitGal = 0;
         try {
             const or = await fetch("wateroffsets.csv");
@@ -297,17 +429,13 @@ async function loadCSV() {
                     benefitGal += parseFloat((cols[gIdx]||'0').replace(/,/g,'')) || 0;
                 });
             }
-        } catch(e) { /* offsets optional */ }
+        } catch(e) {}
 
-        // Populate cards
         animateCounter('totalCounter', totalGal);
-
         document.getElementById('card-total').innerText     = fmtG(totalGal);
         document.getElementById('card-total-sub').innerText = dateRange;
-
         document.getElementById('card-companies').innerText = numCompanies;
         document.getElementById('card-locations').innerText = 'across ' + numLocations.toLocaleString() + ' locations';
-
         document.getElementById('card-utilities').innerText  = numUtilities;
         document.getElementById('card-util-sub').innerText   = 'Virginia';
 
@@ -320,7 +448,6 @@ async function loadCSV() {
             document.getElementById('card-benefit-sub').innerText = 'wateroffsets.csv not loaded';
         }
 
-        // Build everything
         buildFilters();
         loadLocations();
         buildUtilityTable();
@@ -331,6 +458,120 @@ async function loadCSV() {
         buildLegend('coLegend');
 
     } catch(e) { console.error("Error loading CSV:", e); }
+}
+
+/* ── Aggregate loader ── */
+async function loadAggregates() {
+    try {
+        const res = await fetch("wateruse_loudoun.csv");
+        const text = await res.text();
+        const lines = text.trim().split(/\r?\n/);
+        const headers = lines[0].split(',');
+        const iYear = headers.indexOf('Year');
+        const iMonth = headers.indexOf('MonthNum');
+        const iGal = headers.indexOf('Gallons');
+        const iType = headers.indexOf('Type');
+
+        lines.slice(1).forEach(line => {
+            const cols = line.split(',');
+            const type = cols[iType]?.trim().toLowerCase();
+            const year = cols[iYear]?.trim();
+            const mon  = parseInt(cols[iMonth]);
+            const gal  = parseInt(cols[iGal]) || 0;
+            if (!aggData[type]) aggData[type] = {};
+            if (!aggData[type][year]) aggData[type][year] = new Array(12).fill(0);
+            aggData[type][year][mon-1] = gal;
+        });
+
+        buildAggAnnualChart();
+        buildAggYearButtons();
+    } catch(e) { console.error("Aggregate load error:", e); }
+
+    // Also load reclaimed
+    try {
+        const res = await fetch("waterreclaimed.csv");
+        const text = await res.text();
+        const lines = text.trim().split(/\r?\n/);
+        const headers = lines[0].split(',');
+        const iYear = headers.indexOf('Year');
+        const iMonth = headers.indexOf('MonthNum');
+        const iGal = headers.indexOf('Gallons');
+
+        lines.slice(1).forEach(line => {
+            const cols = line.split(',');
+            const year = cols[iYear]?.trim();
+            const mon  = parseInt(cols[iMonth]);
+            const gal  = parseInt(cols[iGal]) || 0;
+            if (!aggData['reclaimed']) aggData['reclaimed'] = {};
+            if (!aggData['reclaimed'][year]) aggData['reclaimed'][year] = new Array(12).fill(0);
+            if (!isNaN(mon)) aggData['reclaimed'][year][mon-1] = gal;
+        });
+    } catch(e) { console.error("Reclaimed load error:", e); }
+}
+
+function buildAggAnnualChart() {
+    const data = aggData[currentAggType] || {};
+    const years = Object.keys(data).sort();
+    const totals = years.map(y => data[y].reduce((s,v)=>s+v,0));
+    const colors = years.map(y => AGG_YEAR_COLORS[y] || '#888');
+
+    if (aggAnnualChart) aggAnnualChart.destroy();
+    aggAnnualChart = new Chart(document.getElementById('aggAnnualChart'), {
+        type: 'bar',
+        data: { labels: years, datasets: [{ label: currentAggType === 'potable' ? 'Potable Gallons' : 'Reclaimed Gallons', data: totals, backgroundColor: colors, borderRadius: 4 }] },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtG(ctx.raw)}} },
+            scales: { y: { ticks:{callback:v=>fmtG(v)}, beginAtZero:true } }
+        }
+    });
+}
+
+function buildAggYearButtons() {
+    const years = Object.keys(aggData[currentAggType] || {}).sort();
+    const container = document.getElementById('aggYearBtns');
+    container.innerHTML = '';
+    years.forEach(y => {
+        const btn = document.createElement('button');
+        btn.className = 'agg-type-btn' + (y === (currentAggYear || years[years.length-1]) ? ' active' : '');
+        btn.textContent = y;
+        btn.onclick = () => {
+            currentAggYear = y;
+            document.querySelectorAll('#aggYearBtns .agg-type-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            buildAggMonthlyChart(y);
+        };
+        container.appendChild(btn);
+    });
+    // Auto-select most recent year
+    const defaultYear = currentAggYear || years[years.length-1];
+    currentAggYear = defaultYear;
+    buildAggMonthlyChart(defaultYear);
+}
+
+function buildAggMonthlyChart(year) {
+    const data = (aggData[currentAggType] || {})[year] || [];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const color = currentAggType === 'potable' ? '#1976d2' : '#2e7d32';
+
+    if (aggMonthlyChart) aggMonthlyChart.destroy();
+    aggMonthlyChart = new Chart(document.getElementById('aggMonthlyChart'), {
+        type: 'bar',
+        data: { labels: months, datasets: [{ label: year, data: data, backgroundColor: color, borderRadius: 3 }] },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtG(ctx.raw)}} },
+            scales: { y: { ticks:{callback:v=>fmtG(v)}, beginAtZero:true } }
+        }
+    });
+}
+
+function showAggType(type) {
+    currentAggType = type;
+    document.getElementById('btnPotable').classList.toggle('active', type === 'potable');
+    document.getElementById('btnReclaimed').classList.toggle('active', type === 'reclaimed');
+    buildAggAnnualChart();
+    buildAggYearButtons();
 }
 
 function animateCounter(id, target) {
@@ -368,7 +609,6 @@ function applyFilters() {
     document.getElementById("chartTitle").innerText = "Select a facility to view usage trends";
 }
 
-/* ── Summary Charts ── */
 function buildSummaryCharts() {
     const monthly = {};
     records.forEach(r => { if (r.monthKey) monthly[r.monthKey] = (monthly[r.monthKey]||0) + r.gallons; });
@@ -378,36 +618,24 @@ function buildSummaryCharts() {
         const [y,m] = k.split('-');
         return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1]} '${y.slice(2)}`;
     });
-
     if (monthlyChart) monthlyChart.destroy();
     monthlyChart = new Chart(document.getElementById('monthlyChart'), {
         type: 'bar',
         data: { labels: mLabels, datasets: [{ label:'Gallons', data:mVals, backgroundColor:'#1976d2', borderRadius:2 }] },
-        options: {
-            responsive:true, maintainAspectRatio:false,
-            plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>(ctx.raw/1e6).toFixed(1)+'M gal'}} },
-            scales:{ x:{ticks:{maxRotation:45,autoSkip:true,maxTicksLimit:18,font:{size:10}}}, y:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},beginAtZero:true} }
-        }
+        options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>(ctx.raw/1e6).toFixed(1)+'M gal'}} }, scales:{ x:{ticks:{maxRotation:45,autoSkip:true,maxTicksLimit:18,font:{size:10}}}, y:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},beginAtZero:true} } }
     });
-
     const annual = {};
     records.forEach(r => { if (r.year) annual[r.year] = (annual[r.year]||0) + r.gallons; });
     const aKeys   = Object.keys(annual).sort();
     const aColors = aKeys.map(k => YEAR_COLORS[k] || '#888');
-
     if (annualChart) annualChart.destroy();
     annualChart = new Chart(document.getElementById('annualChart'), {
         type:'bar',
         data:{ labels:aKeys.map(k=>k=='2026'?'2026*':k), datasets:[{label:'Gallons',data:aKeys.map(k=>annual[k]),backgroundColor:aColors,borderRadius:4}] },
-        options:{
-            responsive:true, maintainAspectRatio:false,
-            plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw/1e6).toFixed(0)+'M gal'}}},
-            scales:{y:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},beginAtZero:true}}
-        }
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw/1e6).toFixed(0)+'M gal'}}}, scales:{y:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},beginAtZero:true}} }
     });
 }
 
-/* ── Utility Grouped Bar ── */
 function buildUtilityChart() {
     const totals = {};
     records.forEach(r => {
@@ -426,23 +654,14 @@ function buildUtilityChart() {
         'CULPEPER, TOWN OF':'Culpeper'
     };
     const labels   = utils.map(u => shortNames[u] || u.trim());
-    const datasets = years.map(yr => ({
-        label: yr==='2026'?'2026 (Jan–Apr)':yr,
-        data:  utils.map(u => totals[u][yr]||0),
-        backgroundColor: YEAR_COLORS[yr]||'#888'
-    }));
+    const datasets = years.map(yr => ({ label: yr==='2026'?'2026 (Jan–Apr)':yr, data: utils.map(u => totals[u][yr]||0), backgroundColor: YEAR_COLORS[yr]||'#888' }));
     if (utilBarChart) utilBarChart.destroy();
     utilBarChart = new Chart(document.getElementById('utilBarChart'), {
         type:'bar', data:{labels, datasets},
-        options:{
-            indexAxis:'y', responsive:true, maintainAspectRatio:false,
-            plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.raw/1e6).toFixed(0)+'M gal'}}},
-            scales:{x:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{font:{size:12}},grid:{display:false}}}
-        }
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.raw/1e6).toFixed(0)+'M gal'}}}, scales:{x:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{font:{size:12}},grid:{display:false}}} }
     });
 }
 
-/* ── Company Grouped Bar ── */
 function buildCompanyChart() {
     const totals = {};
     records.forEach(r => {
@@ -453,19 +672,11 @@ function buildCompanyChart() {
     const sorted = Object.keys(totals).map(c=>({c, t:Object.values(totals[c]).reduce((a,b)=>a+b,0)})).sort((a,b)=>b.t-a.t);
     const cos    = sorted.map(x=>x.c);
     const years  = [...new Set(records.map(r=>r.year).filter(Boolean))].sort();
-    const datasets = years.map(yr => ({
-        label: yr==='2026'?'2026 (Jan–Apr)':yr,
-        data:  cos.map(c=>totals[c][yr]||0),
-        backgroundColor: YEAR_COLORS[yr]||'#888'
-    }));
+    const datasets = years.map(yr => ({ label: yr==='2026'?'2026 (Jan–Apr)':yr, data: cos.map(c=>totals[c][yr]||0), backgroundColor: YEAR_COLORS[yr]||'#888' }));
     if (coBarChart) coBarChart.destroy();
     coBarChart = new Chart(document.getElementById('coBarChart'), {
         type:'bar', data:{labels:cos, datasets},
-        options:{
-            indexAxis:'y', responsive:true, maintainAspectRatio:false,
-            plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.raw/1e6).toFixed(0)+'M gal'}}},
-            scales:{x:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{font:{size:12}},grid:{display:false}}}
-        }
+        options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+(ctx.raw/1e6).toFixed(0)+'M gal'}}}, scales:{x:{ticks:{callback:v=>(v/1e6).toFixed(0)+'M'},grid:{color:'rgba(0,0,0,0.04)'}},y:{ticks:{font:{size:12}},grid:{display:false}}} }
     });
 }
 
@@ -473,12 +684,9 @@ function buildLegend(id) {
     const el = document.getElementById(id);
     if (!el) return;
     const years = [...new Set(records.map(r=>r.year).filter(Boolean))].sort();
-    el.innerHTML = years.map(yr =>
-        `<div class="legend-item"><span class="swatch" style="background:${YEAR_COLORS[yr]||'#888'}"></span>${yr==='2026'?'2026 (Jan–Apr)':yr}</div>`
-    ).join('');
+    el.innerHTML = years.map(yr => `<div class="legend-item"><span class="swatch" style="background:${YEAR_COLORS[yr]||'#888'}"></span>${yr==='2026'?'2026 (Jan–Apr)':yr}</div>`).join('');
 }
 
-/* ── Utility Table ── */
 function buildUtilityTable() {
     const totals = {};
     records.forEach(r => {
@@ -497,7 +705,6 @@ function buildUtilityTable() {
     });
 }
 
-/* ── Facility Explorer ── */
 function loadLocations() {
     const sidebar = document.getElementById("locations");
     [...new Set(records.map(r=>r.location))].sort().forEach(loc => {
@@ -515,19 +722,13 @@ function drawChart(locationName) {
     if (siteChart) siteChart.destroy();
     siteChart = new Chart(document.getElementById("siteChart").getContext('2d'), {
         type:"line",
-        data:{
-            labels: data.map(d=>d.date),
-            datasets:[{ label:"Gallons Used", data:data.map(d=>d.gallons), borderColor:'#1976d2', backgroundColor:'rgba(25,118,210,0.1)', fill:true, tension:0.3, pointRadius:3 }]
-        },
-        options:{
-            responsive:true, maintainAspectRatio:false,
-            plugins:{tooltip:{callbacks:{label:ctx=>Math.round(ctx.raw).toLocaleString()+' gal'}}},
-            scales:{y:{beginAtZero:true,ticks:{callback:v=>v>=1e6?(v/1e6).toFixed(1)+'M':v>=1000?(v/1000).toFixed(0)+'K':v}}}
-        }
+        data:{ labels: data.map(d=>d.date), datasets:[{ label:"Gallons Used", data:data.map(d=>d.gallons), borderColor:'#1976d2', backgroundColor:'rgba(25,118,210,0.1)', fill:true, tension:0.3, pointRadius:3 }] },
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{tooltip:{callbacks:{label:ctx=>Math.round(ctx.raw).toLocaleString()+' gal'}}}, scales:{y:{beginAtZero:true,ticks:{callback:v=>v>=1e6?(v/1e6).toFixed(1)+'M':v>=1000?(v/1000).toFixed(0)+'K':v}}} }
     });
 }
 
 loadCSV();
+loadAggregates();
 </script>
 </body>
 </html>
