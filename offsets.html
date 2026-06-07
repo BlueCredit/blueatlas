@@ -104,6 +104,14 @@
     .support-box h3 { color: #1e293b; margin-top: 0; }
     .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
     .gfm-embed { margin: 0 auto; display: inline-block; }
+
+    /* ── Utility Aggregates tab ── */
+    .agg-banner { background:#fffbeb; border:1px solid #fcd34d; border-left:4px solid #f59e0b; border-radius:8px; padding:12px 16px; font-size:13px; color:#78350f; margin-bottom:20px; line-height:1.5; }
+    .agg-type-tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .agg-type-btn { padding:6px 16px; border-radius:20px; border:1px solid #ddd; background:white; font-size:13px; font-weight:600; cursor:pointer; color:#64748b; transition:all 0.15s; }
+    .agg-type-btn.active { background:#2e7d32; color:white; border-color:#2e7d32; }
+    .agg-yr-btn { padding:5px 12px; border-radius:20px; border:1px solid #ddd; background:white; font-size:12px; font-weight:600; cursor:pointer; color:#64748b; transition:all 0.15s; }
+    .agg-yr-btn.active { background:#1976d2; color:white; border-color:#1976d2; }
 </style>
 </head>
 <body>
@@ -120,27 +128,27 @@
     </a>
 </header>
 
-<!-- Metric cards — all populated by JS -->
+<!-- Metric cards â all populated by JS -->
 <div class="summary-grid">
     <div class="metric-card">
         <div class="metric-label">Verified Water Benefit</div>
-        <div class="metric-value" id="m-benefit">—</div>
-        <div class="metric-sub" id="m-benefit-sub">Loading…</div>
+        <div class="metric-value" id="m-benefit">â</div>
+        <div class="metric-sub" id="m-benefit-sub">Loadingâ¦</div>
     </div>
     <div class="metric-card red">
         <div class="metric-label">Total Consumption</div>
-        <div class="metric-value" id="m-consumption">—</div>
-        <div class="metric-sub" id="m-consumption-sub">Loading…</div>
+        <div class="metric-value" id="m-consumption">â</div>
+        <div class="metric-sub" id="m-consumption-sub">Loadingâ¦</div>
     </div>
     <div class="metric-card amber">
         <div class="metric-label">Replenishment Rate</div>
-        <div class="metric-value" id="m-rate">—</div>
-        <div class="metric-sub" id="m-rate-sub">Loading…</div>
+        <div class="metric-value" id="m-rate">â</div>
+        <div class="metric-sub" id="m-rate-sub">Loadingâ¦</div>
     </div>
     <div class="metric-card blue">
         <div class="metric-label">Companies with Programs</div>
-        <div class="metric-value" id="m-cos">—</div>
-        <div class="metric-sub" id="m-cos-sub">Loading…</div>
+        <div class="metric-value" id="m-cos">â</div>
+        <div class="metric-sub" id="m-cos-sub">Loadingâ¦</div>
     </div>
 </div>
 
@@ -150,7 +158,7 @@
         <div class="modal-top" id="modalTop"></div>
         <div class="modal-header">
             <h2 id="modalCompany"></h2>
-            <button class="modal-close" onclick="document.getElementById('portfolioModal').classList.remove('open')">✕</button>
+            <button class="modal-close" onclick="document.getElementById('portfolioModal').classList.remove('open')">â</button>
         </div>
         <div class="modal-body">
             <span class="modal-badge" id="modalBadge"></span>
@@ -181,6 +189,7 @@
     <button class="tab active" onclick="switchTab('tab-portfolio', this)">Company Portfolios</button>
     <button class="tab" onclick="switchTab('tab-charts', this)">Summary Charts</button>
     <button class="tab" onclick="switchTab('tab-explorer', this)">Project Explorer</button>
+    <button class="tab" onclick="switchTab('tab-agg', this)">Utility Aggregates</button>
 </div>
 
 <!-- TAB: Company Portfolios -->
@@ -189,7 +198,7 @@
         <div class="portfolio-selector-area">
             <p>Select a company to view their verified replenishment portfolio and recorded water benefit impact.</p>
             <select class="large-select" id="portfolioSelector" onchange="openPortfolioModal()">
-                <option value="">— Select a Company —</option>
+                <option value="">â Select a Company â</option>
             </select>
         </div>
     </div>
@@ -210,7 +219,7 @@
             </div>
         </div>
         <div class="section" style="margin-top:20px;">
-            <h3>Monthly water benefit — all projects</h3>
+            <h3>Monthly water benefit â all projects</h3>
             <div class="chart-container" style="height:260px;"><canvas id="monthlyChart"></canvas></div>
             <p class="note">Negative values indicate billing adjustments or meter corrections in the source data.</p>
         </div>
@@ -227,8 +236,8 @@
         <div class="main">
             <h3 id="chartTitle">Select a project to view details</h3>
             <div id="projectMeta" style="font-size:13px;color:#64748b;margin-bottom:12px;display:none;">
-                <span id="metaPartner"></span> &nbsp;·&nbsp;
-                <span id="metaWatershed"></span> &nbsp;·&nbsp;
+                <span id="metaPartner"></span> &nbsp;Â·&nbsp;
+                <span id="metaWatershed"></span> &nbsp;Â·&nbsp;
                 <span id="metaCategory"></span>
             </div>
             <div class="chart-container" style="height:420px;"><canvas id="offsetChart"></canvas></div>
@@ -240,6 +249,38 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+
+<!-- TAB: Utility Aggregates -->
+<div id="tab-agg" class="tab-content">
+    <div style="background:white;padding:20px;border-radius:0 8px 8px 8px;box-shadow:0 2px 4px rgba(0,0,0,0.05);margin-bottom:20px;">
+        <div class="agg-banner">
+            <strong>About this data:</strong> Utility-reported aggregate reclaimed water consumption for all data center 
+            customers served by Loudoun Water, 2023–2025. These volumes are included in the counter above as verified 
+            Recycled Water benefit. Individual site billing records are withheld pending FOIA requests.
+            Source: Loudoun Water billing data, 2025 report.
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <h3 style="margin:0;font-size:15px;color:#1e293b;">Loudoun Water — Reclaimed Water, DC Customers</h3>
+        </div>
+        <div class="chart-container" style="height:300px;margin-bottom:20px;">
+            <canvas id="aggReclaimedAnnual"></canvas>
+        </div>
+
+        <h3 style="margin-bottom:8px;font-size:15px;color:#1e293b;">Monthly detail — select year</h3>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;" id="aggReclYearBtns"></div>
+        <div class="chart-container" style="height:240px;margin-bottom:20px;">
+            <canvas id="aggReclaimedMonthly"></canvas>
+        </div>
+
+        <p class="note">
+            * Usage includes all reclaimed water at each premise used for cooling or irrigation, and may include 
+            multiple buildings per account.
+            These aggregate volumes are in addition to the site-specific Recycled Water entries from Amazon above.
+        </p>
     </div>
 </div>
 
@@ -368,9 +409,9 @@ async function loadData() {
             document.getElementById('m-rate').innerText     = pct.toFixed(1)+'%';
             document.getElementById('m-rate-sub').innerText = fmtM(total)+' of '+fmtM(totalConsumption);
         } else {
-            document.getElementById('m-consumption').innerText     = '—';
+            document.getElementById('m-consumption').innerText     = 'â';
             document.getElementById('m-consumption-sub').innerText = 'wateruse.csv not loaded';
-            document.getElementById('m-rate').innerText     = '—';
+            document.getElementById('m-rate').innerText     = 'â';
             document.getElementById('m-rate-sub').innerText = 'wateruse.csv not loaded';
         }
 
@@ -395,7 +436,7 @@ function buildFilters() {
     addOpts('companyFilter', [...new Set(allRecords.map(r=>r.company))].sort());
     addOpts('partnerFilter', [...new Set(allRecords.map(r=>r.partner))].sort());
 
-    // Portfolio dropdown — companies from records + any in portfolioLinks
+    // Portfolio dropdown â companies from records + any in portfolioLinks
     const pSel = document.getElementById('portfolioSelector');
     const seen = new Set();
     [...new Set(allRecords.map(r=>r.company))].sort().forEach(c => { pSel.add(new Option(c,c)); seen.add(c); });
@@ -410,7 +451,7 @@ function applyFilters() {
     loadSidebar();
 }
 
-/* ── Portfolio Modal ── */
+/* ââ Portfolio Modal ââ */
 function openPortfolioModal() {
     const company = document.getElementById('portfolioSelector').value;
     if (!company) return;
@@ -430,7 +471,7 @@ function openPortfolioModal() {
         : `${company} claims to be water-positive, but no verified volumetric benefit has been recorded in our database for Virginia operations.`;
     const lnk = document.getElementById('modalLink');
     lnk.className       = 'modal-btn '+(hasLink&&hasData?'green':'gray');
-    lnk.innerText       = hasLink ? 'View Verified Portfolio (PDF) ↗' : 'Portfolio Not Released';
+    lnk.innerText       = hasLink ? 'View Verified Portfolio (PDF) â' : 'Portfolio Not Released';
     lnk.href            = hasLink ? portfolioLinks[company] : '#';
     lnk.style.pointerEvents = hasLink ? 'auto' : 'none';
 
@@ -444,7 +485,7 @@ function closeModal(e) {
     }
 }
 
-/* ── Charts ── */
+/* ââ Charts ââ */
 function buildCharts() {
     const years = [...new Set(filteredRecords.map(r=>r.year))].sort();
     const cos   = [...new Set(filteredRecords.map(r=>r.company))].sort();
@@ -491,7 +532,7 @@ function buildCharts() {
     });
 }
 
-/* ── Project Explorer ── */
+/* ââ Project Explorer ââ */
 function loadSidebar() {
     const list = document.getElementById('projectsList');
     list.innerHTML = '';
@@ -517,7 +558,7 @@ function drawChart(projectName) {
     const total = data.reduce((s,r)=>s+r.benefit,0);
     const peak  = data.reduce((m,r)=>r.benefit>m.benefit?r:m, data[0]||{benefit:0});
     document.getElementById('ptTotal').innerText = fmtM(total);
-    document.getElementById('ptPeak').innerText  = peak.date || '—';
+    document.getElementById('ptPeak').innerText  = peak.date || 'â';
     document.getElementById('ptCount').innerText = data.length;
     document.getElementById('projectTotals').style.display = 'block';
 
@@ -536,7 +577,61 @@ function drawChart(projectName) {
     });
 }
 
+/* ── Loudoun reclaimed aggregate charts ── */
+let aggReclAnnual, aggReclMonthly;
+const RECL_DATA = {
+    '2023':[38358045,41042988,39499786,47441063,57187913,59941908,85265225,97499142,88924340,72284901,53575389,42971106],
+    '2024':[42416792,34319769,28724420,43080573,52368741,62471636,89308114,101557146,92848959,59562895,52815429,45387324],
+    '2025':[34919141,32885272,34379965,51050968,54345757,61840263,82709368,88900714,79685866,72585715,58637278,45226267]
+};
+const AGG_YEAR_COLORS = {
+    '2023':'#185FA5','2024':'#1D9E75','2025':'#2e7d32'
+};
+
+function buildAggReclAnnual() {
+    const years = Object.keys(RECL_DATA).sort();
+    const totals = years.map(y => RECL_DATA[y].reduce((s,v)=>s+v,0));
+    const colors = years.map(y => AGG_YEAR_COLORS[y] || '#888');
+    if (aggReclAnnual) aggReclAnnual.destroy();
+    aggReclAnnual = new Chart(document.getElementById('aggReclaimedAnnual'), {
+        type:'bar',
+        data:{ labels:years, datasets:[{ label:'Reclaimed Gallons', data:totals, backgroundColor:colors, borderRadius:4 }] },
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtM(ctx.raw)}}}, scales:{y:{ticks:{callback:v=>fmtM(v)},beginAtZero:true}} }
+    });
+    buildAggReclYearBtns();
+}
+
+function buildAggReclYearBtns() {
+    const years = Object.keys(RECL_DATA).sort();
+    const container = document.getElementById('aggReclYearBtns');
+    container.innerHTML = '';
+    const defaultYr = years[years.length-1];
+    years.forEach(y => {
+        const btn = document.createElement('button');
+        btn.className = 'agg-yr-btn' + (y === defaultYr ? ' active' : '');
+        btn.textContent = y;
+        btn.onclick = () => {
+            document.querySelectorAll('#aggReclYearBtns .agg-yr-btn').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            buildAggReclMonthly(y);
+        };
+        container.appendChild(btn);
+    });
+    buildAggReclMonthly(defaultYr);
+}
+
+function buildAggReclMonthly(year) {
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    if (aggReclMonthly) aggReclMonthly.destroy();
+    aggReclMonthly = new Chart(document.getElementById('aggReclaimedMonthly'), {
+        type:'bar',
+        data:{ labels:months, datasets:[{ label:year, data:RECL_DATA[year], backgroundColor:'#2e7d32', borderRadius:3 }] },
+        options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtM(ctx.raw)}}}, scales:{y:{ticks:{callback:v=>fmtM(v)},beginAtZero:true}} }
+    });
+}
+
 loadData();
+buildAggReclAnnual();
 </script>
 </body>
 </html>
