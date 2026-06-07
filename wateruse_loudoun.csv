@@ -35,3 +35,6 @@ Loudoun Water,Potable,2025,September,9,96555993,Loudoun Water billing data (util
 Loudoun Water,Potable,2025,October,10,78986743,Loudoun Water billing data (utility-reported aggregate),All data center customers — not site-specific
 Loudoun Water,Potable,2025,November,11,64537011,Loudoun Water billing data (utility-reported aggregate),All data center customers — not site-specific
 Loudoun Water,Potable,2025,December,12,50169541,Loudoun Water billing data (utility-reported aggregate),All data center customers — not site-specific
+Loudoun Water,Amazon-Attributed,2023,Annual,0,212960355,Amazon FOIA billing records (site-specific aggregate),Amazon-attributed potable consumption — used to compute coverage percentage
+Loudoun Water,Amazon-Attributed,2024,Annual,0,208286536,Amazon FOIA billing records (site-specific aggregate),Amazon-attributed potable consumption — used to compute coverage percentage
+Loudoun Water,Amazon-Attributed,2025,Annual,0,125398395,Amazon FOIA billing records (site-specific aggregate),Amazon-attributed potable consumption — used to compute coverage percentage

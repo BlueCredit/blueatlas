@@ -105,7 +105,7 @@
     .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
     .gfm-embed { margin: 0 auto; display: inline-block; }
 
-    /* ── Utility Aggregates tab ── */
+    /* ── Loudoun County tab ── */
     .agg-banner { background:#fffbeb; border:1px solid #fcd34d; border-left:4px solid #f59e0b; border-radius:8px; padding:12px 16px; font-size:13px; color:#78350f; margin-bottom:20px; line-height:1.5; }
     .agg-type-tabs { display:flex; gap:8px; margin-bottom:16px; }
     .agg-type-btn { padding:6px 16px; border-radius:20px; border:1px solid #ddd; background:white; font-size:13px; font-weight:600; cursor:pointer; color:#64748b; transition:all 0.15s; }
@@ -189,7 +189,7 @@
     <button class="tab active" onclick="switchTab('tab-portfolio', this)">Company Portfolios</button>
     <button class="tab" onclick="switchTab('tab-charts', this)">Summary Charts</button>
     <button class="tab" onclick="switchTab('tab-explorer', this)">Project Explorer</button>
-    <button class="tab" onclick="switchTab('tab-agg', this)">Utility Aggregates</button>
+    <button class="tab" onclick="switchTab('tab-agg', this)">Loudoun County</button>
 </div>
 
 <!-- TAB: Company Portfolios -->
@@ -258,13 +258,13 @@
     <div style="background:white;padding:20px;border-radius:0 8px 8px 8px;box-shadow:0 2px 4px rgba(0,0,0,0.05);margin-bottom:20px;">
         <div class="agg-banner">
             <strong>About this data:</strong> Utility-reported aggregate reclaimed water consumption for all data center 
-            customers served by Loudoun Water, 2023–2025. These volumes are included in the counter above as verified 
+            customers served by Loudoun Water, 2023–2025 (Loudoun County, Virginia). These volumes are included in the counter above as verified 
             Recycled Water benefit. Individual site billing records are withheld pending FOIA requests.
             Source: Loudoun Water billing data, 2025 report.
         </div>
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-            <h3 style="margin:0;font-size:15px;color:#1e293b;">Loudoun Water — Reclaimed Water, DC Customers</h3>
+            <h3 style="margin:0;font-size:15px;color:#1e293b;">Loudoun County — Reclaimed Water, All DC Customers</h3>
         </div>
         <div class="chart-container" style="height:300px;margin-bottom:20px;">
             <canvas id="aggReclaimedAnnual"></canvas>
@@ -593,11 +593,25 @@ function drawChart(projectName) {
 
 /* ── Loudoun reclaimed aggregate charts ── */
 let aggReclAnnual, aggReclMonthly;
-const RECL_DATA = {
-    '2023':[38358045,41042988,39499786,47441063,57187913,59941908,85265225,97499142,88924340,72284901,53575389,42971106],
-    '2024':[42416792,34319769,28724420,43080573,52368741,62471636,89308114,101557146,92848959,59562895,52815429,45387324],
-    '2025':[34919141,32885272,34379965,51050968,54345757,61840263,82709368,88900714,79685866,72585715,58637278,45226267]
-};
+const RECL_DATA = {}; // loaded from waterreclaimed.csv
+
+async function loadReclaimedData() {
+    try {
+        const text = await (await fetch('waterreclaimed.csv')).text();
+        const lines = text.trim().split(/\r?\n/);
+        const h = lines[0].split(',');
+        const iYear = h.indexOf('Year'), iMon = h.indexOf('MonthNum'), iGal = h.indexOf('Gallons');
+        lines.slice(1).forEach(line => {
+            const c = line.split(',');
+            const yr  = (c[iYear]||'').trim();
+            const mon = parseInt(c[iMon]);
+            const gal = parseInt(c[iGal]) || 0;
+            if (!RECL_DATA[yr]) RECL_DATA[yr] = new Array(12).fill(0);
+            if (mon > 0 && mon <= 12) RECL_DATA[yr][mon-1] = gal;
+        });
+        buildAggReclAnnual();
+    } catch(e) { console.error('Reclaimed load error:', e); }
+}
 const AGG_YEAR_COLORS = {
     '2023':'#185FA5','2024':'#1D9E75','2025':'#2e7d32'
 };
@@ -645,7 +659,7 @@ function buildAggReclMonthly(year) {
 }
 
 loadData();
-buildAggReclAnnual();
+loadReclaimedData();
 </script>
 </body>
 </html>

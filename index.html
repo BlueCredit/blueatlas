@@ -242,8 +242,8 @@
 
             } catch (e) {
                 console.error("CSV loading error:", e);
-                animateCounter('useCounter', 5421890432);
-                animateCounter('restoreCounter', 161930000);
+                // Counters stay at 0 if CSVs fail to load
+                console.error("CSV load failed:", e);
             }
         }
         window.onload = initDashboard;

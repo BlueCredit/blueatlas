@@ -67,7 +67,7 @@
     .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
     .gfm-embed { margin: 0 auto; display: inline-block; }
 
-    /* ── Utility Aggregates tab extras ── */
+    /* ── Loudoun County tab extras ── */
     .agg-banner {
         background: #fffbeb;
         border: 1px solid #fcd34d;
@@ -178,7 +178,7 @@
     <button class="tab" onclick="switchTab('tab-utility', this)">By Utility</button>
     <button class="tab" onclick="switchTab('tab-company', this)">By Company</button>
     <button class="tab" onclick="switchTab('tab-facility', this)">Facility Explorer</button>
-    <button class="tab" onclick="switchTab('tab-aggregate', this)">Utility Aggregates</button>
+    <button class="tab" onclick="switchTab('tab-aggregate', this)">Loudoun County</button>
 </div>
 
 <!-- TAB: Summary Charts -->
@@ -210,7 +210,7 @@
         <div class="chart-container" style="height:340px;">
             <canvas id="utilBarChart"></canvas>
         </div>
-        <p class="note">* Loudoun Water removed from site-specific records — see Utility Aggregates tab for full Loudoun Water data.</p>
+        <p class="note">* Loudoun Water removed from site-specific records — see Loudoun County tab for full Loudoun Water data.</p>
     </div>
     <div class="section">
         <h3>Annual water use by utility — detail table</h3>
@@ -253,54 +253,47 @@
     <div style="background:white; padding:20px; border-radius:0 8px 8px 8px; box-shadow:0 2px 4px rgba(0,0,0,0.05); margin-bottom:20px;">
 
         <div class="agg-banner">
-            <strong>About this data:</strong> Utility-reported aggregate consumption for all data center customers.
+            <strong>About this data:</strong> Loudoun County utility-reported aggregate consumption for all data center customers served by Loudoun Water.
             Individual site billing records are withheld pending FOIA requests for Meta, Google, EdgeConneX, and GDC.
             Amazon site-specific data is available on the Facility Explorer tab (other utilities only).
             Source: Loudoun Water billing data, 2025 report.
         </div>
 
         <!-- Coverage gap cards -->
+
+        <!-- DC Inventory panel -->
+        <div class="section" style="margin-bottom:20px;">
+            <h3 style="margin-bottom:4px;">Loudoun County — Data Center Inventory</h3>
+            <p id="dcInventorySummary" style="font-size:13px;color:#64748b;margin-bottom:14px;">Loading inventory…</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;margin-bottom:8px;">Major Operators (3+ facilities)</div>
+                    <table style="width:100%;font-size:12px;border-collapse:collapse;">
+                        <thead><tr>
+                            <th style="text-align:left;padding:5px 8px;background:#f8f9fa;border-bottom:2px solid #e2e8f0;font-weight:700;">Operator</th>
+                            <th style="text-align:right;padding:5px 8px;background:#f8f9fa;border-bottom:2px solid #e2e8f0;font-weight:700;">Facilities</th>
+                            <th style="text-align:right;padding:5px 8px;background:#f8f9fa;border-bottom:2px solid #e2e8f0;font-weight:700;">Water Data</th>
+                        </tr></thead>
+                        <tbody id="dcInventoryTable"></tbody>
+                    </table>
+                    <p style="font-size:11px;color:#94a3b8;margin-top:6px;font-style:italic;">
+                        + 40 additional operators with 1–2 facilities each.
+                        All data withheld pending FOIA except Amazon.
+                    </p>
+                </div>
+                <div>
+                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#64748b;margin-bottom:8px;">Facility Status</div>
+                    <div class="chart-container" style="height:220px;"><canvas id="dcStatusChart"></canvas></div>
+                    <div style="font-size:11px;color:#94a3b8;margin-top:6px;font-style:italic;">
+                        Source: Virginia permit records &amp; field verification.
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h3 style="margin-top:0; margin-bottom:14px; font-size:15px; color:#1e293b;">Loudoun Water — Data Attribution Coverage</h3>
-        <div class="coverage-grid">
-            <div class="coverage-card">
-                <div class="coverage-year">2023</div>
-                <div class="coverage-total">810.0M gal</div>
-                <div style="font-size:12px; color:#64748b; margin-bottom:6px;">All data centers (potable)</div>
-                <div class="coverage-bar-wrap">
-                    <div class="coverage-bar-attr" style="width:26.3%; float:left;"></div>
-                    <div style="clear:both;"></div>
-                </div>
-                <div class="coverage-legend">
-                    <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: 26.3%</span>
-                    <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: 73.7%</span>
-                </div>
-            </div>
-            <div class="coverage-card">
-                <div class="coverage-year">2024</div>
-                <div class="coverage-total">898.5M gal</div>
-                <div style="font-size:12px; color:#64748b; margin-bottom:6px;">All data centers (potable)</div>
-                <div class="coverage-bar-wrap">
-                    <div class="coverage-bar-attr" style="width:23.2%; float:left;"></div>
-                    <div style="clear:both;"></div>
-                </div>
-                <div class="coverage-legend">
-                    <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: 23.2%</span>
-                    <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: 76.8%</span>
-                </div>
-            </div>
-            <div class="coverage-card">
-                <div class="coverage-year">2025 (full year)</div>
-                <div class="coverage-total">906.2M gal</div>
-                <div style="font-size:12px; color:#64748b; margin-bottom:6px;">All data centers (potable)</div>
-                <div class="coverage-bar-wrap">
-                    <div class="coverage-bar-attr" style="width:13.8%; float:left;"></div>
-                    <div style="clear:both;"></div>
-                </div>
-                <div class="coverage-legend">
-                    <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: 13.8%</span>
-                    <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: 86.2%</span>
-                </div>
-            </div>
+        <div class="coverage-grid" id="coverageCards">
+            <div class="coverage-card" style="color:#94a3b8;font-size:13px;">Loading…</div>
         </div>
 
         <!-- Toggle potable / reclaimed -->
@@ -349,7 +342,7 @@ let allRecords = [];
 let records    = [];
 let siteChart, monthlyChart, annualChart, utilBarChart, coBarChart;
 let aggAnnualChart, aggMonthlyChart;
-let aggData = { potable: {}, reclaimed: {} };
+let aggData = { potable: {}, reclaimed: {}, attributed: {} };
 let currentAggType = 'potable';
 let currentAggYear = null;
 
@@ -363,6 +356,8 @@ function switchTab(id, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     btn.classList.add('active');
+    // Re-render DC status chart when Loudoun County tab becomes visible
+    if (id === 'tab-aggregate') { if (dcStatusChart) dcStatusChart.destroy(); dcStatusChart = null; if (dcInventoryData.length) buildDCInventory(); }
 }
 
 function fmtG(v) {
@@ -452,10 +447,13 @@ async function loadCSV() {
         document.getElementById('card-utilities').innerText  = numUtilities;
         document.getElementById('card-util-sub').innerText   = 'Virginia';
 
-        if (totalGal > 0 && benefitGal > 0) {
-            const pct = (benefitGal / totalGal * 100).toFixed(1);
+        // Use full combined total (site-specific + Loudoun aggregate) as denominator
+        const fullTotal = (window._loudounAggTotal || 0) + totalGal;
+        const denominator = fullTotal > 0 ? fullTotal : totalGal;
+        if (denominator > 0 && benefitGal > 0) {
+            const pct = (benefitGal / denominator * 100).toFixed(1);
             document.getElementById('card-benefit-pct').innerText = '<' + Math.ceil(pct) + '%';
-            document.getElementById('card-benefit-sub').innerText = fmtG(benefitGal) + ' of ' + fmtG(totalGal);
+            document.getElementById('card-benefit-sub').innerText = fmtG(benefitGal) + ' of ' + fmtG(denominator);
         } else if (benefitGal === 0) {
             document.getElementById('card-benefit-pct').innerText = '—';
             document.getElementById('card-benefit-sub').innerText = 'wateroffsets.csv not loaded';
@@ -487,13 +485,21 @@ async function loadAggregates() {
 
         lines.slice(1).forEach(line => {
             const cols = line.split(',');
-            const type = cols[iType]?.trim().toLowerCase();
+            const rawType = cols[iType]?.trim() || '';
+            const type = rawType.toLowerCase().replace(/-/g,'').replace(/ /g,'');
             const year = cols[iYear]?.trim();
             const mon  = parseInt(cols[iMonth]);
             const gal  = parseInt(cols[iGal]) || 0;
-            if (!aggData[type]) aggData[type] = {};
-            if (!aggData[type][year]) aggData[type][year] = new Array(12).fill(0);
-            aggData[type][year][mon-1] = gal;
+            if (type === 'potable') {
+                if (!aggData['potable'][year]) aggData['potable'][year] = new Array(12).fill(0);
+                if (mon > 0) aggData['potable'][year][mon-1] = gal;
+            } else if (type === 'reclaimed') {
+                if (!aggData['reclaimed'][year]) aggData['reclaimed'][year] = new Array(12).fill(0);
+                if (mon > 0) aggData['reclaimed'][year][mon-1] = gal;
+            } else if (type === 'amazonattributed') {
+                // Annual totals for attribution coverage cards
+                aggData['attributed'][year] = gal;
+            }
         });
 
         // Store loudoun potable total for the top counter
@@ -501,6 +507,7 @@ async function loadAggregates() {
         window._loudounAggTotal = potableRows.reduce((s, months) => s + months.reduce((a,b)=>a+b,0), 0);
         if (window._updateUsageCounter) window._updateUsageCounter(window._loudounAggTotal);
 
+        buildCoverageCards();
         buildAggAnnualChart();
         buildAggYearButtons();
     } catch(e) { console.error("Aggregate load error:", e); }
@@ -745,8 +752,134 @@ function drawChart(locationName) {
     });
 }
 
+/* ── Loudoun County DC Inventory ── */
+let dcInventoryData = []; // populated by loadDCInventory()
+let dcStatusChart;
+
+/* ── Dynamic DC inventory loader ── */
+async function loadDCInventory() {
+    try {
+        const text = await (await fetch('loudoun_dc_inventory.csv')).text();
+        const lines = text.trim().split(/\r?\n/);
+        const h = lines[0].split(',');
+        const iCo = h.indexOf('Company'), iSt = h.indexOf('Status');
+        dcInventoryData = lines.slice(1).map(l => {
+            const c = l.split(',');
+            return { company: (c[iCo]||'').trim(), status: (c[iSt]||'').trim() };
+        }).filter(r => r.company);
+        buildDCInventory();
+    } catch(e) { console.error('DC inventory load error:', e); }
+}
+
+function buildDCInventory() {
+    if (!dcInventoryData.length) return;
+
+    // Compute company counts
+    const companyCounts = {};
+    dcInventoryData.forEach(r => {
+        companyCounts[r.company] = (companyCounts[r.company] || 0) + 1;
+    });
+    const totalFacilities = dcInventoryData.length;
+    const totalOperators  = Object.keys(companyCounts).length;
+    const sortedCos = Object.entries(companyCounts).sort((a,b) => b[1]-a[1]);
+    const majorCos  = sortedCos.filter(([,v]) => v >= 3);
+    const otherCos  = sortedCos.filter(([,v]) => v < 3);
+
+    // Companies with water data = only Amazon
+    const withData = new Set(['Amazon']);
+
+    // Get most recent year attribution %
+    const attrYears = Object.keys(aggData['attributed'] || {}).sort();
+    const latestAttrYear = attrYears[attrYears.length-1] || '';
+    const attrPot = aggData['potable'][latestAttrYear]?.reduce((a,b)=>a+b,0) || 0;
+    const attrAmazon = aggData['attributed'][latestAttrYear] || 0;
+    const attrPct = attrPot > 0 ? (attrAmazon/attrPot*100).toFixed(1) : '—';
+
+    // Update summary text
+    const summary = document.getElementById('dcInventorySummary');
+    if (summary) {
+        summary.innerHTML = `<strong>${totalFacilities} confirmed facilities</strong> across <strong>${totalOperators} operators</strong> served by Loudoun Water, based on permit records and field verification. Site-specific water billing data is only available for Amazon (${attrPct}% of ${latestAttrYear} potable consumption). FOIA requests pending for all other operators.`;
+    }
+
+    // Populate table
+    const tbody = document.getElementById('dcInventoryTable');
+    if (tbody) {
+        tbody.innerHTML = '';
+        majorCos.forEach(([name, count]) => {
+            const hasData = withData.has(name);
+            const tr = document.createElement('tr');
+            tr.innerHTML = \`
+                <td style="padding:5px 8px;border-bottom:1px solid #f1f5f9;">\${name}</td>
+                <td style="text-align:right;padding:5px 8px;border-bottom:1px solid #f1f5f9;font-family:monospace;">\${count}</td>
+                <td style="text-align:right;padding:5px 8px;border-bottom:1px solid #f1f5f9;\${hasData?'color:#2e7d32;font-weight:700;':'color:#b91c1c;'}">\${hasData ? '✓ Available' : 'FOIA pending'}</td>\`;
+            tbody.appendChild(tr);
+        });
+        // Footer row for others
+        if (otherCos.length) {
+            const totalOther = otherCos.reduce((s,[,v])=>s+v,0);
+            const tr = document.createElement('tr');
+            tr.innerHTML = \`<td colspan="2" style="padding:5px 8px;color:#94a3b8;font-style:italic;font-size:11px;">+ \${otherCos.length} operators with 1–2 facilities (\${totalOther} total)</td><td style="text-align:right;padding:5px 8px;color:#b91c1c;font-size:11px;">All FOIA pending</td>\`;
+            tbody.appendChild(tr);
+        }
+    }
+
+    // Status donut — computed from data
+    const statusCounts = {};
+    dcInventoryData.forEach(r => { statusCounts[r.status] = (statusCounts[r.status]||0)+1; });
+    const statusColors = { 'Existing':'#1976d2', 'In Construction':'#f59e0b', 'Proposed':'#94a3b8', 'Location Unconfirmed':'#e2e8f0' };
+    const statusEntries = Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]);
+    if (dcStatusChart) dcStatusChart.destroy();
+    const canvas = document.getElementById('dcStatusChart');
+    if (canvas) {
+        dcStatusChart = new Chart(canvas, {
+            type: 'doughnut',
+            data: {
+                labels: statusEntries.map(([k])=>k),
+                datasets:[{ data: statusEntries.map(([,v])=>v), backgroundColor: statusEntries.map(([k])=>statusColors[k]||'#cbd5e1'), borderWidth:2 }]
+            },
+            options:{ responsive:true, maintainAspectRatio:false,
+                plugins:{ legend:{position:'right',labels:{font:{size:11},boxWidth:12}}, tooltip:{callbacks:{label:ctx=>`\${ctx.label}: \${ctx.raw}`}} } }
+        });
+    }
+}
+
+/* ── Coverage cards ── */
+function buildCoverageCards() {
+    const container = document.getElementById('coverageCards');
+    if (!container) return;
+    const potData  = aggData['potable']     || {};
+    const attrData = aggData['attributed']  || {};
+    const years = Object.keys(potData).sort();
+    if (!years.length) return;
+
+    container.innerHTML = '';
+    years.forEach(yr => {
+        const total  = (potData[yr] || []).reduce((a,b)=>a+b,0);
+        const attr   = attrData[yr] || 0;
+        const pct    = total > 0 ? (attr/total*100) : 0;
+        const unattr = 100 - pct;
+        function fM(v){ return v>=1e9?(v/1e9).toFixed(2)+'B':v>=1e6?(v/1e6).toFixed(0)+'M':Math.round(v/1e3)+'K'; }
+        const card = document.createElement('div');
+        card.className = 'coverage-card';
+        card.innerHTML = \`
+            <div class="coverage-year">\${yr}</div>
+            <div class="coverage-total">\${fM(total)} gal</div>
+            <div style="font-size:12px;color:#64748b;margin-bottom:6px;">All data centers (potable)</div>
+            <div class="coverage-bar-wrap">
+                <div class="coverage-bar-attr" style="width:\${pct.toFixed(1)}%;float:left;"></div>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="coverage-legend">
+                <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: \${pct.toFixed(1)}%</span>
+                <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: \${unattr.toFixed(1)}%</span>
+            </div>\`;
+        container.appendChild(card);
+    });
+}
+
 loadCSV();
 loadAggregates();
+loadDCInventory();
 </script>
 </body>
 </html>
