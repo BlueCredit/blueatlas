@@ -429,9 +429,10 @@ async function loadData() {
             document.getElementById('m-rate-sub').innerText = 'wateruse.csv not loaded';
         }
 
-        const cosWithData = [...new Set(allRecords.filter(r=>r.benefit>0).map(r=>r.company))].length;
-        const totalCos    = totalTrackedCos || [...new Set(allRecords.map(r=>r.company))].length;
-        document.getElementById('m-cos').innerText     = cosWithData;
+        // Companies with programs = any offset records (regardless of verified gallons)
+        const cosWithPrograms = [...new Set(allRecords.map(r=>r.company))].length;
+        const totalCos        = totalTrackedCos || cosWithPrograms;
+        document.getElementById('m-cos').innerText     = cosWithPrograms;
         document.getElementById('m-cos-sub').innerText = 'of '+totalCos+' tracked companies';
 
         // 5. Build filters, portfolio dropdown, charts, sidebar
