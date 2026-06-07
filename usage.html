@@ -877,9 +877,11 @@ function buildCoverageCards() {
     });
 }
 
-loadCSV();
-loadAggregates();
-loadDCInventory();
+// Run sequentially so counter update callback is always wired before aggregate fires
+loadCSV().then(() => {
+    loadAggregates();
+    loadDCInventory();
+});
 </script>
 </body>
 </html>

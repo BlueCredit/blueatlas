@@ -233,7 +233,8 @@
 
                 // col[4] = Gallons in wateruse.csv; col[5] = Gallons in wateruse_loudoun.csv
                 const usageSiteSpecific = useRows.reduce((sum, row) => sum + (parseFloat(row[4]) || 0), 0);
-                const usageLoudounAgg   = loudounRows.reduce((sum, row) => sum + (parseFloat(row[5]) || 0), 0);
+                // col[1]=Type, col[5]=Gallons — only sum Potable rows (skip Amazon-Attributed annual rows)
+                const usageLoudounAgg   = loudounRows.filter(row => (row[1]||'').trim().toLowerCase() === 'potable').reduce((sum, row) => sum + (parseFloat(row[5]) || 0), 0);
                 const usageTotal  = usageSiteSpecific + usageLoudounAgg;
                 const offsetTotal = offRows.reduce((sum, row) => sum + (parseFloat(row[6]) || 0), 0);
 
