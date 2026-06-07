@@ -221,15 +221,20 @@
 
         async function initDashboard() {
             try {
-                const [useRes, offRes] = await Promise.all([
+                const [useRes, loudounRes, offRes] = await Promise.all([
                     fetch("wateruse.csv").then(r => r.text()),
+                    fetch("wateruse_loudoun.csv").then(r => r.text()),
                     fetch("wateroffsets.csv").then(r => r.text())
                 ]);
 
-                const useRows = parseCSV(useRes);
-                const offRows = parseCSV(offRes);
+                const useRows     = parseCSV(useRes);
+                const loudounRows = parseCSV(loudounRes);
+                const offRows     = parseCSV(offRes);
 
-                const usageTotal = useRows.reduce((sum, row) => sum + (parseFloat(row[4]) || 0), 0);
+                // col[4] = Gallons in wateruse.csv; col[5] = Gallons in wateruse_loudoun.csv
+                const usageSiteSpecific = useRows.reduce((sum, row) => sum + (parseFloat(row[4]) || 0), 0);
+                const usageLoudounAgg   = loudounRows.reduce((sum, row) => sum + (parseFloat(row[5]) || 0), 0);
+                const usageTotal  = usageSiteSpecific + usageLoudounAgg;
                 const offsetTotal = offRows.reduce((sum, row) => sum + (parseFloat(row[6]) || 0), 0);
 
                 animateCounter('useCounter', usageTotal);

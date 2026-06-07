@@ -430,9 +430,23 @@ async function loadCSV() {
             }
         } catch(e) {}
 
-        animateCounter('totalCounter', totalGal);
-        document.getElementById('card-total').innerText     = fmtG(totalGal);
-        document.getElementById('card-total-sub').innerText = dateRange;
+        // Usage counter = site-specific + Loudoun potable aggregate
+        // Loudoun aggregate loaded separately; sum after both resolve
+        window._siteSpecificTotal = totalGal;
+        window._updateUsageCounter = function(loudounAgg) {
+            const grand = (window._siteSpecificTotal || 0) + loudounAgg;
+            animateCounter('totalCounter', grand);
+            document.getElementById('card-total').innerText     = fmtG(grand);
+            document.getElementById('card-total-sub').innerText = dateRange + ' · incl. Loudoun Water aggregate';
+        };
+        // If aggregate already loaded, update now; otherwise site-specific total shown first
+        if (window._loudounAggTotal) {
+            window._updateUsageCounter(window._loudounAggTotal);
+        } else {
+            animateCounter('totalCounter', totalGal);
+            document.getElementById('card-total').innerText     = fmtG(totalGal);
+            document.getElementById('card-total-sub').innerText = dateRange;
+        }
         document.getElementById('card-companies').innerText = numCompanies;
         document.getElementById('card-locations').innerText = 'across ' + numLocations.toLocaleString() + ' locations';
         document.getElementById('card-utilities').innerText  = numUtilities;
@@ -481,6 +495,11 @@ async function loadAggregates() {
             if (!aggData[type][year]) aggData[type][year] = new Array(12).fill(0);
             aggData[type][year][mon-1] = gal;
         });
+
+        // Store loudoun potable total for the top counter
+        const potableRows = Object.values(aggData['potable'] || {});
+        window._loudounAggTotal = potableRows.reduce((s, months) => s + months.reduce((a,b)=>a+b,0), 0);
+        if (window._updateUsageCounter) window._updateUsageCounter(window._loudounAggTotal);
 
         buildAggAnnualChart();
         buildAggYearButtons();

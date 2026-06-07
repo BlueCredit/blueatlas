@@ -382,17 +382,31 @@ async function loadData() {
 
         filteredRecords = [...allRecords];
 
-        // 3. Consumption totals from wateruse.csv (optional)
+        // 3. Consumption totals — site-specific + Loudoun aggregate
         let totalConsumption=0, totalLocations=0, totalTrackedCos=0;
         try {
-            const ut    = await (await fetch("wateruse.csv")).text();
+            const [ut, lt] = await Promise.all([
+                fetch("wateruse.csv").then(r=>r.text()),
+                fetch("wateruse_loudoun.csv").then(r=>r.text())
+            ]);
             const ul    = ut.trim().split(/\r?\n/);
             const uh    = parseLine(ul[0]);
             const gi    = uh.indexOf('Gallons'), li=uh.indexOf('Location'), ci=uh.indexOf('Company');
             const uRows = ul.slice(1).map(l=>parseLine(l)).filter(r=>r.length>gi);
-            totalConsumption = uRows.reduce((s,r)=>s+(parseFloat((r[gi]||'0').replace(/,/g,''))||0),0);
+            const siteTotal  = uRows.reduce((s,r)=>s+(parseFloat((r[gi]||'0').replace(/,/g,''))||0),0);
             totalLocations   = new Set(uRows.map(r=>(r[li]||'').trim()).filter(Boolean)).size;
             totalTrackedCos  = new Set(uRows.map(r=>(r[ci]||'').trim()).filter(Boolean)).size;
+
+            // Add Loudoun potable aggregate
+            const ll    = lt.trim().split(/\r?\n/);
+            const lh    = parseLine(ll[0]);
+            const lgi   = lh.indexOf('Gallons'), lti = lh.indexOf('Type');
+            const lRows = ll.slice(1).map(l=>parseLine(l)).filter(r=>r.length>lgi);
+            const loudounTotal = lRows
+                .filter(r => (r[lti]||'').trim().toLowerCase() === 'potable')
+                .reduce((s,r)=>s+(parseFloat((r[lgi]||'0').replace(/,/g,''))||0),0);
+
+            totalConsumption = siteTotal + loudounTotal;
         } catch(e) {}
 
         // 4. Populate metric cards
