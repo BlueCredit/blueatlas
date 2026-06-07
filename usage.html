@@ -67,7 +67,7 @@
     .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
     .gfm-embed { margin: 0 auto; display: inline-block; }
 
-    /* ── Loudoun County tab extras ── */
+    /* -- Loudoun County tab extras -- */
     .agg-banner {
         background: #fffbeb;
         border: 1px solid #fcd34d;
@@ -367,7 +367,7 @@ function fmtG(v) {
     return Math.round(v).toLocaleString() + ' gal';
 }
 
-/* ── Main wateruse.csv loader (unchanged logic) ── */
+/* -- Main wateruse.csv loader (unchanged logic) -- */
 async function loadCSV() {
     try {
         const response = await fetch("wateruse.csv");
@@ -482,7 +482,7 @@ async function loadCSV() {
     }
 }
 
-/* ── Aggregate loader ── */
+/* -- Aggregate loader -- */
 async function loadAggregates() {
     try {
         const res = await fetch("wateruse_loudoun.csv");
@@ -768,11 +768,11 @@ function drawChart(locationName) {
     });
 }
 
-/* ── Loudoun County DC Inventory ── */
+/* -- Loudoun County DC Inventory -- */
 let dcInventoryData = []; // populated by loadDCInventory()
 let dcStatusChart;
 
-/* ── Dynamic DC inventory loader ── */
+/* -- Dynamic DC inventory loader -- */
 async function loadDCInventory() {
     try {
         const text = await (await fetch('loudoun_dc_inventory.csv')).text();
@@ -824,17 +824,17 @@ function buildDCInventory() {
         majorCos.forEach(([name, count]) => {
             const hasData = withData.has(name);
             const tr = document.createElement('tr');
-            tr.innerHTML = \`
-                <td style="padding:5px 8px;border-bottom:1px solid #f1f5f9;">\${name}</td>
-                <td style="text-align:right;padding:5px 8px;border-bottom:1px solid #f1f5f9;font-family:monospace;">\${count}</td>
-                <td style="text-align:right;padding:5px 8px;border-bottom:1px solid #f1f5f9;\${hasData?'color:#2e7d32;font-weight:700;':'color:#b91c1c;'}">\${hasData ? '✓ Available' : 'FOIA pending'}</td>\`;
+            tr.innerHTML = `
+                <td style="padding:5px 8px;border-bottom:1px solid #f1f5f9;">${name}</td>
+                <td style="text-align:right;padding:5px 8px;border-bottom:1px solid #f1f5f9;font-family:monospace;">${count}</td>
+                <td style="text-align:right;padding:5px 8px;border-bottom:1px solid #f1f5f9;${hasData?'color:#2e7d32;font-weight:700;':'color:#b91c1c;'}">${hasData ? '✓ Available' : 'FOIA pending'}</td>`;
             tbody.appendChild(tr);
         });
         // Footer row for others
         if (otherCos.length) {
             const totalOther = otherCos.reduce((s,[,v])=>s+v,0);
             const tr = document.createElement('tr');
-            tr.innerHTML = \`<td colspan="2" style="padding:5px 8px;color:#94a3b8;font-style:italic;font-size:11px;">+ \${otherCos.length} operators with 1–2 facilities (\${totalOther} total)</td><td style="text-align:right;padding:5px 8px;color:#b91c1c;font-size:11px;">All FOIA pending</td>\`;
+            tr.innerHTML = `<td colspan="2" style="padding:5px 8px;color:#94a3b8;font-style:italic;font-size:11px;">+ ${otherCos.length} operators with 1–2 facilities (${totalOther} total)</td><td style="text-align:right;padding:5px 8px;color:#b91c1c;font-size:11px;">All FOIA pending</td>`;
             tbody.appendChild(tr);
         }
     }
@@ -854,12 +854,12 @@ function buildDCInventory() {
                 datasets:[{ data: statusEntries.map(([,v])=>v), backgroundColor: statusEntries.map(([k])=>statusColors[k]||'#cbd5e1'), borderWidth:2 }]
             },
             options:{ responsive:true, maintainAspectRatio:false,
-                plugins:{ legend:{position:'right',labels:{font:{size:11},boxWidth:12}}, tooltip:{callbacks:{label:ctx=>`\${ctx.label}: \${ctx.raw}`}} } }
+                plugins:{ legend:{position:'right',labels:{font:{size:11},boxWidth:12}}, tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw}`}} } }
         });
     }
 }
 
-/* ── Coverage cards ── */
+/* -- Coverage cards -- */
 function buildCoverageCards() {
     const container = document.getElementById('coverageCards');
     if (!container) return;
@@ -877,18 +877,18 @@ function buildCoverageCards() {
         function fM(v){ return v>=1e9?(v/1e9).toFixed(2)+'B':v>=1e6?(v/1e6).toFixed(0)+'M':Math.round(v/1e3)+'K'; }
         const card = document.createElement('div');
         card.className = 'coverage-card';
-        card.innerHTML = \`
-            <div class="coverage-year">\${yr}</div>
-            <div class="coverage-total">\${fM(total)} gal</div>
+        card.innerHTML = `
+            <div class="coverage-year">${yr}</div>
+            <div class="coverage-total">${fM(total)} gal</div>
             <div style="font-size:12px;color:#64748b;margin-bottom:6px;">All data centers (potable)</div>
             <div class="coverage-bar-wrap">
-                <div class="coverage-bar-attr" style="width:\${pct.toFixed(1)}%;float:left;"></div>
+                <div class="coverage-bar-attr" style="width:${pct.toFixed(1)}%;float:left;"></div>
                 <div style="clear:both;"></div>
             </div>
             <div class="coverage-legend">
-                <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: \${pct.toFixed(1)}%</span>
-                <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: \${unattr.toFixed(1)}%</span>
-            </div>\`;
+                <span><span class="dot" style="background:#1976d2;"></span>Amazon attributed: ${pct.toFixed(1)}%</span>
+                <span><span class="dot" style="background:#e2e8f0;"></span>Unattributed: ${unattr.toFixed(1)}%</span>
+            </div>`;
         container.appendChild(card);
     });
 }
