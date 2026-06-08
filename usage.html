@@ -449,22 +449,15 @@ async function loadCSV() {
         document.getElementById('card-utilities').innerText  = numUtilities;
         document.getElementById('card-util-sub').innerText   = 'Virginia';
 
-        // Store benefit gallons globally so we can update after Loudoun loads
-        window._benefitGal = benefitGal;
-
-        // Initial denominator (site-specific only until Loudoun loads)
+        // Use full combined total (site-specific + Loudoun aggregate) as denominator
         const denominator = totalGal;
-
         if (denominator > 0 && benefitGal > 0) {
             const pct = (benefitGal / denominator * 100).toFixed(1);
-            document.getElementById('card-benefit-pct').innerText =
-                '<' + Math.ceil(pct) + '%';
-            document.getElementById('card-benefit-sub').innerText =
-                fmtG(benefitGal) + ' of ' + fmtG(denominator);
+            document.getElementById('card-benefit-pct').innerText = '<' + Math.ceil(pct) + '%';
+            document.getElementById('card-benefit-sub').innerText = fmtG(benefitGal) + ' of ' + fmtG(denominator);
         } else if (benefitGal === 0) {
             document.getElementById('card-benefit-pct').innerText = '—';
-            document.getElementById('card-benefit-sub').innerText =
-                'wateroffsets.csv not loaded';
+            document.getElementById('card-benefit-sub').innerText = 'wateroffsets.csv not loaded';
         }
 
         buildFilters();
@@ -519,30 +512,11 @@ async function loadAggregates() {
                 aggData['attributed'][year] = gal;
             }
         });
-    window._loudounAggTotal = potableRows.reduce((s, months) =>
-        s + months.reduce((a,b)=>a+b,0), 0);
 
-    if (window._updateUsageCounter)
-        window._updateUsageCounter(window._loudounAggTotal);
-
-    // Recalculate Water Benefit Verified using full total
-    if (window._benefitGal > 0) {
-
-        const denominator =
-            (window._siteSpecificTotal || 0) +
-            (window._loudounAggTotal || 0);
-
-        const pct =
-            (window._benefitGal / denominator * 100).toFixed(1);
-
-        document.getElementById('card-benefit-pct').innerText =
-            '<' + Math.ceil(pct) + '%';
-
-        document.getElementById('card-benefit-sub').innerText =
-            fmtG(window._benefitGal) +
-            ' of ' +
-            fmtG(denominator);
-    }
+        // Store loudoun potable total for the top counter
+        const potableRows = Object.values(aggData['potable'] || {});
+        window._loudounAggTotal = potableRows.reduce((s, months) => s + months.reduce((a,b)=>a+b,0), 0);
+        if (window._updateUsageCounter) window._updateUsageCounter(window._loudounAggTotal);
 
         buildCoverageCards();
         buildAggAnnualChart();
