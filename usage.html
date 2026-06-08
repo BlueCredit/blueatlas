@@ -142,7 +142,7 @@
         <div class="metric-value" id="card-utilities">—</div>
         <div class="metric-sub" id="card-util-sub">Virginia</div>
     </div>
-    <div class="metric-card red">
+   <div class="metric-card red" style="display:none;"></div>
         <div class="metric-label">Water Benefit Verified</div>
         <div class="metric-value" id="card-benefit-pct">—</div>
         <div class="metric-sub" id="card-benefit-sub">Loading…</div>
@@ -430,11 +430,19 @@ async function loadCSV() {
         // Usage counter = site-specific + Loudoun potable aggregate
         // Loudoun aggregate loaded separately; sum after both resolve
         window._siteSpecificTotal = totalGal;
+        window._benefitGal = benefitGal;
         window._updateUsageCounter = function(loudounAgg) {
             const grand = (window._siteSpecificTotal || 0) + loudounAgg;
             animateCounter('totalCounter', grand);
             document.getElementById('card-total').innerText     = fmtG(grand);
             document.getElementById('card-total-sub').innerText = dateRange + ' · incl. Loudoun Water aggregate';
+            // Re-render benefit card with correct denominator
+            const bGal = window._benefitGal || 0;
+            if (grand > 0 && bGal > 0) {
+                const pct = (bGal / grand * 100).toFixed(1);
+                document.getElementById('card-benefit-pct').innerText = '<' + Math.ceil(pct) + '%';
+                document.getElementById('card-benefit-sub').innerText = fmtG(bGal) + ' of ' + fmtG(grand);
+            }
         };
         // Show site-specific total immediately, update when Loudoun aggregate loads
         animateCounter('totalCounter', totalGal);
