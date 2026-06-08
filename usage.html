@@ -847,26 +847,6 @@ function buildDCInventory() {
         }
     }
 
-    // Status donut — computed from data
-    const statusCounts = {};
-    dcInventoryData.forEach(r => { statusCounts[r.status] = (statusCounts[r.status]||0)+1; });
-    const statusColors = { 'Existing':'#1976d2', 'In Construction':'#f59e0b', 'Proposed':'#94a3b8', 'Location Unconfirmed':'#e2e8f0' };
-    const statusEntries = Object.entries(statusCounts).sort((a,b)=>b[1]-a[1]);
-    if (dcStatusChart) dcStatusChart.destroy();
-    const canvas = document.getElementById('dcStatusChart');
-    if (canvas) {
-        dcStatusChart = new Chart(canvas, {
-            type: 'doughnut',
-            data: {
-                labels: statusEntries.map(([k])=>k),
-                datasets:[{ data: statusEntries.map(([,v])=>v), backgroundColor: statusEntries.map(([k])=>statusColors[k]||'#cbd5e1'), borderWidth:2 }]
-            },
-            options:{ responsive:true, maintainAspectRatio:false,
-                plugins:{ legend:{position:'right',labels:{font:{size:11},boxWidth:12}}, tooltip:{callbacks:{label:ctx=>`${ctx.label}: ${ctx.raw}`}} } }
-        });
-    }
-}
-
 /* -- Coverage cards -- */
 function buildCoverageCards() {
     const container = document.getElementById('coverageCards');
