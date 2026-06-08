@@ -450,8 +450,7 @@ async function loadCSV() {
         document.getElementById('card-util-sub').innerText   = 'Virginia';
 
         // Use full combined total (site-specific + Loudoun aggregate) as denominator
-        const fullTotal = (window._loudounAggTotal || 0) + totalGal;
-        const denominator = fullTotal > 0 ? fullTotal : totalGal;
+        const denominator = totalGal;
         if (denominator > 0 && benefitGal > 0) {
             const pct = (benefitGal / denominator * 100).toFixed(1);
             document.getElementById('card-benefit-pct').innerText = '<' + Math.ceil(pct) + '%';
