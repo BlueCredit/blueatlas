@@ -33,6 +33,28 @@
         .map-btn { background: #1976d2; }
         .law-btn { background: #6366f1; }
 
+        /* REPORTS SECTION */
+        .reports-section { max-width: 1100px; width: 90%; margin-bottom: 60px; background: #fff; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; box-sizing: border-box; }
+        .carousel-wrap { position: relative; margin-top: 30px; }
+        .reports-track { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; scroll-snap-type: x mandatory; padding: 4px 4px 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .reports-track::-webkit-scrollbar { display: none; }
+        .report-bubble { flex: 0 0 320px; scroll-snap-align: start; display: flex; flex-direction: column; padding: 24px; border-radius: 16px; background: #f8fafc; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; box-sizing: border-box; }
+        .report-bubble:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); border-color: #0f766e; }
+        .report-bubble .report-tag { display: inline-block; align-self: flex-start; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 999px; background: #ccfbf1; color: #0f766e; margin-bottom: 14px; }
+        .report-bubble h3 { margin: 0 0 8px 0; font-size: 1.1rem; color: #0f172a; line-height: 1.35; }
+        .report-bubble p { font-size: 0.9rem; color: #64748b; margin: 0 0 18px 0; line-height: 1.5; flex-grow: 1; }
+        .report-meta { display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; color: #94a3b8; }
+        .report-meta .report-cta { font-weight: 700; color: #0f766e; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 1px solid #e2e8f0; background: #fff; color: #0f172a; font-size: 1.3rem; line-height: 1; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; z-index: 5; transition: background 0.2s, opacity 0.2s; }
+        .carousel-btn:hover { background: #f0fdfa; border-color: #0f766e; }
+        .carousel-btn:disabled { opacity: 0.35; cursor: default; }
+        .carousel-btn.prev { left: -8px; }
+        .carousel-btn.next { right: -8px; }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+        .carousel-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; border: none; padding: 0; cursor: pointer; transition: background 0.2s, width 0.2s; }
+        .carousel-dots .dot.active { background: #0f766e; width: 22px; border-radius: 999px; }
+        @media (max-width: 640px) { .carousel-btn { display: none; } .report-bubble { flex-basis: 85%; } }
+
         /* SUBMIT DATA SECTION */
         .submit-section { max-width: 1100px; width: 90%; margin-bottom: 60px; background: #fff; padding: 40px; border-radius: 20px; border: 1px solid #e2e8f0; box-sizing: border-box; }
         .section-title { font-size: 2rem; font-weight: 800; margin-bottom: 10px; color: #0f172a; text-align: center; }
@@ -127,6 +149,38 @@
         </a>
     </div>
 
+    <div class="reports-section">
+        <h2 class="section-title">Investigative Reports</h2>
+        <p class="section-subtitle">Public-records investigations into data-center water use and the money behind the messaging.</p>
+
+        <div class="carousel-wrap">
+            <button class="carousel-btn prev" id="reportPrev" aria-label="Previous reports">&#8249;</button>
+            <div class="reports-track" id="reportsTrack">
+                <a href="DataCenter_Water_Funding_Report.pdf" target="_blank" class="report-bubble">
+                    <span class="report-tag">Report 01</span>
+                    <h3>Following the Money: Source to Sink</h3>
+                    <p>How the data center industry funds public messaging and political influence on data-center water use in Virginia. A public-records investigation tracing the DCC, Virginia Connects, and the VA Digital Infrastructure PAC.</p>
+                    <div class="report-meta">
+                        <span>PDF &middot; Public Records</span>
+                        <span class="report-cta">Read Report &rarr;</span>
+                    </div>
+                </a>
+                <a href="foia_opinion.pdf" target="_blank" class="report-bubble">
+                    <span class="report-tag">Report 02</span>
+                    <h3>FOIA Advisory Opinion: Utility Water Records Are Public</h3>
+                    <p>Virginia FOIA Council advisory opinion confirming that the amount of utility service provided and the amount charged fall outside the customer-account exemption in Va. Code &sect; 2.2-3705.7(7), and must be disclosed on request.</p>
+                    <div class="report-meta">
+                        <span>PDF &middot; VA FOIA Council</span>
+                        <span class="report-cta">Read Report &rarr;</span>
+                    </div>
+                </a>
+                <!-- Add future reports here by copying a .report-bubble block and updating the href, tag, title, and description. -->
+            </div>
+            <button class="carousel-btn next" id="reportNext" aria-label="Next reports">&#8250;</button>
+        </div>
+        <div class="carousel-dots" id="reportDots"></div>
+    </div>
+
     <div class="submit-section">
         <h2 class="section-title">Commit to Water Transparency</h2>
         <p class="section-subtitle">Help us build a more sustainable future by contributing data.</p>
@@ -157,7 +211,7 @@
                 <div class="step"><strong>2. Use Template:</strong> Download <a href="foia_template.docx" target="_blank">FOIA Template</a>. Specify dates (e.g. 2022-2024).</div>
                 <div class="step"><strong>3. Submit & Track:</strong> Submit via email. Agencies must usually respond within 5-10 days.</div>
             </div>
-            <p style="margin-top: 15px; font-size: 0.85rem;"><a href="foia_opinion.pdf" target="_blank">View Legal Opinion on Public Water Data →</a></p>
+          
         </div>
 
         <div class="google-form-box" style="display:flex; gap:16px; flex-wrap:wrap; align-items:stretch;">
@@ -257,7 +311,51 @@
                 console.error("CSV load failed:", e);
             }
         }
-        window.onload = initDashboard;
+        function initReportsCarousel() {
+            const track = document.getElementById('reportsTrack');
+            const prev = document.getElementById('reportPrev');
+            const next = document.getElementById('reportNext');
+            const dotsWrap = document.getElementById('reportDots');
+            if (!track) return;
+
+            const cards = Array.from(track.querySelectorAll('.report-bubble'));
+            if (!cards.length) return;
+
+            // step = distance between adjacent cards (width + gap)
+            function step() {
+                if (cards.length > 1) return cards[1].offsetLeft - cards[0].offsetLeft;
+                return cards[0].offsetWidth + 20;
+            }
+
+            // Build dots (one per card)
+            cards.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to report ' + (i + 1));
+                dot.addEventListener('click', () => track.scrollTo({ left: step() * i, behavior: 'smooth' }));
+                dotsWrap.appendChild(dot);
+            });
+            const dots = Array.from(dotsWrap.children);
+
+            function update() {
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                prev.disabled = track.scrollLeft <= 2;
+                next.disabled = track.scrollLeft >= maxScroll - 2;
+                const idx = Math.round(track.scrollLeft / step());
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            }
+
+            prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+            next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+            track.addEventListener('scroll', update);
+            window.addEventListener('resize', update);
+            update();
+        }
+
+        window.onload = function() {
+            initDashboard();
+            initReportsCarousel();
+        };
     </script>
 </body>
 </html>
