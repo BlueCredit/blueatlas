@@ -39,23 +39,24 @@
         .stat-value { font-size: 30px; font-weight: 800; color: #0f172a; font-variant-numeric: proportional-nums; }
         .stat-unit { font-size: 12px; color: #94a3b8; margin-top: 4px; }
 
-        /* Timeline chart */
+        /* Timeline chart: stacked columns, bills introduced per month */
         .viz-root { color-scheme: light; --surface-1: #fcfcfb; --text-primary: #0f172a; --text-secondary: #64748b; --series-house: #2a78d6; --series-senate: #eb6834; }
         .timeline-legend { display: flex; gap: 22px; justify-content: center; margin-bottom: 14px; font-size: 0.85rem; color: var(--text-secondary); }
         .legend-key { display: flex; align-items: center; gap: 7px; }
-        .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-        .legend-dot.house { background: var(--series-house); }
-        .legend-dot.senate { background: var(--series-senate); }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+        .legend-swatch.house { background: var(--series-house); }
+        .legend-swatch.senate { background: var(--series-senate); }
         #timelineSvg { width: 100%; height: auto; display: block; }
         .tl-axis-label { fill: var(--text-secondary); font-size: 11px; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        .tl-lane-label { fill: var(--text-secondary); font-size: 12px; font-weight: 700; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        .tl-dot { cursor: pointer; }
-        .tl-dot-ring { fill: #fcfcfb; }
-        .tl-direct-label { fill: var(--text-primary); font-size: 11px; font-weight: 600; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        .tl-ytick-label { fill: var(--text-secondary); font-size: 10px; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        .tl-bar-seg { cursor: pointer; }
+        .tl-value-label { fill: var(--text-primary); font-size: 11px; font-weight: 700; font-family: 'Segoe UI', Tahoma, sans-serif; text-anchor: middle; }
         .tl-gridline { stroke: #e2e8f0; stroke-width: 1; }
+        .tl-baseline { stroke: #cbd5e1; stroke-width: 1; }
 
-        .tl-tooltip { position: absolute; display: none; background: #0f172a; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; line-height: 1.5; max-width: 240px; pointer-events: none; box-shadow: 0 8px 20px rgba(0,0,0,0.25); z-index: 20; }
+        .tl-tooltip { position: absolute; display: none; background: #0f172a; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 0.8rem; line-height: 1.5; max-width: 260px; pointer-events: auto; box-shadow: 0 8px 20px rgba(0,0,0,0.25); z-index: 20; }
         .tl-tooltip strong { display: block; margin-bottom: 3px; font-size: 0.85rem; }
+        .tl-tooltip .tl-bill-row { margin-top: 2px; }
         .timeline-wrap { position: relative; }
 
         /* Table */
@@ -87,7 +88,30 @@
         .back-link { display: inline-block; margin: 10px 0 40px; color: #6366f1; font-weight: 700; text-decoration: none; font-size: 0.9rem; }
         .back-link:hover { text-decoration: underline; }
 
-        footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 40px 0; margin-top: auto; text-align: center; color: #94a3b8; font-size: 0.85rem; }
+        .bill-link { color: #4338ca; text-decoration: none; font-weight: 700; }
+        .bill-link:hover { text-decoration: underline; }
+
+        /* FOOTER — matches index.html */
+        footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: auto; }
+        .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
+        .footer-section { width: 100%; text-align: center; }
+        .footer-section h3 { font-size: 1.4rem; color: #0f172a; margin-bottom: 15px; }
+        .footer-section p.disclaimer { font-size: 0.9rem; color: #94a3b8; max-width: 800px; margin: 0 auto 40px; line-height: 1.6; }
+        .support-box {
+            background: #ffffff;
+            padding: 41px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #6366f1;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.04);
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+        .support-box h3 { color: #1e293b; margin-top: 0; }
+        .support-box p { color: #64748b; margin-bottom: 30px; font-size: 1rem; }
+        .gfm-embed { margin: 0 auto; display: inline-block; }
     </style>
 </head>
 <body>
@@ -151,14 +175,14 @@
             </div>
 
             <div class="section-box viz-root">
-                <h2>Introduction timeline</h2>
-                <p class="section-note">Every tracked bill, plotted by the date it was introduced. Hover a dot for details.</p>
+                <h2>Bills introduced per month</h2>
+                <p class="section-note">Each column is one month; hover a segment for the bills introduced that month, with links to congress.gov.</p>
                 <div class="timeline-legend">
-                    <span class="legend-key"><span class="legend-dot house"></span>House</span>
-                    <span class="legend-key"><span class="legend-dot senate"></span>Senate</span>
+                    <span class="legend-key"><span class="legend-swatch house"></span>House</span>
+                    <span class="legend-key"><span class="legend-swatch senate"></span>Senate</span>
                 </div>
                 <div class="timeline-wrap">
-                    <svg id="timelineSvg" viewBox="0 0 1000 220" preserveAspectRatio="xMidYMid meet"></svg>
+                    <svg id="timelineSvg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet"></svg>
                     <div class="tl-tooltip" id="tlTooltip"></div>
                 </div>
             </div>
@@ -196,11 +220,22 @@
     </div>
 
     <footer>
-        Data compiled from public congressional and state-legislature records. Last updated for tracking purposes only — verify against congress.gov before citing.
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Data Disclaimer and Support</h3>
+                <p class="disclaimer">The information presented is compiled from verified FOIA requests and corporate sustainability reports. All information is provided "as is".</p>
+                <div class="support-box">
+                    <h3>Support This Project</h3>
+                    <p>Your contribution helps cover FOIA fees and technology costs required to keep this data public.</p>
+                    <div class="gfm-embed" data-url="https://www.gofundme.com/f/transparency-for-data-center-water-use/widget/small"></div>
+                    <script defer src="https://www.gofundme.com/static/js/embed.js"></script>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script>
-        const BILLS = [{"bill": "H.R. 2940", "short_title": "Advancing Water Reuse Act", "sponsor": "Darin LaHood", "party": "R", "chamber": "House", "intro_date": "4/17/2025", "cosponsor_count": 25, "status": "Referred"}, {"bill": "H.R. 5227", "short_title": "Unleashing Low-Cost Rural AI Act", "sponsor": "Jim Costa", "party": "D", "chamber": "House", "intro_date": "9/9/2025", "cosponsor_count": 6, "status": "Referred"}, {"bill": "H.R. 5332", "short_title": "Liquid Cooling for AI Act of 2025", "sponsor": "Jay Obernolte", "party": "R", "chamber": "House", "intro_date": "9/11/2025", "cosponsor_count": 11, "status": "Referred"}, {"bill": "H.R. 6900", "short_title": "American Affordability Act of 2025", "sponsor": "Mike Thompson", "party": "D", "chamber": "House", "intro_date": "12/18/2025", "cosponsor_count": 46, "status": "Referred"}, {"bill": "H.R. 6984", "short_title": "Data Center Transparency Act", "sponsor": "Robert Menendez", "party": "D", "chamber": "House", "intro_date": "1/8/2026", "cosponsor_count": 10, "status": "Referred"}, {"bill": "H.R. 7858", "short_title": "Data Center Community Impact Act", "sponsor": "Bonnie Watson Coleman", "party": "D", "chamber": "House", "intro_date": "3/5/2026", "cosponsor_count": 15, "status": "Referred"}, {"bill": "H.R. 8033", "short_title": "No Harm Data Centers Act", "sponsor": "Greg Landsman", "party": "D", "chamber": "House", "intro_date": "3/20/2026", "cosponsor_count": 1, "status": "Referred"}, {"bill": "H.R. 9372", "short_title": "Data Infrastructure Energy Measurement and Standards Act", "sponsor": "Suhas Subramanyam", "party": "D", "chamber": "House", "intro_date": "6/18/2026", "cosponsor_count": 2, "status": "Ordered reported, amended, 6/25/2026"}, {"bill": "H.R. 9419", "short_title": "Power and Water for Families Act of 2026", "sponsor": "Michael Baumgartner", "party": "R", "chamber": "House", "intro_date": "6/24/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "H.R. 9442", "short_title": "Artificial Intelligence Data Center Moratorium Act", "sponsor": "Alexandria Ocasio-Cortez", "party": "D", "chamber": "House", "intro_date": "6/24/2026", "cosponsor_count": 13, "status": "Referred"}, {"bill": "H.R. 9629", "short_title": "Protecting Communities from Data Center Impacts Act of 2026", "sponsor": "Greg Landsman", "party": "D", "chamber": "House", "intro_date": "7/9/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "H.R. 9777", "short_title": "Protecting Ratepayers Act", "sponsor": "Byron Donalds", "party": "R", "chamber": "House", "intro_date": "7/20/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "H.R. 9825", "short_title": "Data Center Water and Energy Transparency Act of 2026", "sponsor": "Lauren Underwood", "party": "D", "chamber": "House", "intro_date": "7/22/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "S. 4213", "short_title": "Data Center Water and Energy Transparency Act of 2026", "sponsor": "Richard J. Durbin", "party": "D", "chamber": "Senate", "intro_date": "3/25/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "S. 4214", "short_title": "Artificial Intelligence Data Center Moratorium Act", "sponsor": "Bernard Sanders", "party": "I", "chamber": "Senate", "intro_date": "3/25/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "S. 5054", "short_title": "Data Center Tax Accountability and Disclosure Act of 2026", "sponsor": "Mark R. Warner", "party": "D", "chamber": "Senate", "intro_date": "7/21/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "H.R. 8037", "short_title": "Protect American AI Act of 2026", "sponsor": "Michael Baumgartner", "party": "R", "chamber": "House", "intro_date": "3/24/2026", "cosponsor_count": 0, "status": "Referred"}, {"bill": "S. 3269", "short_title": "Liquid Cooling for AI Act of 2025", "sponsor": "David McCormick", "party": "R", "chamber": "Senate", "intro_date": "11/20/2025", "cosponsor_count": 3, "status": "Hearings held (Subcommittee on Energy, 4/15/2026)"}, {"bill": "S. 3737", "short_title": "GROW SMART Act (Growing Resilient Operations from Water Saving and Municipal-Agricultural Reciprocally-beneficial Transactions Act)", "sponsor": "Alex Padilla", "party": "D", "chamber": "Senate", "intro_date": "1/29/2026", "cosponsor_count": 0, "status": "Hearings held (Subcommittee on Water and Power, 3/17/2026)"}, {"bill": "S. 3852", "short_title": "GRID Act (Guaranteeing Rate Insulation from Data Centers Act)", "sponsor": "Josh Hawley", "party": "R", "chamber": "Senate", "intro_date": "2/11/2026", "cosponsor_count": 2, "status": "Referred"}];
+        const BILLS = [{"bill": "H.R. 2940", "short_title": "Advancing Water Reuse Act", "sponsor": "Darin LaHood", "party": "R", "chamber": "House", "intro_date": "4/17/2025", "cosponsor_count": 25, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/2940"}, {"bill": "H.R. 5227", "short_title": "Unleashing Low-Cost Rural AI Act", "sponsor": "Jim Costa", "party": "D", "chamber": "House", "intro_date": "9/9/2025", "cosponsor_count": 6, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/5227"}, {"bill": "H.R. 5332", "short_title": "Liquid Cooling for AI Act of 2025", "sponsor": "Jay Obernolte", "party": "R", "chamber": "House", "intro_date": "9/11/2025", "cosponsor_count": 11, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/5332"}, {"bill": "H.R. 6900", "short_title": "American Affordability Act of 2025", "sponsor": "Mike Thompson", "party": "D", "chamber": "House", "intro_date": "12/18/2025", "cosponsor_count": 46, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/6900"}, {"bill": "H.R. 6984", "short_title": "Data Center Transparency Act", "sponsor": "Robert Menendez", "party": "D", "chamber": "House", "intro_date": "1/8/2026", "cosponsor_count": 10, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/6984"}, {"bill": "H.R. 7858", "short_title": "Data Center Community Impact Act", "sponsor": "Bonnie Watson Coleman", "party": "D", "chamber": "House", "intro_date": "3/5/2026", "cosponsor_count": 15, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/7858"}, {"bill": "H.R. 8033", "short_title": "No Harm Data Centers Act", "sponsor": "Greg Landsman", "party": "D", "chamber": "House", "intro_date": "3/20/2026", "cosponsor_count": 1, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/8033"}, {"bill": "H.R. 9372", "short_title": "Data Infrastructure Energy Measurement and Standards Act", "sponsor": "Suhas Subramanyam", "party": "D", "chamber": "House", "intro_date": "6/18/2026", "cosponsor_count": 2, "status": "Ordered reported, amended, 6/25/2026", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/9372"}, {"bill": "H.R. 9419", "short_title": "Power and Water for Families Act of 2026", "sponsor": "Michael Baumgartner", "party": "R", "chamber": "House", "intro_date": "6/24/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/9419"}, {"bill": "H.R. 9442", "short_title": "Artificial Intelligence Data Center Moratorium Act", "sponsor": "Alexandria Ocasio-Cortez", "party": "D", "chamber": "House", "intro_date": "6/24/2026", "cosponsor_count": 13, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/9442"}, {"bill": "H.R. 9629", "short_title": "Protecting Communities from Data Center Impacts Act of 2026", "sponsor": "Greg Landsman", "party": "D", "chamber": "House", "intro_date": "7/9/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/9629"}, {"bill": "H.R. 9777", "short_title": "Protecting Ratepayers Act", "sponsor": "Byron Donalds", "party": "R", "chamber": "House", "intro_date": "7/20/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/9777"}, {"bill": "H.R. 9825", "short_title": "Data Center Water and Energy Transparency Act of 2026", "sponsor": "Lauren Underwood", "party": "D", "chamber": "House", "intro_date": "7/22/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/9825"}, {"bill": "S. 4213", "short_title": "Data Center Water and Energy Transparency Act of 2026", "sponsor": "Richard J. Durbin", "party": "D", "chamber": "Senate", "intro_date": "3/25/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/senate-bill/4213"}, {"bill": "S. 4214", "short_title": "Artificial Intelligence Data Center Moratorium Act", "sponsor": "Bernard Sanders", "party": "I", "chamber": "Senate", "intro_date": "3/25/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/senate-bill/4214"}, {"bill": "S. 5054", "short_title": "Data Center Tax Accountability and Disclosure Act of 2026", "sponsor": "Mark R. Warner", "party": "D", "chamber": "Senate", "intro_date": "7/21/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/senate-bill/5054"}, {"bill": "H.R. 8037", "short_title": "Protect American AI Act of 2026", "sponsor": "Michael Baumgartner", "party": "R", "chamber": "House", "intro_date": "3/24/2026", "cosponsor_count": 0, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/house-bill/8037"}, {"bill": "S. 3269", "short_title": "Liquid Cooling for AI Act of 2025", "sponsor": "David McCormick", "party": "R", "chamber": "Senate", "intro_date": "11/20/2025", "cosponsor_count": 3, "status": "Hearings held (Subcommittee on Energy, 4/15/2026)", "congress_url": "https://www.congress.gov/bill/119th-congress/senate-bill/3269"}, {"bill": "S. 3737", "short_title": "GROW SMART Act (Growing Resilient Operations from Water Saving and Municipal-Agricultural Reciprocally-beneficial Transactions Act)", "sponsor": "Alex Padilla", "party": "D", "chamber": "Senate", "intro_date": "1/29/2026", "cosponsor_count": 0, "status": "Hearings held (Subcommittee on Water and Power, 3/17/2026)", "congress_url": "https://www.congress.gov/bill/119th-congress/senate-bill/3737"}, {"bill": "S. 3852", "short_title": "GRID Act (Guaranteeing Rate Insulation from Data Centers Act)", "sponsor": "Josh Hawley", "party": "R", "chamber": "Senate", "intro_date": "2/11/2026", "cosponsor_count": 2, "status": "Referred", "congress_url": "https://www.congress.gov/bill/119th-congress/senate-bill/3852"}];
 
         // ---- Tabs ----
         document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -212,71 +247,112 @@
             });
         });
 
-        // ---- Timeline ----
+        // ---- Timeline: bills introduced per month, stacked by chamber ----
         function parseDate(s) {
             const [m, d, y] = s.split('/').map(Number);
             return new Date(y, m - 1, d);
         }
-        BILLS.forEach(b => { b.intro_date_sort = parseDate(b.intro_date).getTime(); });
+        BILLS.forEach(b => {
+            const dt = parseDate(b.intro_date);
+            b.intro_date_sort = dt.getTime();
+            b.month_key = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+        });
+
+        function buildMonthBuckets() {
+            const dates = BILLS.map(b => parseDate(b.intro_date));
+            const minDt = new Date(Math.min(...dates));
+            const maxDt = new Date(Math.max(...dates));
+            const buckets = [];
+            let y = minDt.getFullYear(), m = minDt.getMonth();
+            while (y < maxDt.getFullYear() || (y === maxDt.getFullYear() && m <= maxDt.getMonth())) {
+                const key = y + '-' + String(m + 1).padStart(2, '0');
+                buckets.push({
+                    key,
+                    label: new Date(y, m, 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' }),
+                    House: BILLS.filter(b => b.month_key === key && b.chamber === 'House'),
+                    Senate: BILLS.filter(b => b.month_key === key && b.chamber === 'Senate'),
+                });
+                m++;
+                if (m > 11) { m = 0; y++; }
+            }
+            return buckets;
+        }
 
         function renderTimeline() {
             const svg = document.getElementById('timelineSvg');
-            const W = 1000, H = 220, padL = 40, padR = 20, padTop = 20, padBottom = 40;
-            const dates = BILLS.map(b => b.intro_date_sort);
-            const minD = Math.min(...dates), maxD = Math.max(...dates);
-            const span = maxD - minD || 1;
-            const x = t => padL + ((t - minD) / span) * (W - padL - padR);
-            const laneY = { House: 75, Senate: 155 };
+            const buckets = buildMonthBuckets();
+            const W = 1000, H = 300, padL = 36, padR = 16, padTop = 20, padBottom = 46;
+            const plotH = H - padTop - padBottom;
+            const maxCount = Math.max(1, ...buckets.map(b => b.House.length + b.Senate.length));
+            const yMax = Math.max(2, Math.ceil(maxCount / 2) * 2); // round to even ceiling for clean ticks
+            const yScale = v => padTop + plotH - (v / yMax) * plotH;
 
-            let svgParts = [];
+            const n = buckets.length;
+            const slot = (W - padL - padR) / n;
+            const barW = Math.min(24, slot * 0.55);
+            const gap = 2;
 
-            // gridlines: one per quarter-ish (6 ticks)
-            const ticks = 6;
-            for (let i = 0; i <= ticks; i++) {
-                const t = minD + (span * i / ticks);
-                const px = x(t);
-                const dt = new Date(t);
-                const label = dt.toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
-                svgParts.push(`<line class="tl-gridline" x1="${px}" y1="${padTop}" x2="${px}" y2="${H - padBottom + 6}" />`);
-                svgParts.push(`<text class="tl-axis-label" x="${px}" y="${H - padBottom + 22}" text-anchor="middle">${label}</text>`);
+            let parts = [];
+
+            // y gridlines / ticks (integers)
+            for (let v = 0; v <= yMax; v++) {
+                const py = yScale(v);
+                parts.push(`<line class="tl-gridline" x1="${padL}" y1="${py}" x2="${W - padR}" y2="${py}" />`);
+                parts.push(`<text class="tl-ytick-label" x="${padL - 8}" y="${py + 3}" text-anchor="end">${v}</text>`);
+            }
+            parts.push(`<line class="tl-baseline" x1="${padL}" y1="${yScale(0)}" x2="${W - padR}" y2="${yScale(0)}" />`);
+
+            buckets.forEach((b, i) => {
+                const cx = padL + slot * i + slot / 2;
+                const x0 = cx - barW / 2;
+                const total = b.House.length + b.Senate.length;
+
+                // House segment (bottom), Senate segment stacked on top, 2px surface gap between
+                let cursorVal = 0;
+                if (b.House.length) {
+                    const y1 = yScale(cursorVal), y0 = yScale(cursorVal + b.House.length);
+                    parts.push(`<rect class="tl-bar-seg" data-key="${b.key}" data-chamber="House" x="${x0}" y="${y0}" width="${barW}" height="${Math.max(0, y1 - y0 - (b.Senate.length ? gap : 0))}" rx="4" fill="var(--series-house)"></rect>`);
+                    cursorVal += b.House.length;
+                }
+                if (b.Senate.length) {
+                    const y1 = yScale(cursorVal), y0 = yScale(cursorVal + b.Senate.length);
+                    parts.push(`<rect class="tl-bar-seg" data-key="${b.key}" data-chamber="Senate" x="${x0}" y="${y0}" width="${barW}" height="${Math.max(0, y1 - y0)}" rx="4" fill="var(--series-senate)"></rect>`);
+                }
+                if (total > 0) {
+                    parts.push(`<text class="tl-value-label" x="${cx}" y="${yScale(total) - 8}">${total}</text>`);
+                }
+                parts.push(`<text class="tl-axis-label" x="${cx}" y="${H - padBottom + 20}" text-anchor="middle">${b.label}</text>`);
+            });
+
+            svg.innerHTML = parts.join('');
+
+            // ---- tooltip: hoverable + clickable links, works across bar -> tooltip ----
+            const tooltip = document.getElementById('tlTooltip');
+            let hideTimer = null;
+            const cancelHide = () => { if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; } };
+            const scheduleHide = () => { cancelHide(); hideTimer = setTimeout(() => { tooltip.style.display = 'none'; }, 180); };
+
+            function tooltipHTML(bucket, chamber) {
+                const list = bucket[chamber];
+                const header = `${chamber} — ${bucket.label} (${list.length} bill${list.length === 1 ? '' : 's'})`;
+                const rows = list.map(bl => `<div class="tl-bill-row">&bull; <a class="bill-link" style="color:#93c5fd" href="${bl.congress_url}" target="_blank" rel="noopener">${bl.bill}</a> — ${bl.short_title}</div>`).join('');
+                return `<strong>${header}</strong>${rows}`;
             }
 
-            svgParts.push(`<text class="tl-lane-label" x="${padL}" y="${laneY.House - 30}">House</text>`);
-            svgParts.push(`<text class="tl-lane-label" x="${padL}" y="${laneY.Senate - 30}">Senate</text>`);
-            svgParts.push(`<line class="tl-gridline" x1="${padL}" y1="${laneY.House}" x2="${W - padR}" y2="${laneY.House}" />`);
-            svgParts.push(`<line class="tl-gridline" x1="${padL}" y1="${laneY.Senate}" x2="${W - padR}" y2="${laneY.Senate}" />`);
-
-            // sort by date to find extremes for direct labels
-            const sorted = [...BILLS].sort((a, b) => a.intro_date_sort - b.intro_date_sort);
-            const earliest = sorted[0], latest = sorted[sorted.length - 1];
-
-            BILLS.forEach(b => {
-                const cx = x(b.intro_date_sort);
-                const cy = laneY[b.chamber];
-                const color = b.chamber === 'House' ? 'var(--series-house)' : 'var(--series-senate)';
-                svgParts.push(`<circle class="tl-dot-ring" cx="${cx}" cy="${cy}" r="8"></circle>`);
-                svgParts.push(`<circle class="tl-dot" data-bill="${b.bill}" cx="${cx}" cy="${cy}" r="6" fill="${color}"></circle>`);
-                if (b === earliest || b === latest) {
-                    const dy = b.chamber === 'House' ? -16 : 22;
-                    const anchor = cx > W - padR - 45 ? 'end' : cx < padL + 45 ? 'start' : 'middle';
-                    svgParts.push(`<text class="tl-direct-label" x="${cx}" y="${cy + dy}" text-anchor="${anchor}">${b.bill}</text>`);
-                }
-            });
-
-            svg.innerHTML = svgParts.join('');
-
-            const tooltip = document.getElementById('tlTooltip');
-            svg.querySelectorAll('.tl-dot').forEach(dot => {
-                const bill = BILLS.find(b => b.bill === dot.dataset.bill);
-                dot.addEventListener('mousemove', (e) => {
+            svg.querySelectorAll('.tl-bar-seg').forEach(seg => {
+                seg.addEventListener('mousemove', (e) => {
+                    cancelHide();
+                    const bucket = buckets.find(b => b.key === seg.dataset.key);
                     const wrap = document.querySelector('.timeline-wrap').getBoundingClientRect();
                     tooltip.style.display = 'block';
-                    tooltip.style.left = (e.clientX - wrap.left + 14) + 'px';
+                    tooltip.style.left = Math.min(e.clientX - wrap.left + 14, wrap.width - 260) + 'px';
                     tooltip.style.top = (e.clientY - wrap.top - 10) + 'px';
-                    tooltip.innerHTML = `<strong>${bill.bill} — ${bill.short_title}</strong>${bill.sponsor} (${bill.party}) · ${bill.intro_date}<br>${bill.status}`;
+                    tooltip.innerHTML = tooltipHTML(bucket, seg.dataset.chamber);
                 });
-                dot.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+                seg.addEventListener('mouseleave', scheduleHide);
             });
+            tooltip.addEventListener('mouseenter', cancelHide);
+            tooltip.addEventListener('mouseleave', scheduleHide);
         }
         renderTimeline();
 
@@ -306,7 +382,7 @@
             document.getElementById('noResults').style.display = rows.length ? 'none' : 'block';
             tbody.innerHTML = rows.map(b => `
                 <tr>
-                    <td><span class="chamber-pill ${b.chamber.toLowerCase()}">${b.chamber === 'House' ? 'HR' : 'SEN'}</span> ${b.bill}</td>
+                    <td><span class="chamber-pill ${b.chamber.toLowerCase()}">${b.chamber === 'House' ? 'HR' : 'SEN'}</span> <a class="bill-link" href="${b.congress_url}" target="_blank" rel="noopener">${b.bill}</a></td>
                     <td>${b.short_title}</td>
                     <td>${b.sponsor}</td>
                     <td><span class="party-pill ${partyClass(b.party)}">${b.party}</span></td>
