@@ -91,6 +91,18 @@
         .bill-link { color: #4338ca; text-decoration: none; font-weight: 700; }
         .bill-link:hover { text-decoration: underline; }
 
+        /* Model Law tab */
+        .law-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 6px; }
+        .law-card { display: flex; flex-direction: column; padding: 26px; border-radius: 14px; background: #f8fafc; border: 1px solid #e2e8f0; box-sizing: border-box; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+        .law-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); border-color: #6366f1; }
+        .law-card .bill-tag { display: inline-block; align-self: flex-start; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 10px; border-radius: 999px; background: #e0e7ff; color: #4338ca; margin-bottom: 14px; }
+        .law-card h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: #0f172a; line-height: 1.35; }
+        .law-card > p { font-size: 0.9rem; color: #64748b; margin: 0 0 16px 0; line-height: 1.55; }
+        .law-points { padding-left: 20px; margin: 0 0 22px 0; color: #475569; font-size: 0.85rem; line-height: 1.6; }
+        .law-points li { margin-bottom: 6px; }
+        .law-download { align-self: flex-start; margin-top: auto; background: #6366f1; color: #fff; padding: 10px 22px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; border: none; cursor: pointer; display: inline-block; text-decoration: none; }
+        .law-download:hover { background: #4f46e5; }
+
         /* FOOTER — matches index.html */
         footer { background: #fff; width: 100%; border-top: 1px solid #e2e8f0; padding: 60px 0; margin-top: auto; }
         .footer-container { max-width: 1100px; width: 90%; margin: 0 auto; }
@@ -130,6 +142,7 @@
         <div class="tab-bar">
             <button class="tab-btn active" data-tab="state">State Law</button>
             <button class="tab-btn" data-tab="federal">Federal Law</button>
+            <button class="tab-btn" data-tab="model">Model Law</button>
         </div>
 
         <!-- STATE TAB -->
@@ -215,6 +228,45 @@
                     </table>
                 </div>
                 <div class="no-results" id="noResults" style="display:none;">No bills match your search.</div>
+            </div>
+        </div>
+
+        <!-- MODEL LAW TAB -->
+        <div class="tab-panel" id="tab-model">
+            <div class="section-box">
+                <h2>Model Legislation</h2>
+                <p class="section-note">Two ready-to-introduce model bills that close the gap this campaign keeps running into: a "water-positive" claim that no one outside the company can check.</p>
+
+                <div class="law-grid">
+                    <div class="law-card">
+                        <span class="bill-tag">Model Bill 01</span>
+                        <h3>Model Industrial Water Offset Act</h3>
+                        <p>Creates a state-administered, credit-based offset system for industrial water withdrawals, modeled on wetland mitigation banking. An Interagency Water Offset Review Board (IWORB) certifies offset projects and releases credits only after performance standards are actually met &mdash; not on a developer's projection.</p>
+                        <ul class="law-points">
+                            <li>Applies to facilities withdrawing over 50 million gallons/year, or any publicly traded company over 10 MGY</li>
+                            <li>Mitigation sequencing required: avoid and minimize withdrawals before any offset credit can be purchased</li>
+                            <li>Credits quantified under Volumetric Water Benefit Accounting (VWBA), a six-step, third-party-verifiable methodology</li>
+                            <li>A public ledger tracks every credit from release through debit, so the same gallon can't be sold twice</li>
+                            <li>Debit ratios scale with hydrological stress and timing &mdash; not a flat 1:1 trade</li>
+                            <li>Annual compliance reports are posted publicly; a governor's drought declaration triggers automatic credit review</li>
+                        </ul>
+                        <a href="Model_Industrial_Water_Offset_Act.docx" target="_blank" class="law-download">Download Model Bill (.docx)</a>
+                    </div>
+
+                    <div class="law-card">
+                        <span class="bill-tag">Model Bill 02</span>
+                        <h3>Model Water Sustainability Disclosure Act</h3>
+                        <p>A lighter companion bill: mandatory annual water disclosure for large water users, so regulators and the public can check a "water-positive" or "water-neutral" claim against the same data set the Offset Act's registry produces &mdash; even in states that never adopt the credit system.</p>
+                        <ul class="law-points">
+                            <li>Same coverage threshold as the Offset Act: over 50 MGY, or any publicly traded company operating in the state</li>
+                            <li>Requires watershed-level reporting (HydroBASINS Level 6 / HUC-8) of withdrawals, consumptive use, and discharges</li>
+                            <li>An offset counts only if it's independently verified, hydrologically connected to the withdrawal, and department-approved</li>
+                            <li>Reports and every offset disclosure are posted on the department's public website</li>
+                            <li>Civil penalties up to $25,000 per violation per day for a false or missing filing</li>
+                        </ul>
+                        <a href="Model_Water_Sustainability_Disclosure_Act.docx" target="_blank" class="law-download">Download Model Bill (.docx)</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
